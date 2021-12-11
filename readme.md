@@ -33,7 +33,7 @@ Customer {
 
 ## Nice to do:
 - CQRS is also a plus.
-- You can use MVC Razor or Blazor UI is a plus.
+- Blazor Web.
 - Docker-compose project that loads database service automatically which `docker-compose up`
 - Clean git commits that show the work progress.
 

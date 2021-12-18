@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace CrudTest.BddTdd.Tests
+namespace Mc2.CrudTest.AcceptanceTests
 {
     [TestClass]
     public class BddTddTests

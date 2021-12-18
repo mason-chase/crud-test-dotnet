@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CrudTest.Domain
+﻿namespace Mc2.CrudTest.Domain
 {
     public class Customer
     {

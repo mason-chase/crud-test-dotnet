@@ -1,12 +1,12 @@
 ﻿@page "/fetchdata"
-@using CrudTest.Presentation.Shared
-@inject HttpClient Http
+@using Mc2.CrudTest.Domain
+@inject HttpClient _http
 
 <h1>Weather forecast</h1>
 
 <p>This component demonstrates fetching data from the server.</p>
 
-@if (forecasts == null)
+@if (_forecasts == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -22,12 +22,12 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in forecasts)
+            @foreach (WeatherForecast forecast in _forecasts)
             {
                 <tr>
                     <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
+                    <td>@forecast.TemperatureC.ToString()</td>
+                    <td>@forecast.TemperatureF.ToString()</td>
                     <td>@forecast.Summary</td>
                 </tr>
             }
@@ -36,11 +36,11 @@ else
 }
 
 @code {
-    private WeatherForecast[] forecasts;
+    private WeatherForecast[] _forecasts;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+        _forecasts = await _http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
     }
 
 }

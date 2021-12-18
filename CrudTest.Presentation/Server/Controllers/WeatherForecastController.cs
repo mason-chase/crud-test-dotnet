@@ -1,22 +1,17 @@
-﻿using CrudTest.Presentation.Shared;
+﻿using Mc2.CrudTest.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Net;
+using Mc2.CrudTest.Domain.Generators;
 
-namespace CrudTest.Presentation.Server.Controllers
+namespace Mc2.CrudTest.Presentation.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
         private readonly ILogger<WeatherForecastController> _logger;
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
@@ -25,16 +20,12 @@ namespace CrudTest.Presentation.Server.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public List<WeatherForecast> Get()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+            List<WeatherForecast> response = WeatherForecastGenerator.GenerateWeatherForecast();
+            IPAddress userIp = HttpContext.Request.HttpContext.Connection.RemoteIpAddress;
+            _logger.LogDebug($"[Request from {userIp}: Serving Get() response: {string.Join("\n", response.ToList())}");
+            return response;
         }
     }
 }

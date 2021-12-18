@@ -13,10 +13,11 @@ Customer {
 	BankAccountNumber
 }
 ```
-## Must do:
+## Practices and patterns (Must):
 
-- **Best Practice**: Tdd and Bdd.
-
+- Tdd and Bdd.
+- CQRS pattern.
+- Clean git commits that shows your work progress.
 
 ### Validations (Must)
 
@@ -32,9 +33,7 @@ Customer {
 - Email must be unique in the database
 
 ## Nice to do:
-- CQRS is also a plus.
 - Blazor Web.
 - Docker-compose project that loads database service automatically which `docker-compose up`
-- Clean git commits that show the work progress.
 
 Please clone this repository in a new github repository in private mode and share with ID: `mason-chase` in private mode on github.com

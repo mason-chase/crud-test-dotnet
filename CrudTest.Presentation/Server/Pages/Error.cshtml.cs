@@ -1,13 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace CrudTest.Presentation.Server.Pages
+namespace Mc2.CrudTest.Presentation.Server.Pages
 {
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     [IgnoreAntiforgeryToken]
@@ -26,6 +22,7 @@ namespace CrudTest.Presentation.Server.Pages
 
         public void OnGet()
         {
+            _logger.LogDebug($"serving OnGet() in ErrorModel");
             RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
         }
     }

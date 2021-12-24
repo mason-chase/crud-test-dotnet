@@ -1,6 +1,7 @@
 # CRUD Code Test 
 
 Please read each note very carefully!
+and feel free to add/change project structure to a clean architecture to your view.
 
 Create a simple CRUD application with ASP NET Core that implements the below model:
 ```

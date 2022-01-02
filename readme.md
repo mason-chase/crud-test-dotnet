@@ -8,8 +8,8 @@ in a new Front project.
 Create a simple CRUD application with ASP NET Core that implements the below model:
 ```
 Customer {
-	FirstName
-	LastName
+	Firstname
+	Lastname
 	DateOfBirth
 	PhoneNumber
 	Email
@@ -24,16 +24,17 @@ Customer {
 
 ### Validations (Must)
 
-- During Create; validate the phone number to be a valid mobile number only.
+- During Create; validate the phone number to be a valid *mobile* number only (You can use [Google LibPhoneNumber](https://github.com/google/libphonenumber) to validate number at the backend).
 
 - A Valid email and a valid account number must be checked before submitting the form.
-- You can use [Google LibPhoneNumber](https://github.com/google/libphonenumber) to validate number at the backend:
 
+- Customers must be unique in database: By `Firstname`, `Lastname` and `DateOfBirth`.
+
+- Email must be unique in the database.
 
 ### Storage (Must)
 
 - Store the phone number in a database with minimized space storage (choose varchar, or `ulong` whichever store less space).
-- Email must be unique in the database
 
 ## Nice to do:
 - Blazor Web.

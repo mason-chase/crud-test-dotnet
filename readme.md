@@ -19,7 +19,8 @@ Customer {
 ## Practices and patterns (Must):
 
 - Tdd and Bdd.
-- CQRS pattern.
+- Clean acrhitecture.
+- At least a basic CQRS pattern (Refer to tutorial from [Nick Chapsas](https://www.youtube.com/watch?v=YzOBrVlthMk) or [Tim Corey](https://www.youtube.com/watch?v=yozD5Tnd8nw)).
 - Clean git commits that shows your work progress.
 
 ### Validations (Must)
@@ -34,7 +35,7 @@ Customer {
 
 ### Storage (Must)
 
-- Store the phone number in a database with minimized space storage (choose varchar, or `ulong` whichever store less space).
+- Store the phone number in a database with minimized space storage (choose `varchar`/`string`, or `ulong` whichever store less space).
 
 ## Nice to do:
 - Blazor Web.

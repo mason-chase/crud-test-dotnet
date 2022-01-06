@@ -18,8 +18,8 @@ Customer {
 ```
 ## Practices and patterns (Must):
 
-- Tdd and Bdd.
-- Clean acrhitecture.
+- [TDD](https://docs.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-dotnet-test#create-a-test), [DDD](https://en.wikipedia.org/wiki/Domain-driven_design) and of course [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development).
+- [Clean acrhitecture](https://github.com/jasontaylordev/CleanArchitecture).
 - At least a basic CQRS pattern (Refer to tutorial from [Nick Chapsas](https://www.youtube.com/watch?v=YzOBrVlthMk) or [Tim Corey](https://www.youtube.com/watch?v=yozD5Tnd8nw)).
 - Clean git commits that shows your work progress.
 

@@ -1,11 +1,10 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Mc2.CrudTest.AcceptanceTests
 {
-    [TestClass]
     public class BddTddTests
     {
-        [TestMethod]
+        [Fact]
         public void CreateCustomerValid_ReturnsSuccess()
         {
             // Todo: Refer to readme.md 

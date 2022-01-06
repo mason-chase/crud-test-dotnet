@@ -18,8 +18,10 @@ Customer {
 ```
 ## Practices and patterns (Must):
 
-- [TDD](https://docs.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-dotnet-test#create-a-test), [DDD](https://en.wikipedia.org/wiki/Domain-driven_design) and of course [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development).
-- [Clean acrhitecture](https://github.com/jasontaylordev/CleanArchitecture).
+- [TDD](https://docs.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-dotnet-test#create-a-test)
+- [DDD](https://en.wikipedia.org/wiki/Domain-driven_design)
+- [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development)
+- [Clean acrhitecture](https://github.com/jasontaylordev/CleanArchitecture)
 - [CQRS](https://en.wikipedia.org/wiki/Command%E2%80%93query_separation#Command_query_responsibility_separation) pattern ([Event sourcing](https://en.wikipedia.org/wiki/Domain-driven_design#Event_sourcing)).
 - Clean git commits that shows your work progress.
 

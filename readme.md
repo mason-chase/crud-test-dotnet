@@ -18,7 +18,7 @@ Customer {
 ```
 ## Practices and patterns (Must):
 
-- [TDD](https://docs.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-dotnet-test#create-a-test)
+- [TDD](https://docs.microsoft.com/en-us/visualstudio/test/quick-start-test-driven-development-with-test-explorer?view=vs-2022)
 - [DDD](https://en.wikipedia.org/wiki/Domain-driven_design)
 - [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development)
 - [Clean architecture](https://github.com/jasontaylordev/CleanArchitecture)

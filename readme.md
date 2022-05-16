@@ -29,7 +29,7 @@ Customer {
 
 - During Create; validate the phone number to be a valid *mobile* number only (You can use [Google LibPhoneNumber](https://github.com/google/libphonenumber) to validate number at the backend).
 
-- A Valid email and a valid account number must be checked before submitting the form.
+- A Valid email and a valid bank account number must be checked before submitting the form.
 
 - Customers must be unique in database: By `Firstname`, `Lastname` and `DateOfBirth`.
 

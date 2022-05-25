@@ -39,8 +39,9 @@ Customer {
 
 - Store the phone number in a database with minimized space storage (choose `varchar`/`string`, or `ulong` whichever store less space).
 
+### Delivery (Must)
+- Please clone this repository in a new github repository in private mode and share with ID: `mason-chase` in private mode on github.com, make sure you do not erase my commits and then create a [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) (code review).
+
 ## Nice to do:
 - Blazor Web.
 - Docker-compose project that loads database service automatically which `docker-compose up`
-
-Please clone this repository in a new github repository in private mode and share with ID: `mason-chase` in private mode on github.com, make sure you do not erase my commits and then create a [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) (code review).

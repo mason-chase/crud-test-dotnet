@@ -1,10 +1,5 @@
-﻿using Mc2.CrudTest.Domain;
+using Mc2.CrudTest.Presentation.Shared;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using Mc2.CrudTest.Domain.Generators;
 
 namespace Mc2.CrudTest.Presentation.Server.Controllers
 {
@@ -12,6 +7,11 @@ namespace Mc2.CrudTest.Presentation.Server.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
+        private static readonly string[] Summaries = new[]
+        {
+        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+    };
+
         private readonly ILogger<WeatherForecastController> _logger;
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
@@ -20,12 +20,15 @@ namespace Mc2.CrudTest.Presentation.Server.Controllers
         }
 
         [HttpGet]
-        public List<WeatherForecast> Get()
+        public IEnumerable<WeatherForecast> Get()
         {
-            List<WeatherForecast> response = WeatherForecastGenerator.GenerateWeatherForecast();
-            IPAddress userIp = HttpContext.Request.HttpContext.Connection.RemoteIpAddress;
-            _logger.LogDebug($"[Request from {userIp}: Serving Get() response: {string.Join("\n", response.ToList())}");
-            return response;
+            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            {
+                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                TemperatureC = Random.Shared.Next(-20, 55),
+                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+            })
+            .ToArray();
         }
     }
 }

@@ -1,0 +1,6 @@
+@crud_test_dotnet_HostAddress = http://localhost:5119
+
+GET {{crud_test_dotnet_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,146 @@
+{
+  "swagger": "2.0",
+  "x-stoplight": {
+    "id": "56bce1e3clqs4"
+  },
+  "info": {
+    "title": "crud-test-OpenAPI",
+    "version": "1.0"
+  },
+  "host": "localhost:8080",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/customers": {
+      "parameters": [],
+      "get": {
+        "summary": "Get User Info by User ID",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "User Found",
+            "schema": {
+              "$ref": "#/definitions/User"
+            },
+            "examples": {
+              "Get User Alice Smith": {
+                "id": 142,
+                "firstName": "Alice",
+                "lastName": "Smith",
+                "email": "alice.smith@gmail.com",
+                "dateOfBirth": "1997-10-31",
+                "emailVerified": true,
+                "signUpDate": "2019-08-24"
+              }
+            }
+          },
+          "404": {
+            "description": "User Not Found",
+            "schema": {
+              "type": "null"
+            },
+            "examples": {}
+          }
+        },
+        "operationId": "get-users-userId",
+        "description": "Retrieve the information of the user with the matching user ID."
+      },
+      "post": {
+        "summary": "",
+        "operationId": "postcustomers",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/customers/{customer_id}": {
+      "get": {
+        "summary": "",
+        "operationId": "get-user",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "summary": "",
+        "operationId": "put-user",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-user",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "customer_id",
+          "in": "path",
+          "required": true
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "User": {
+      "title": "User",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Unique identifier for the given user."
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "dateOfBirth": {
+          "type": "string",
+          "format": "date",
+          "example": "1997-10-31"
+        },
+        "emailVerified": {
+          "type": "boolean",
+          "description": "Set to true if the user's email has been verified."
+        },
+        "createDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The date that the user was created."
+        }
+      },
+      "required": [
+        "id",
+        "firstName",
+        "lastName",
+        "email",
+        "emailVerified"
+      ]
+    }
+  }
+}

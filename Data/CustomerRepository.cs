@@ -52,5 +52,12 @@ namespace webapi.Data
             _customerDbContext.customers.Remove(customer);
             return await _customerDbContext.SaveChangesAsync();
         }
+
+        public Customer GetCustomerByName(string Firstname, string Lastname)
+        {
+            return _customerDbContext.customers.
+                    FirstOrDefault(c => c.Firstname == Firstname &&
+                                   c.Lastname == Lastname);
+        }
     }
 }

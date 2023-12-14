@@ -79,7 +79,7 @@
               }
             },
             "examples": {
-              "Get List": [
+              "0": [
                 {
                   "id": 1,
                   "firstname": "mehdi",
@@ -149,7 +149,7 @@
               }
             },
             "x-examples": {
-              "Add Customer": {
+              "0": {
                 "Firstname": "mehdi",
                 "Lastname": "kordilo",
                 "DateOfBirth": "1990-08-24T14:15:22Z",
@@ -294,14 +294,14 @@
               }
             },
             "x-examples": {
-              "update customer": {
-                "Id": 1,
-                "Firstname": "mehdi",
-                "Lastname": "kordilo",
-                "DateOfBirth": "1990-08-24T14:15:22Z",
-                "PhoneNumber": "09355329942",
-                "Email": "mehdi.kordilo@gmail.com",
-                "BankAccountNumber": "123456789"
+              "0": {
+                "Id": 0,
+                "Firstname": "string",
+                "Lastname": "string",
+                "DateOfBirth": "2019-08-24T14:15:22Z",
+                "PhoneNumber": "string",
+                "Email": "string",
+                "BankAccountNumber": "string"
               }
             }
           }
@@ -326,47 +326,5 @@
       ]
     }
   },
-  "definitions": {
-    "User": {
-      "title": "User",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "description": "Unique identifier for the given user."
-        },
-        "firstName": {
-          "type": "string"
-        },
-        "lastName": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string",
-          "format": "email"
-        },
-        "dateOfBirth": {
-          "type": "string",
-          "format": "date",
-          "example": "1997-10-31"
-        },
-        "emailVerified": {
-          "type": "boolean",
-          "description": "Set to true if the user's email has been verified."
-        },
-        "createDate": {
-          "type": "string",
-          "format": "date",
-          "description": "The date that the user was created."
-        }
-      },
-      "required": [
-        "id",
-        "firstName",
-        "lastName",
-        "email",
-        "emailVerified"
-      ]
-    }
-  }
+  "definitions": {}
 }

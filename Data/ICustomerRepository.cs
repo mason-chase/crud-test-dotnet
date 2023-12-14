@@ -9,5 +9,6 @@ namespace webapi.Data
         Task<int> AddCustomer(Customer customer);
          Task<int>  UpdateCustomer(Customer customer);
         Task<int> DeleteCustomer(int customerId);
+        Customer GetCustomerByName(string Firstname, string Lastname);
     }
 }

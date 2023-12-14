@@ -10,6 +10,6 @@ namespace webapi.Data
             
         }
 
-        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Customer> customers { get; set; }
     }
 }

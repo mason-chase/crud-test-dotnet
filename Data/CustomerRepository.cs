@@ -27,7 +27,7 @@ namespace webapi.Data
             return await _customerDbContext.SaveChangesAsync();
         }
 
-        public async Task<Customer> UpdateCustomer(Customer customer)
+        public async Task<int> UpdateCustomer(Customer customer)
         {
             var result = _customerDbContext.customers
                 .Where(c => c.Id == customer.Id).ToList()[0];
@@ -41,11 +41,9 @@ namespace webapi.Data
                 result.PhoneNumber = customer.PhoneNumber;
                 result.BankAccountNumber = customer.BankAccountNumber;
 
-                await _customerDbContext.SaveChangesAsync();
-
-                return result;
+                return await _customerDbContext.SaveChangesAsync();
             }
-            return null;
+            return 0;
         }
 
         public async Task<int> DeleteCustomer(int customerId)

@@ -10,4 +10,14 @@
     <PackageReference Include="libphonenumber-csharp" Version="8.13.26" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Mc2.CrudTest.Shared.Abstraction\Mc2.CrudTest.Shared.Abstraction.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Policies\Birthday\" />
+    <Folder Include="Policies\Continent\" />
+    <Folder Include="Policies\Gender\" />
+  </ItemGroup>
+
 </Project>

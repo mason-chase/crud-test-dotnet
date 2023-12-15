@@ -1,4 +1,15 @@
+using Mc2.CrudTest.Application;
+using Mc2.CrudTest.Infrastructure;
+using Mc2.CrudTest.Shared;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+ConfigurationManager configuration = builder.Configuration;
+
+builder.Services.AddShared();
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure(configuration);
 
 // Add services to the container.
 
@@ -17,6 +28,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseShared();
 
 app.UseAuthorization();
 

@@ -1,0 +1,7 @@
+﻿dotnet tool install --global dotnet-ef --version 7.* 
+
+cd Final_SophieTravelManagement_.Infrastructure
+
+dotnet ef migrations add Init_Read --context ReadDbContext --startup-project ../Final_SophieTravelManagement_.API -o EF/Migrations
+
+

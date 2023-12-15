@@ -4,7 +4,9 @@ using Mc2.CrudTest.Domain.Factories;
 using Mc2.CrudTest.Domain.Repositories;
 using Mc2.CrudTest.Domain.ValueObjects;
 using Mc2.CrudTest.Shared.Abstraction.Command;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Mc2.CrudTest.Tests")]
 namespace Mc2.CrudTest.Application.Commands.Handlers
 {
     internal sealed class AddCustomerHandler : ICommandHandler<AddCustomer>

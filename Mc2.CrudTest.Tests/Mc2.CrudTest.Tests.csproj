@@ -24,4 +24,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Mc2.CrudTest.Application\Mc2.CrudTest.Application.csproj" />
+  </ItemGroup>
+
 </Project>

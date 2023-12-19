@@ -21,16 +21,6 @@ public static class ServiceExtension
 
         services.AddTransient<ICustomersRepository, CustomersRepository>();
          services.AddMediatR(c => c.RegisterServicesFromAssembly(typeof(Program).Assembly));
-         //services.AddMediatR(cfg => cfg.AsScoped(), typeof(Program));
-         //services.AddScoped<CreateCustomerCommand>();
-         // services.AddScoped<CreateCustomerCommandHandler>();
-         // services.AddScoped<CreateCustomerCommandHandler>();
-        // services.AddMediatR(typeof(CreateCustomerCommandHandler));
-         //services.AddMediatR(typeof(CreateCustomerCommand));
-         // services.AddMediatR(typeof(UpdateCustomerCommandHandler));
-         // services.AddMediatR(typeof(RemoveCustomerCommandHandler));
-         // services.AddMediatR(typeof(GetAllCustomersQueryHandler));
-         // services.AddMediatR(typeof(GetCustomerByIdQueryHandler));
-         // services.AddMediatR(typeof(GetCustomerByPhoneQueryHandler));
+       
     }
 }

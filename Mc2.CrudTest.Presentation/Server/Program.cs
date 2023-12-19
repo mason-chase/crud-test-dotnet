@@ -1,45 +1,53 @@
-using Microsoft.AspNetCore.ResponseCompression;
+using Mc2.CrudTest.Application;
+using Mc2.CrudTest.Presentation.Server.Extensions;
+using Serilog;
 
-namespace Mc2.CrudTest.Presentation
+try
 {
-    public class Program
+    var builder = WebApplication.CreateBuilder(args);
+    
+    var logger = new LoggerConfiguration()
+        .ReadFrom.Configuration(builder.Configuration)
+        .Enrich.FromLogContext()
+        .WriteTo.File(Environment.CurrentDirectory)
+        .CreateLogger();
+    builder.Logging.ClearProviders();
+    builder.Logging.AddSerilog(logger);
+    Log.Logger.Information("Application Started...");
+    
+    builder.Services.AddControllers();
+
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
+   // builder.Services.AddAutoMapper(typeof(Program));
+    builder.Services.AddCors(p => p.AddPolicy("corsPolicy", builder =>
     {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+        builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+    }));
+    builder.Services.AddApplicationServices();
+     ServiceExtension.Inject(builder.Services, builder.Configuration);
 
-            // Add services to the container.
+    var app = builder.Build();
 
-            builder.Services.AddControllersWithViews();
-            builder.Services.AddRazorPages();
+  
+    app.UseSwagger();
+    app.UseSwaggerUI();
+    
+    app.UseCors("corsPolicy");
+  //  app.UseHttpsRedirection();
+    // app.UseCustomExceptionHandler();
+    app.UseAuthorization();
 
-            var app = builder.Build();
+    app.MapControllers();
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseWebAssemblyDebugging();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-
-            app.UseHttpsRedirection();
-
-            app.UseBlazorFrameworkFiles();
-            app.UseStaticFiles();
-
-            app.UseRouting();
-
-
-            app.MapRazorPages();
-            app.MapControllers();
-            app.MapFallbackToFile("index.html");
-
-            app.Run();
-        }
-    }
+    app.Run();
+}
+catch (Exception e)
+{
+    Log.Logger.Error(e.Message);
+}
+finally
+{
+    Log.Logger.Information("shutting down...");
+    
 }

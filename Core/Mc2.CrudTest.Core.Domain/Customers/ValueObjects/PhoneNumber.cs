@@ -1,12 +1,13 @@
 ﻿using Mc2.CrudTest.Framework.Domain.ValueObjects;
 using PhoneNumbers;
 
-namespace Mc2.CrudTest.Core.Domain.Customer.ValueObjects
+namespace Mc2.CrudTest.Core.Domain.Customers.ValueObjects
 {
     public class PhoneNumber : BaseValueObject<PhoneNumber>
     {
 
         public string Value { get; private set; }
+        public static PhoneNumber FromString(string value) => new PhoneNumber(value);
 
         private PhoneNumber()
         {

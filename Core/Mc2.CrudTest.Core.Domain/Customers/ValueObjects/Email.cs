@@ -2,12 +2,13 @@
 
 using Mc2.CrudTest.Framework.Domain.ValueObjects;
 
-namespace Mc2.CrudTest.Core.Domain.Customer.ValueObjects
+namespace Mc2.CrudTest.Core.Domain.Customers.ValueObjects
 {
     public class Email : BaseValueObject<Email>
     {
 
         public string Value { get; private set; }
+        public static Email FromString(string value) => new Email(value);
 
         private Email()
         {

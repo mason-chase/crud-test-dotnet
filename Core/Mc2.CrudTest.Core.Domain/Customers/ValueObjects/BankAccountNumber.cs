@@ -1,13 +1,13 @@
 ﻿using Mc2.CrudTest.Framework.Domain.ValueObjects;
 using PhoneNumbers;
 
-namespace Mc2.CrudTest.Core.Domain.Customer.ValueObjects
+namespace Mc2.CrudTest.Core.Domain.Customers.ValueObjects
 {
     public class BankAccountNumber : BaseValueObject<BankAccountNumber>
     {
 
         public string Value { get; private set; }
-
+        public static BankAccountNumber FromString(string value) => new BankAccountNumber(value);
         private BankAccountNumber()
         {
 

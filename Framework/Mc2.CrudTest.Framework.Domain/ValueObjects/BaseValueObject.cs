@@ -1,6 +1,4 @@
-﻿
-
-namespace Mc2.CrudTest.Framework.Domain.ValueObjects
+﻿namespace Mc2.CrudTest.Framework.Domain.ValueObjects
 {
     public abstract class BaseValueObject<TValueObject> : IEquatable<TValueObject>
            where TValueObject : BaseValueObject<TValueObject>

@@ -1,16 +1,19 @@
 ﻿using Mc2.CrudTest.Core.Domain.Customers.Commands;
 using Mc2.CrudTest.Core.Domain.Customers.Data;
-using Mc2.CrudTest.Core.Domain.Customers.ValueObjects;
 using Mc2.CrudTest.Framework.Domain.ApplicationService;
+using Mc2.CrudTest.Framework.Domain.Data;
 
 namespace Mc2.CrudTest.Core.ApplicationService.Customers.CommandHandlers
 {
     public class DeleteCustomerCommandHandler : ICommandHandler<DeleteCustomerCommand>
     {
         private readonly ICustomerRepository _customerRepository;
-        public DeleteCustomerCommandHandler(ICustomerRepository customerRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public DeleteCustomerCommandHandler(ICustomerRepository customerRepository, IUnitOfWork unitOfWork)
         {
             _customerRepository = customerRepository;
+            _unitOfWork = unitOfWork;
+
         }
         public void Handle(DeleteCustomerCommand command)
         {
@@ -20,9 +23,7 @@ namespace Mc2.CrudTest.Core.ApplicationService.Customers.CommandHandlers
                 throw new InvalidOperationException($"The Customer with id:{command.Id} doesn't exists.");
 
             customer.DeleteCustomer();
-            _customerRepository.Save(customer);
-            // unitOfWork.Commit();
-
+            _unitOfWork.Commit();
         }
     }
 }

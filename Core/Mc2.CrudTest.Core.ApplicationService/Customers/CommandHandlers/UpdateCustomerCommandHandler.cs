@@ -2,15 +2,19 @@
 using Mc2.CrudTest.Core.Domain.Customers.Data;
 using Mc2.CrudTest.Core.Domain.Customers.ValueObjects;
 using Mc2.CrudTest.Framework.Domain.ApplicationService;
+using Mc2.CrudTest.Framework.Domain.Data;
 
 namespace Mc2.CrudTest.Core.ApplicationService.Customers.CommandHandlers
 {
     public class UpdateCustomerCommandHandler : ICommandHandler<UpdateCustomerCommand>
     {
         private readonly ICustomerRepository _customerRepository;
-        public UpdateCustomerCommandHandler(ICustomerRepository customerRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public UpdateCustomerCommandHandler(ICustomerRepository customerRepository, IUnitOfWork unitOfWork)
         {
             _customerRepository = customerRepository;
+            _unitOfWork = unitOfWork;
+
         }
         public void Handle(UpdateCustomerCommand command)
         {
@@ -25,8 +29,7 @@ namespace Mc2.CrudTest.Core.ApplicationService.Customers.CommandHandlers
                                     PhoneNumber.FromString(command.PhoneNumber), 
                                     BankAccountNumber.FromString(command.BankAccountNumber), 
                                     command.DateOfBirth);
-            _customerRepository.Save(customer);
-            // unitOfWork.Commit();
+            _unitOfWork.Commit();
         }
     }
 }

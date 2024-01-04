@@ -20,13 +20,21 @@ namespace Mc2.CrudTest.Core.Domain.Customers.ValueObjects
             {
                 throw new ArgumentNullException("Phone Number is required.", nameof(value));
             }
-            var phoneUtil = PhoneNumberUtil.GetInstance();
-            var numberProto = phoneUtil.Parse(value, "ZZ");
-            if (phoneUtil.IsValidNumber(numberProto))
+            try {
+                var phoneUtil = PhoneNumberUtil.GetInstance();
+
+                var numberProto = phoneUtil.Parse(value, "CA");
+                if (!phoneUtil.IsValidNumber(numberProto))
+                {
+                    throw new ArgumentException("Invalid Phone Number.", nameof(value));
+                }
+                Value = value;
+            }
+            catch
             {
                 throw new ArgumentException("Invalid Phone Number.", nameof(value));
             }
-            Value = value;
+            
         }
         public override int ObjectGetHashCode() => Value.GetHashCode();
         public override bool ObjectIsEqual(PhoneNumber otherObject) => Value == otherObject.Value;

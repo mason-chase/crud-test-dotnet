@@ -7,7 +7,7 @@ namespace Mc2.CrudTest.Framework.Domain.Entities
 
     public abstract class BaseEntity<TId> where TId : IEquatable<TId>
     {
-        private readonly List<IEvent> _events;
+        private readonly List<IEvent> _events = new List<IEvent>();
         private void Raise(IEvent @event) => _events.Add(@event);
         protected void HandleEvent(IEvent @event)
         {

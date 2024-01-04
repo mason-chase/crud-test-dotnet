@@ -29,7 +29,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.AcceptanceTest
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Infrastructure.Data.SqlServer", "Infrastructure\Mc2.CrudTest.Infrastructure.Data.SqlServer\Mc2.CrudTest.Infrastructure.Data.SqlServer.csproj", "{A71A6B5E-ABFB-4FE6-809F-3BAD19745AF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.Endpoints.API", "Presentation\Mc2.CrudTest.Endpoints.API\Mc2.CrudTest.Endpoints.API.csproj", "{45536714-6D4C-4EDB-B917-9AD1337A1897}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Endpoints.API", "Presentation\Mc2.CrudTest.Endpoints.API\Mc2.CrudTest.Endpoints.API.csproj", "{45536714-6D4C-4EDB-B917-9AD1337A1897}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.Frameword.Tools", "Mc2.CrudTest.Frameword.Tools\Mc2.CrudTest.Frameword.Tools.csproj", "{7E5AA956-EACE-45CD-BEC3-DAED0450D735}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +75,10 @@ Global
 		{45536714-6D4C-4EDB-B917-9AD1337A1897}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45536714-6D4C-4EDB-B917-9AD1337A1897}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45536714-6D4C-4EDB-B917-9AD1337A1897}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E5AA956-EACE-45CD-BEC3-DAED0450D735}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E5AA956-EACE-45CD-BEC3-DAED0450D735}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E5AA956-EACE-45CD-BEC3-DAED0450D735}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E5AA956-EACE-45CD-BEC3-DAED0450D735}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,6 +93,7 @@ Global
 		{23D53173-B315-4787-9558-4D4FD7FD36DD} = {588D53A2-08FD-483E-B455-261F42AB9BB1}
 		{A71A6B5E-ABFB-4FE6-809F-3BAD19745AF7} = {4BE427AC-7041-4B01-9852-8098FF89E77F}
 		{45536714-6D4C-4EDB-B917-9AD1337A1897} = {54096795-9778-4363-81A1-6C5B6B90210D}
+		{7E5AA956-EACE-45CD-BEC3-DAED0450D735} = {E402B688-F5D5-4838-BFA4-6160397013E5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4B5A26C9-68C1-49D9-9F32-AF907A1730C2}

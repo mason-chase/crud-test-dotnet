@@ -38,7 +38,7 @@ namespace Mc2.CrudTest.Core.Domain.Customers.Entities
                 FirstName = firstName,
                 LastName = lastName,
                 DateOfBirth = date,
-                Email = Email.Value,
+                Email = email.Value,
                 PhoneNumber = phoneNumber.Value,
                 BankAccountNumber = bankAccountNumber.Value,
             });

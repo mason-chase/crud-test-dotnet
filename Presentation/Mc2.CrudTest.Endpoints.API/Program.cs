@@ -1,15 +1,36 @@
+using Mc2.CrudTest.Core.ApplicationService.Customers.CommandHandlers;
+using Mc2.CrudTest.Core.Domain.Customers.Data;
+using Mc2.CrudTest.Framework.Domain.Data;
+using Mc2.CrudTest.Infrastructure.Data.SqlServer;
+using Mc2.CrudTest.Infrastructure.Data.SqlServer.Customers;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+builder.Services.AddScoped<ICustomerRepository, EfCustomerRespository>();
+builder.Services.AddScoped<IUnitOfWork, CustomerUnitOfWork>();
+builder.Services.AddDbContext<CustomerDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("CustomerCnn"));
+});
+
+builder.Services.AddScoped<CreateCustomerCommandHandler>();  
+builder.Services.AddScoped<UpdateCustomerCommandHandler>();
+builder.Services.AddScoped<DeleteCustomerCommandHandler>();
+
+
+
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

@@ -7,7 +7,7 @@ using Mc2.CrudTest.Framework.Domain.Events;
 
 namespace Mc2.CrudTest.Core.Domain.Customers.Entities
 {
-    public class Customer : BaseEntity<Guid>
+    public class Customer : BaseAggregateRoot<Guid>
     {
         #region Fields
         public string FirstName { get; protected set; }

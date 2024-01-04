@@ -1,5 +1,4 @@
 ﻿
-
 namespace Mc2.CrudTest.Core.Domain.Customers.Commands
 {
     public  class CreateCustomerCommand

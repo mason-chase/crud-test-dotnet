@@ -1,6 +1,7 @@
 
 using Mc2.CrudTest.Core.ApplicationService.Customers.CommandHandlers;
 using Mc2.CrudTest.Core.Domain.Customers.Commands;
+using Mc2.CrudTest.Endpoints.API.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Mc2.CrudTest.Endpoints.API.Controllers
@@ -12,25 +13,22 @@ namespace Mc2.CrudTest.Endpoints.API.Controllers
 
 
         [HttpPost]
-        public IActionResult Post([FromServices] CreateCustomerCommandHandler handler, CreateCustomerCommand request)
+        public IActionResult Post([FromServices] CreateCustomerCommandHandler createCustomerHandler, CreateCustomerCommand request)
         {
-            handler.Handle(request);
-            return Ok();
+            return RequestHandler.HandleRequest(request, createCustomerHandler.Handle);
         }
 
         [HttpPut]
-        public IActionResult Put([FromServices] UpdateCustomerCommandHandler handler, UpdateCustomerCommand request)
+        public IActionResult Put([FromServices] UpdateCustomerCommandHandler updateCustomerHandler, UpdateCustomerCommand request)
         {
-            handler.Handle(request);
-            return Ok();
+            return RequestHandler.HandleRequest(request, updateCustomerHandler.Handle);
         }
 
 
         [HttpDelete]
-        public IActionResult Delete([FromServices] DeleteCustomerCommandHandler handler, DeleteCustomerCommand request)
+        public IActionResult Delete([FromServices] DeleteCustomerCommandHandler deleteCustomerHandler, DeleteCustomerCommand request)
         {
-            handler.Handle(request);
-            return Ok();
+            return RequestHandler.HandleRequest(request, deleteCustomerHandler.Handle);
         }
     }
 }

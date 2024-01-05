@@ -1,5 +1,4 @@
-﻿
-using Mc2.CrudTest.Framework.Domain.Events;
+﻿using Mc2.CrudTest.Framework.Domain.Events;
 
 namespace Mc2.CrudTest.Core.Domain.Customers.Events
 {

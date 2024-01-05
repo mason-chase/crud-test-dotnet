@@ -1,5 +1,4 @@
-﻿
-using Mc2.CrudTest.Core.Domain.Customers.Commands;
+﻿using Mc2.CrudTest.Core.Domain.Customers.Commands;
 using Mc2.CrudTest.Core.Domain.Customers.Data;
 using Mc2.CrudTest.Core.Domain.Customers.Entities;
 using Mc2.CrudTest.Core.Domain.Customers.ValueObjects;
@@ -20,10 +19,10 @@ namespace Mc2.CrudTest.Core.ApplicationService.Customers.CommandHandlers
         }
         public void Handle(CreateCustomerCommand command)
         {
-            if (_customerRepository.Exists(command.Id))
-                throw new InvalidOperationException($"The Customer with id:{command.Id} already exists.");
+            if (_customerRepository.FindByEmail(command.Email) != null)
+                throw new InvalidOperationException($"The Customer with email:{command.Email} already exists.");
 
-            var customer = new Customer(command.Id, 
+            var customer = new Customer(Guid.NewGuid(), 
                                         command.FirstName,
                                         command.LastName,
                                         Email.FromString(command.Email),
@@ -32,6 +31,7 @@ namespace Mc2.CrudTest.Core.ApplicationService.Customers.CommandHandlers
                                         command.DateOfBirth);
             _customerRepository.Add(customer);
             _unitOfWork.Commit();
+  
         }
     }
 }

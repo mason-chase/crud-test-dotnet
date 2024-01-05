@@ -1,6 +1,4 @@
-﻿
-
-using Mc2.CrudTest.Core.Domain.Customers.Events;
+﻿using Mc2.CrudTest.Core.Domain.Customers.Events;
 using Mc2.CrudTest.Core.Domain.Customers.ValueObjects;
 using Mc2.CrudTest.Framework.Domain.Entities;
 using Mc2.CrudTest.Framework.Domain.Events;

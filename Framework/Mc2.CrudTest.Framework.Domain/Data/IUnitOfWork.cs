@@ -1,5 +1,4 @@
-﻿
-namespace Mc2.CrudTest.Framework.Domain.Data
+﻿namespace Mc2.CrudTest.Framework.Domain.Data
 {
     public interface IUnitOfWork
     {

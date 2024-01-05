@@ -1,6 +1,4 @@
-﻿
-
-using Mc2.CrudTest.Core.Domain.Customers.Data;
+﻿using Mc2.CrudTest.Core.Domain.Customers.Data;
 using Mc2.CrudTest.Core.Domain.Customers.Entities;
 namespace Mc2.CrudTest.Infrastructure.Data.SqlServer.Customers
 {
@@ -26,6 +24,11 @@ namespace Mc2.CrudTest.Infrastructure.Data.SqlServer.Customers
         public Customer Load(Guid id)
         {
             return _customerDbContext.Customers.Find(id);
+        }
+
+        public Customer FindByEmail(string email)
+        {
+            return _customerDbContext.Customers.FirstOrDefault(c => c.Email == email);
         }
 
         public void Dispose()

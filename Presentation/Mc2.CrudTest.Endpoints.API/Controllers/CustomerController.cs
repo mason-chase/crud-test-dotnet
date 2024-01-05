@@ -1,4 +1,3 @@
-
 using Mc2.CrudTest.Core.ApplicationService.Customers.CommandHandlers;
 using Mc2.CrudTest.Core.Domain.Customers.Commands;
 using Mc2.CrudTest.Endpoints.API.Services;

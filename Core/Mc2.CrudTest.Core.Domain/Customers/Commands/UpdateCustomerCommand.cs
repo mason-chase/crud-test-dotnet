@@ -1,6 +1,4 @@
-﻿
-
-namespace Mc2.CrudTest.Core.Domain.Customers.Commands
+﻿namespace Mc2.CrudTest.Core.Domain.Customers.Commands
 {
     public class UpdateCustomerCommand
     {

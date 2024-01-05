@@ -1,6 +1,4 @@
-﻿
-
-namespace Mc2.CrudTest.Framework.Domain.Events
+﻿namespace Mc2.CrudTest.Framework.Domain.Events
 {
     public interface IEvent
     {

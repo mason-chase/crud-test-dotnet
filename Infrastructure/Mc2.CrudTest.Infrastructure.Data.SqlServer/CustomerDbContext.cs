@@ -1,6 +1,4 @@
-﻿
-
-using Mc2.CrudTest.Core.Domain.Customers.Entities;
+﻿using Mc2.CrudTest.Core.Domain.Customers.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using System.Diagnostics.CodeAnalysis;

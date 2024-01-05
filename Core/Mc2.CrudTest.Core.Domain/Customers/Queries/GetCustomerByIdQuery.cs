@@ -1,6 +1,4 @@
-﻿
-
-namespace Mc2.CrudTest.Core.Domain.Customers.Queries
+﻿namespace Mc2.CrudTest.Core.Domain.Customers.Queries
 {
     public class GetCustomerByIdQuery
     {

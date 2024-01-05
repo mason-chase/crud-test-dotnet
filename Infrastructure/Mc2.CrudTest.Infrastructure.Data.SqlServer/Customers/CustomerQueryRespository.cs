@@ -1,5 +1,4 @@
-﻿
-using Dapper;
+﻿using Dapper;
 using Mc2.CrudTest.Core.Domain.Customers.Data;
 using Mc2.CrudTest.Core.Domain.Customers.Dtoes;
 using Mc2.CrudTest.Core.Domain.Customers.Queries;

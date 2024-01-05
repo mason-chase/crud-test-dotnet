@@ -23,6 +23,10 @@ namespace Mc2.CrudTest.Core.ApplicationService.Customers.CommandHandlers
             if (customer == null)
                 throw new InvalidOperationException($"The Customer with id:{command.Id} doesn't exists.");
 
+            var customerInfo = _customerRepository.FindByEmail(command.Email);
+            if (customerInfo != null && customerInfo.Id != command.Id)
+                throw new InvalidOperationException($"The Customer with email:{command.Email} already exists.");
+
             customer.UpdateCustomer(command.FirstName,
                                     command.LastName, 
                                     Email.FromString(command.Email), 

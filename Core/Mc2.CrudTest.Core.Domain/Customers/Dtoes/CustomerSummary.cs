@@ -1,5 +1,4 @@
-﻿
-namespace Mc2.CrudTest.Core.Domain.Customers.Dtoes
+﻿namespace Mc2.CrudTest.Core.Domain.Customers.Dtoes
 {
     public class CustomerSummary
     { 

@@ -19,7 +19,7 @@ namespace Mc2.CrudTest.Core.ApplicationService.Customers.CommandHandlers
         {
             var customer = _customerRepository.Load(command.Id);
 
-            if (customer == null)
+            if (customer is null)
                 throw new InvalidOperationException($"The Customer with id:{command.Id} doesn't exists.");
 
             customer.DeleteCustomer();

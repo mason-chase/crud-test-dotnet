@@ -27,9 +27,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Endpoints.API"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Infracture.Data.EventSourcing", "Infrastructure\Mc2.CrudTest.Infracture.Data.EventSourcing\Mc2.CrudTest.Infracture.Data.EventSourcing.csproj", "{CA11D142-B532-477B-8F3F-13D43318E862}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.Framework.Tool", "Framework\Mc2.CrudTest.Framework.Tool\Mc2.CrudTest.Framework.Tool.csproj", "{21454966-E7D4-4490-AB4A-56DDAFD2B175}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Framework.Tool", "Framework\Mc2.CrudTest.Framework.Tool\Mc2.CrudTest.Framework.Tool.csproj", "{21454966-E7D4-4490-AB4A-56DDAFD2B175}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{77F77174-0CD5-4DA7-BF9C-3AE825B25CD1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.UnitTest", "Test\Mc2.CrudTest.UnitTest\Mc2.CrudTest.UnitTest.csproj", "{C7F22CBA-F09E-4AEB-A9B5-B1DE231D3107}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.TDD", "Test\Mc2.CrudTest.TDD\Mc2.CrudTest.TDD.csproj", "{F082B474-5EF7-409D-BAB6-7DC8E7C42A59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.NewCore", "..\Mc2.CrudTest.Core\Mc2.CrudTest.NewCore.csproj", "{F19082FF-A0BC-41AA-8CC9-D326F1E35360}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +79,18 @@ Global
 		{77F77174-0CD5-4DA7-BF9C-3AE825B25CD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77F77174-0CD5-4DA7-BF9C-3AE825B25CD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77F77174-0CD5-4DA7-BF9C-3AE825B25CD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7F22CBA-F09E-4AEB-A9B5-B1DE231D3107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7F22CBA-F09E-4AEB-A9B5-B1DE231D3107}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7F22CBA-F09E-4AEB-A9B5-B1DE231D3107}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7F22CBA-F09E-4AEB-A9B5-B1DE231D3107}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F082B474-5EF7-409D-BAB6-7DC8E7C42A59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F082B474-5EF7-409D-BAB6-7DC8E7C42A59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F082B474-5EF7-409D-BAB6-7DC8E7C42A59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F082B474-5EF7-409D-BAB6-7DC8E7C42A59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F19082FF-A0BC-41AA-8CC9-D326F1E35360}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F19082FF-A0BC-41AA-8CC9-D326F1E35360}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F19082FF-A0BC-41AA-8CC9-D326F1E35360}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F19082FF-A0BC-41AA-8CC9-D326F1E35360}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +104,9 @@ Global
 		{45536714-6D4C-4EDB-B917-9AD1337A1897} = {54096795-9778-4363-81A1-6C5B6B90210D}
 		{CA11D142-B532-477B-8F3F-13D43318E862} = {4BE427AC-7041-4B01-9852-8098FF89E77F}
 		{21454966-E7D4-4490-AB4A-56DDAFD2B175} = {E402B688-F5D5-4838-BFA4-6160397013E5}
+		{C7F22CBA-F09E-4AEB-A9B5-B1DE231D3107} = {588D53A2-08FD-483E-B455-261F42AB9BB1}
+		{F082B474-5EF7-409D-BAB6-7DC8E7C42A59} = {588D53A2-08FD-483E-B455-261F42AB9BB1}
+		{F19082FF-A0BC-41AA-8CC9-D326F1E35360} = {588D53A2-08FD-483E-B455-261F42AB9BB1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4B5A26C9-68C1-49D9-9F32-AF907A1730C2}

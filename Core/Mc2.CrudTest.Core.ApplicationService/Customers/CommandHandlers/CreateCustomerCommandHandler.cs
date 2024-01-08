@@ -15,14 +15,13 @@ namespace Mc2.CrudTest.Core.ApplicationService.Customers.CommandHandlers
         {
             _customerRepository = customerRepository;
             _unitOfWork = unitOfWork;
-
         }
         public void Handle(CreateCustomerCommand command)
         {
-            if (_customerRepository.FindByEmail(command.Email) != null)
+            if (_customerRepository.FindByEmail(command.Email) is not null)
                 throw new InvalidOperationException($"The Customer with email:{command.Email} already exists.");
 
-            var customer = new Customer(Guid.NewGuid(), 
+            var customer = new Customer( 
                                         command.FirstName,
                                         command.LastName,
                                         Email.FromString(command.Email),
@@ -30,6 +29,7 @@ namespace Mc2.CrudTest.Core.ApplicationService.Customers.CommandHandlers
                                         BankAccountNumber.FromString(command.BankAccountNumber),
                                         command.DateOfBirth);
             _customerRepository.Add(customer);
+
             _unitOfWork.Commit();
   
         }

@@ -1,28 +1,50 @@
-using System;
-using TechTalk.SpecFlow;
+using Mc2.CrudTest.AcceptanceTests.Infra;
+using Mc2.CrudTest.Core.Domain.Customers.Commands;
+using Mc2.CrudTest.Core.Domain.Customers.ValueObjects;
+using Newtonsoft.Json;
+using PhoneNumbers;
+using System.IO;
 
-namespace Mc2.CrudTest.AcceptanceTests
+namespace Mc2.CrudTest.AcceptanceTests.Steps
 {
     [Binding]
     public class CreateCustomerStepDefinitions
     {
-        [Given(@"the user is entering a new customer with an invalid mobile number ""([^""]*)""")]
-        public void GivenTheUserIsEnteringANewCustomerWithAnInvalidMobileNumber(string p0)
+        internal BddTestsApplicationFactory _factory = new BddTestsApplicationFactory();
+        public HttpClient _client { get; set; } = null!;
+        private HttpResponseMessage _response { get; set; } = null!;
+
+        public CreateCustomerStepDefinitions()
         {
-            throw new PendingStepException();
+            _client = _factory.CreateDefaultClient(new Uri($"http://localhost/"));
         }
 
-        [When(@"the user tries to add the customer with the invalid mobile number")]
-        public void WhenTheUserTriesToAddTheCustomerWithTheInvalidMobileNumber()
+
+        [When(@"the user is entering a new customer with an invalid mobile number ""([^""]*)""")]
+        public async Task WhenTheUserIsEnteringANewCustomerWithAnInvalidMobileNumber(string phoneNumber)
         {
-            throw new PendingStepException();
+            var request = new CreateCustomerCommand
+            {
+                FirstName = "Sahar",
+                LastName = "Amoorezaei",
+                DateOfBirth = DateTime.Now,
+                Email = "saharamoorezaie@gmail.com",
+                PhoneNumber = phoneNumber,
+                BankAccountNumber = "123456789"
+            };
+            var json = JsonConvert.SerializeObject(request);
+            var requestBody = new StringContent(json);
+            requestBody.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            _response = await _client.PostAsync("/Customer", requestBody);
         }
 
-        [Then(@"the system should display an error message indicating an invalid mobile number")]
-        public void ThenTheSystemShouldDisplayAnErrorMessageIndicatingAnInvalidMobileNumber()
+        [Then(@"the system responses BadRequest")]
+        public void ThenTheSystemResponsesBadRequest()
         {
-            throw new PendingStepException();
+            _response.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
         }
+
+
 
         [Given(@"the user is entering a new customer with a valid mobile number ""([^""]*)""")]
         public void GivenTheUserIsEnteringANewCustomerWithAValidMobileNumber(string p0)
@@ -79,21 +101,36 @@ namespace Mc2.CrudTest.AcceptanceTests
         }
 
         [Given(@"the system has an existing customer with the email address ""([^""]*)""")]
-        public void GivenTheSystemHasAnExistingCustomerWithTheEmailAddress(string p0)
+        public void GivenTheSystemHasAnExistingCustomerWithTheEmailAddress(string email)
         {
-            throw new PendingStepException();
+            _factory.customerRepository.Add(CustomerBuilder.WithEmail(email));
         }
 
         [When(@"the user adds a new customer with the same email address ""([^""]*)""")]
-        public void WhenTheUserAddsANewCustomerWithTheSameEmailAddress(string p0)
+        public async Task WhenTheUserAddsANewCustomerWithTheSameEmailAddress(string  email)
         {
-            throw new PendingStepException();
+            var request = new CreateCustomerCommand
+            {
+                FirstName = "Sahar",
+                LastName = "Amoorezaei",
+                DateOfBirth = DateTime.Now,
+                Email = email,
+                PhoneNumber = "+15879742888",
+                BankAccountNumber = "123456789"
+            };
+            var json = JsonConvert.SerializeObject(request);
+            var requestBody = new StringContent(json);
+            requestBody.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            _response = await _client.PostAsync("/Customer", requestBody);
         }
 
         [Then(@"the system should display an error message indicating a duplicate email")]
         public void ThenTheSystemShouldDisplayAnErrorMessageIndicatingADuplicateEmail()
         {
-            throw new PendingStepException();
+
+            string result =  _response.Content.ReadAsStringAsync().Result;
+            result.Should().Contain("exists");
+
         }
 
         [Given(@"the system has no existing customer with the email address ""([^""]*)""")]

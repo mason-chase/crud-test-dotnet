@@ -10,8 +10,6 @@ namespace Mc2.CrudTest.Core.Domain.Customers.Data
 
         Customer FindByEmail(string email);
 
-
-
         void Add(Customer entity);
     }
 }

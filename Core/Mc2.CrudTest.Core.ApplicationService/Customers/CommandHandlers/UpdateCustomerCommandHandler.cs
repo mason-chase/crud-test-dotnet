@@ -20,11 +20,11 @@ namespace Mc2.CrudTest.Core.ApplicationService.Customers.CommandHandlers
         {
             var customer = _customerRepository.Load(command.Id);
 
-            if (customer == null)
+            if (customer is null)
                 throw new InvalidOperationException($"The Customer with id:{command.Id} doesn't exists.");
 
             var customerInfo = _customerRepository.FindByEmail(command.Email);
-            if (customerInfo != null && customerInfo.Id != command.Id)
+            if (customerInfo is not null && customerInfo.Id != command.Id)
                 throw new InvalidOperationException($"The Customer with email:{command.Email} already exists.");
 
             customer.UpdateCustomer(command.FirstName,

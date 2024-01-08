@@ -11,6 +11,9 @@
     <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
+	<ItemGroup>
+	<InternalsVisibleTo Include ="Mc2.CrudTest.AcceptanceTests"/>
+	</ItemGroup>
   <ItemGroup>
     <PackageReference Include="EventStore.Client" Version="5.0.9" />
     <PackageReference Include="EventStore.Client.Grpc.Streams" Version="23.1.0" />

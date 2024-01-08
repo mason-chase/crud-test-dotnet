@@ -22,7 +22,7 @@ namespace Mc2.CrudTest.Core.Domain.Customers.Entities
         {
         }
 
-        public Customer(Guid id,
+        public Customer(
                         string firstName,
                         string lastName,
                         Email email,
@@ -32,7 +32,7 @@ namespace Mc2.CrudTest.Core.Domain.Customers.Entities
         {
             HandleEvent(new CustomerCreatedEvent
             {
-                Id = id,
+                Id = Guid.NewGuid(),
                 FirstName = firstName,
                 LastName = lastName,
                 DateOfBirth = date,

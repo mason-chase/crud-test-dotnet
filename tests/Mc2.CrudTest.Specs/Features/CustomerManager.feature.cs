@@ -21,12 +21,16 @@ namespace Mc2.CrudTest.Specs.Features
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
     [NUnit.Framework.DescriptionAttribute("Customer Manager")]
+    [NUnit.Framework.CategoryAttribute("automated")]
+    [NUnit.Framework.CategoryAttribute("CustomerManagement")]
     public partial class CustomerManagerFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-        private string[] _featureTags = ((string[])(null));
+        private string[] _featureTags = new string[] {
+                "automated",
+                "CustomerManagement"};
         
 #line 1 "CustomerManager.feature"
 #line hidden
@@ -36,7 +40,9 @@ namespace Mc2.CrudTest.Specs.Features
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Customer Manager", "As a an operator I wish to be able to Create, Update, Delete customers and list a" +
-                    "ll customers", ProgrammingLanguage.CSharp, ((string[])(null)));
+                    "ll customers", ProgrammingLanguage.CSharp, new string[] {
+                        "automated",
+                        "CustomerManagement"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -75,16 +81,14 @@ namespace Mc2.CrudTest.Specs.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Operator creates, list, update and delete customers")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
-        public virtual void OperatorCreatesListUpdateAndDeleteCustomers()
+        [NUnit.Framework.DescriptionAttribute("Create a new Customer")]
+        public virtual void CreateANewCustomer()
         {
-            string[] tagsOfScenario = new string[] {
-                    "mytag"};
+            string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Operator creates, list, update and delete customers", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a new Customer", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 6
-this.ScenarioInitialize(scenarioInfo);
+    this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
             bool isFeatureIgnored = default(bool);
@@ -103,14 +107,28 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
+                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Firstname",
+                            "Lastname",
+                            "DateOfBirth",
+                            "PhoneNumber",
+                            "Email",
+                            "BankAccountNumber"});
+                table1.AddRow(new string[] {
+                            "John",
+                            "Doe",
+                            "2024-01-05",
+                            "+1 419-437-3751",
+                            "JohnDoe@gmail.com",
+                            "12345678"});
 #line 7
- testRunner.Given("to be filled...", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+        testRunner.Given("There is no Customer with following data", ((string)(null)), table1, "Given ");
 #line hidden
-#line 8
- testRunner.When("to be filled...", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 10
+        testRunner.When("Create new Customer api is called with the given data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 9
- testRunner.Then("to be filled...", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 11
+        testRunner.Then("Customer should Be created with the given data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

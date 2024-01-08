@@ -1,0 +1,45 @@
+version: '3.4'
+
+services:
+ sqlserver:
+    container_name: Customer_Service_SqlServer
+    image: mcr.microsoft.com/mssql/server
+    volumes:
+      - dbdata:/var/opt/mssql
+ eventstore.db:
+    image: eventstore/eventstore:release-5.0.9
+    environment:
+      - EVENTSTORE_CLUSTER_SIZE=1
+      - EVENTSTORE_RUN_PROJECTIONS=All
+      - EVENTSTORE_START_STANDARD_PROJECTIONS=true
+      - EVENTSTORE_EXT_TCP_PORT=1113
+      - EVENTSTORE_HTTP_PORT=2113
+      - EVENTSTORE_INSECURE=true
+      - EVENTSTORE_ENABLE_EXTERNAL_TCP=true
+      - EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP=true
+    ports:
+      - "1113:1113"
+      - "2113:2113"
+    volumes:
+      - type: volume
+        source: eventstore-volume-data
+        target: /var/lib/eventstore
+      - type: volume
+        source: eventstore-volume-logs
+        target: /var/log/eventstore 
+
+ mc2.crudtest.endpoints.api:
+    image: ${DOCKER_REGISTRY-}mc2crudtestendpointsapi
+    build:
+      context: .
+      dockerfile: Presentation/Mc2.CrudTest.Endpoints.API/Dockerfile
+    depends_on:
+      - sqlserver
+      - eventstore.db
+
+volumes:
+  eventstore-volume-data:
+  eventstore-volume-logs:
+  dbdata:
+
+

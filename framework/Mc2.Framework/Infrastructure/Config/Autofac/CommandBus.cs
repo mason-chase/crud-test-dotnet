@@ -1,7 +1,7 @@
 using Autofac;
 using Mc2.Framework.Application;
 
-namespace Mc2.Framework.Infrastructure.Config;
+namespace Mc2.Framework.Infrastructure.Config.Autofac;
 
 public class CommandBus(ILifetimeScope lifetimeScope) : ICommandBus
 {

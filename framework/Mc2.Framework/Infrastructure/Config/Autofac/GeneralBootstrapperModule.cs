@@ -6,8 +6,7 @@ using Mc2.Framework.Domain.Events;
 using Mc2.Framework.Domain.Utils;
 using Mc2.Framework.Infrastructure.EF;
 
-
-namespace Mc2.Framework.Infrastructure.Config;
+namespace Mc2.Framework.Infrastructure.Config.Autofac;
 
 public class GeneralBootstrapperModule : Module
 {

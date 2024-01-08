@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\framework\Mc2.Framework\Mc2.Framework.csproj" />
+    </ItemGroup>
+
 </Project>

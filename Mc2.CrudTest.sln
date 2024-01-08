@@ -51,6 +51,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Tools", "_Tools", "{FAF6C9
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.QuerySynchronizer.EF", "src\_Tools\Mc2.CrudTest.QuerySynchronizer.EF\Mc2.CrudTest.QuerySynchronizer.EF.csproj", "{BE141E84-914B-4610-A6F9-2FDDE6F39E85}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.Domain.Tests.Unit", "tests\Mc2.CrudTest.Domain.Tests.Unit\Mc2.CrudTest.Domain.Tests.Unit.csproj", "{0A082163-FD11-49D1-91C2-514DC51CAC63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.Tests.Utils", "tests\Mc2.CrudTest.Tests.Utils\Mc2.CrudTest.Tests.Utils.csproj", "{26CB8326-E419-47C7-B42B-476808252797}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +121,14 @@ Global
 		{BE141E84-914B-4610-A6F9-2FDDE6F39E85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE141E84-914B-4610-A6F9-2FDDE6F39E85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE141E84-914B-4610-A6F9-2FDDE6F39E85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A082163-FD11-49D1-91C2-514DC51CAC63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A082163-FD11-49D1-91C2-514DC51CAC63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A082163-FD11-49D1-91C2-514DC51CAC63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A082163-FD11-49D1-91C2-514DC51CAC63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26CB8326-E419-47C7-B42B-476808252797}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26CB8326-E419-47C7-B42B-476808252797}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26CB8326-E419-47C7-B42B-476808252797}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26CB8326-E419-47C7-B42B-476808252797}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -146,5 +158,7 @@ Global
 		{0A2C5DED-17DB-4FB9-9F45-6510CCAFB632} = {40E8DF31-1B59-47DE-8140-E575AD8C3FF2}
 		{FAF6C903-C899-40D1-AF11-A1E783D93EC4} = {0E6EDA75-F912-4E69-B832-19803EB7B3B1}
 		{BE141E84-914B-4610-A6F9-2FDDE6F39E85} = {FAF6C903-C899-40D1-AF11-A1E783D93EC4}
+		{0A082163-FD11-49D1-91C2-514DC51CAC63} = {47C53304-E8FA-420D-9655-AB1B9C00FAA4}
+		{26CB8326-E419-47C7-B42B-476808252797} = {47C53304-E8FA-420D-9655-AB1B9C00FAA4}
 	EndGlobalSection
 EndGlobal

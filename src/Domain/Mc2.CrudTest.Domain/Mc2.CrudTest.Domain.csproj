@@ -6,4 +6,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\framework\Mc2.Framework\Mc2.Framework.csproj" />
+      <ProjectReference Include="..\Mc2.CrudTest.Domain.Contracts\Mc2.CrudTest.Domain.Contracts.csproj" />
+    </ItemGroup>
+
 </Project>

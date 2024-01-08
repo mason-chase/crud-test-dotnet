@@ -39,11 +39,11 @@ public class AggregateRoot<TKey>:Entity<TKey>,IAggregateRoot
     protected void Recover() => IsDeleted = false;
 
     protected AggregateRoot(
-        TKey id,
+        TKey entityId,
         IClock clock,
         IEventPublisher publisher,
         long actionUserId)
-        : base(id)
+        : base(entityId)
     {
         CreateOn = clock.Now();
         _publisher = publisher;

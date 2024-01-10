@@ -26,6 +26,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Endpoint", "Endpoint", "{99B41669-EC7A-4F3D-8B31-392423037CE7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.Infrastructure.Query", "Mc2.CrudTest.Infrastructure.Query\Mc2.CrudTest.Infrastructure.Query.csproj", "{B51E9AE1-D10F-4E6C-B323-0E73D80F320A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{F895E6A0-417D-44FB-8035-12524BECCF9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F895E6A0-417D-44FB-8035-12524BECCF9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F895E6A0-417D-44FB-8035-12524BECCF9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B51E9AE1-D10F-4E6C-B323-0E73D80F320A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B51E9AE1-D10F-4E6C-B323-0E73D80F320A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B51E9AE1-D10F-4E6C-B323-0E73D80F320A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B51E9AE1-D10F-4E6C-B323-0E73D80F320A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 		{A7E7DF4D-4B77-44F1-BDB7-5C0D2B9EA518} = {0837919B-FE92-45DC-9F28-F1C42A710B12}
 		{CAB84198-0616-4563-80EF-2D28751565C5} = {0837919B-FE92-45DC-9F28-F1C42A710B12}
 		{99B41669-EC7A-4F3D-8B31-392423037CE7} = {0837919B-FE92-45DC-9F28-F1C42A710B12}
+		{B51E9AE1-D10F-4E6C-B323-0E73D80F320A} = {CAB84198-0616-4563-80EF-2D28751565C5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4B5A26C9-68C1-49D9-9F32-AF907A1730C2}

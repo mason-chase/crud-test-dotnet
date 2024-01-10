@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Mc2.CrudTest.Pres
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Mc2.CrudTest.Presentation\Server\src\External\Presentation\Presentation.csproj", "{C92F0099-50D0-4E62-A00B-CC436653E8CA}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{487772AD-45CD-4F7E-96D9-52985E5FE459}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{C92F0099-50D0-4E62-A00B-CC436653E8CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C92F0099-50D0-4E62-A00B-CC436653E8CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C92F0099-50D0-4E62-A00B-CC436653E8CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{487772AD-45CD-4F7E-96D9-52985E5FE459}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{487772AD-45CD-4F7E-96D9-52985E5FE459}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{487772AD-45CD-4F7E-96D9-52985E5FE459}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{487772AD-45CD-4F7E-96D9-52985E5FE459}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

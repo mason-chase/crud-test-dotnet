@@ -15,5 +15,6 @@ public static class ServiceExtensions
             .AddValidatorsFromAssembly(assembly, ServiceLifetime.Scoped, null, true)
             .AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
         services.AddScoped<ICreateCustomerCommandMapper, CreateCustomerCommandMapper>();
+        services.AddScoped<IGetCustomerByIdMapper, GetCustomerByIdMapper>();
     }
 }

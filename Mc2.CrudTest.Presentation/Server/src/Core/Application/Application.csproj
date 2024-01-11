@@ -10,7 +10,16 @@
     <Folder Include="Abstractions\" />
     <Folder Include="Behaviours\" />
     <Folder Include="Exceptions\" />
-    <Folder Include="Customers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CQRS.NET" Version="0.3.0" />
+    <PackageReference Include="MediatR" Version="12.2.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
 </Project>

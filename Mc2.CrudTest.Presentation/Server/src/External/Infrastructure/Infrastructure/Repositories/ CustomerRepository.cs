@@ -15,6 +15,7 @@ public class CustomerRepository : GenericRepository<Customer>, ICustomerReposito
     }
 
 
+
     public async Task<List<Customer>> GetAllAsync()
        => await _genericRepository.All();
 

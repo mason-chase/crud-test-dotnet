@@ -1,5 +1,14 @@
 ﻿using CQRS.NET;
+using MediatR;
 
 namespace Application.Customers.Queries.GetCustomerById;
 
-public sealed record GetCustomerByIdQuery(int CustomerId) : IQuery<CustomerResponse>;
+public class GetCustomerByIdQuery : IRequest<CustomerResponse>
+{
+    public int CustomerId { get; }
+
+    public GetCustomerByIdQuery(int customerId)
+    {
+        CustomerId = customerId;
+    }
+}

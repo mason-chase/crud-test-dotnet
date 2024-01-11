@@ -1,25 +1,26 @@
 ﻿using Domain.Abstractions;
+using Domain.Entities;
 
 namespace Infrastructure.Repositories;
 
-public class UnitOfWork : IUnitOfWork, IDisposable
-{
-    private readonly ApplicationDbContext _context;
-    public ICustomerRepository CustomerRepository { get; private set; }
-    public async Task SaveChangeAsync(CancellationToken cancellationToken)
+    public class UnitOfWork : IUnitOfWork, IDisposable
     {
-        await _context.SaveChangesAsync();
-    }
+        private readonly ApplicationDbContext _context;
+        public ICustomerRepository CustomerRepository { get; private set; }
 
-    public UnitOfWork(ApplicationDbContext context)
-    {
-        _context = context; 
-        CustomerRepository = new CustomerRepository(_context);
-       
-    }
+        public async Task SaveChangeAsync(CancellationToken cancellationToken)
+        {
+            await _context.SaveChangesAsync();
+        }
 
-    public void Dispose()
-    {
-        _context.Dispose();
+        public UnitOfWork(ApplicationDbContext context, IGenericRepository<Customer> customerGenericRepository)
+        {
+            _context = context;
+            CustomerRepository = new CustomerRepository(_context, customerGenericRepository);
+        }
+
+        public void Dispose()
+        {
+            _context.Dispose();
+        }
     }
-}

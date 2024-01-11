@@ -1,13 +1,29 @@
+using Application.Customers.Queries.GetCustomerById;
 using Infrastructure;
+using Infrastructure.Repositories;
+using Microsoft.AspNetCore.Hosting;
+using System.Reflection;
+using Application.Customers.Commands.CreateCustomer;
+using CQRS.NET;
+using Domain.Abstractions;
 using Microsoft.EntityFrameworkCore;
+using MediatR; // Import MediatR namespace
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<IRequestHandler<GetCustomerByIdQuery, CustomerResponse>, GetCustomerQueryHandler>();
+builder.Services.AddScoped<IRequestHandler<CreateCustomerCommand, int>, CreateCustomerCommandHandler>();
+
+// Register MediatR
+builder.Services.AddMediatR(typeof(Program).Assembly);
+
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

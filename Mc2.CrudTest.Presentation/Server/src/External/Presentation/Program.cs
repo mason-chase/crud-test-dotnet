@@ -23,6 +23,7 @@ builder.Services.AddScoped<IRequestHandler<CreateCustomerCommand, int>, CreateCu
 builder.Services.AddScoped<IRequestHandler<UpdateCustomerCommand, bool>, UpdateCustomerCommandHandler>();
 builder.Services.AddScoped<IRequestHandler<DeleteCustomerCommand, bool>, DeleteCustomerCommandHandler>();
 builder.Services.AddScoped<IRequestHandler<GetAllCustomersQuery,List<CustomerResponse>>, GetAllCustomersQueryHandler>();
+builder.Services.AddScoped<INotificationHandler<CustomerCreatedEvent>, CustomerCreatedEventHandler>();
 
 builder.Services.AddMediatR(typeof(Program).Assembly);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

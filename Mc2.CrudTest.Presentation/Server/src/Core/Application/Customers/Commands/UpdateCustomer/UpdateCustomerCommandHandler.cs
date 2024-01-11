@@ -1,34 +1,69 @@
-﻿using Application.Behaviours;
-using Application.Customers.Commands.UpdateCustomer;
-using AutoMapper;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Application.Behaviours;
 using Domain.Abstractions;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Customers.Commands.UpdateCustomer;
 
-public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommand, bool>
-{
-    private readonly ICustomerRepository _customerRepository;
-    private readonly IMapper _mapper;
-
-    public UpdateCustomerCommandHandler(ICustomerRepository customerRepository, IMapper mapper)
+    public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommand, bool>
     {
-        _customerRepository = customerRepository;
-        _mapper = mapper;
+        private readonly ICustomerRepository _customerRepository;
+
+        public UpdateCustomerCommandHandler(ICustomerRepository customerRepository)
+        {
+            _customerRepository = customerRepository;
+        }
+
+        public async Task<bool> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
+        {
+            using var transaction = await _customerRepository.BeginTransactionAsync();
+
+            try
+            {
+                if (!CustomerValidator.IsValidEmail(request.Email))
+                {
+                    await _customerRepository.RollbackTransactionAsync();
+                    throw new Exception("Invalid email format");
+                }
+
+                if (!CustomerValidator.IsValidPhoneNumber(request.PhoneNumber))
+                {
+                    await _customerRepository.RollbackTransactionAsync();
+                    throw new Exception("Invalid phone number");
+                }
+
+                var customer = new Customer
+                {
+                    Id = request.Id,
+                    Firstname = request.Firstname,
+                    Lastname = request.Lastname,
+                    DateOfBirth = request.DateOfBirth,
+                    PhoneNumber = request.PhoneNumber,
+                    Email = request.Email,
+                    BankAccountNumber = request.BankAccountNumber
+                };
+
+                var isUpdated = await _customerRepository.UpdateAsync(customer);
+
+                if (isUpdated)
+                {
+                    await _customerRepository.CommitTransactionAsync();
+                }
+                else
+                {
+                    await _customerRepository.RollbackTransactionAsync();
+                }
+
+                return isUpdated;
+            }
+            catch (Exception)
+            {
+                await _customerRepository.RollbackTransactionAsync();
+                throw; 
+            }
+        }
     }
 
-    public async Task<bool> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
-    {
-        if (!CustomerValidator.IsValidEmail(request.Email))
-        {
-            throw new Exception("Invalid email format");
-        }
-        if (!CustomerValidator.IsValidPhoneNumber(request.PhoneNumber))
-        {
-            throw new Exception("Invalid phone number");
-        }
-        var customer = _mapper.Map<Customer>(request);
-        return await _customerRepository.UpdateAsync(customer);
-    }
-}

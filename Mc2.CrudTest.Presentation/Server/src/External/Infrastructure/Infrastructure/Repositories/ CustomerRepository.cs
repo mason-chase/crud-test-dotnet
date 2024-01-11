@@ -1,16 +1,22 @@
-﻿using System.Linq.Expressions;
+﻿using System;
+using System.Linq.Expressions;
 using Domain.Abstractions;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Infrastructure.Repositories;
 
 public class CustomerRepository : GenericRepository<Customer>, ICustomerRepository
 {
     private readonly IGenericRepository<Customer> _genericRepository;
+    private IDbContextTransaction _transaction;
+    private readonly ApplicationDbContext _context; // Assuming ApplicationDbContext is your DbContext
+
     public CustomerRepository(ApplicationDbContext context, IGenericRepository<Customer> genericRepository)
         : base(context)
     {
+        _context = context;
         _genericRepository = genericRepository;
     }
 
@@ -45,4 +51,26 @@ public class CustomerRepository : GenericRepository<Customer>, ICustomerReposito
    
     public async Task<bool> DeleteAsync(int id)
     => await _genericRepository.Delete(id);
+
+    public async Task<IDbContextTransaction> BeginTransactionAsync()
+    {
+        _transaction = await _context.Database.BeginTransactionAsync();
+        return _transaction;
+    }
+
+    public async Task CommitTransactionAsync()
+    {
+        if (_transaction != null)
+        {
+            await _transaction.CommitAsync();
+        }
+    }
+
+    public async Task RollbackTransactionAsync()
+    {
+        if (_transaction != null)
+        {
+            await _transaction.RollbackAsync();
+        }
+    }
 }

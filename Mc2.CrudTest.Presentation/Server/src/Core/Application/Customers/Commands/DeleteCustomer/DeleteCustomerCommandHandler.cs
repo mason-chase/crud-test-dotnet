@@ -1,5 +1,9 @@
-﻿using Domain.Abstractions;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Domain.Abstractions;
 using MediatR;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Application.Customers.Commands.DeleteCustomer
 {
@@ -13,8 +17,29 @@ namespace Application.Customers.Commands.DeleteCustomer
         }
 
         public async Task<bool> Handle(DeleteCustomerCommand request, CancellationToken cancellationToken)
+        {
+            using var transaction = await _customerRepository.BeginTransactionAsync();
 
-         => await _customerRepository.DeleteAsync(request.Id);
+            try
+            {
+                var isDeleted = await _customerRepository.DeleteAsync(request.Id);
 
+                if (isDeleted)
+                {
+                    await _customerRepository.CommitTransactionAsync();
+                }
+                else
+                {
+                    await _customerRepository.RollbackTransactionAsync();
+                }
+
+                return isDeleted;
+            }
+            catch (Exception)
+            {
+                await _customerRepository.RollbackTransactionAsync();
+                throw; 
+            }
+        }
     }
 }

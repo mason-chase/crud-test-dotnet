@@ -2,6 +2,7 @@ using Application.Customers.Queries.GetCustomerById;
 using Infrastructure;
 using Infrastructure.Repositories;
 using Application.Customers.Commands.CreateCustomer;
+using Application.Customers.Commands.DeleteCustomer;
 using Application.Customers.Commands.UpdateCustomer;
 using Application.Customers.Queries.GetAllCustomer;
 using Application.MappingProfiles;
@@ -20,6 +21,7 @@ builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepositor
 builder.Services.AddScoped<IRequestHandler<GetCustomerByIdQuery, CustomerResponse>, GetCustomerQueryHandler>();
 builder.Services.AddScoped<IRequestHandler<CreateCustomerCommand, int>, CreateCustomerCommandHandler>();
 builder.Services.AddScoped<IRequestHandler<UpdateCustomerCommand, bool>, UpdateCustomerCommandHandler>();
+builder.Services.AddScoped<IRequestHandler<DeleteCustomerCommand, bool>, DeleteCustomerCommandHandler>();
 builder.Services.AddScoped<IRequestHandler<GetAllCustomersQuery,List<CustomerResponse>>, GetAllCustomersQueryHandler>();
 
 builder.Services.AddMediatR(typeof(Program).Assembly);

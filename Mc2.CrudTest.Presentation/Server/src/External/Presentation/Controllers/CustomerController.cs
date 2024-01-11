@@ -1,4 +1,5 @@
 ﻿using Application.Customers.Commands.CreateCustomer;
+using Application.Customers.Commands.DeleteCustomer;
 using Application.Customers.Commands.UpdateCustomer;
 using Application.Customers.Queries.GetAllCustomer;
 using Application.Customers.Queries.GetCustomerById;
@@ -68,6 +69,17 @@ namespace Presentation.Controllers;
         {
             var command = new UpdateCustomerCommand(request.Id,request.Firstname, request.Lastname, request.DateOfBirth,
                 request.PhoneNumber, request.Email, request.BankAccountNumber);
+            var result = await _mediator.Send(command, cancellationToken);
+            return Ok(result);
+        }
+
+        [HttpDelete("{customerId:int}")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> DeleteCustomer(int customerId,
+            CancellationToken cancellationToken)
+        {
+            var command = new DeleteCustomerCommand(customerId);
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(result);
         }

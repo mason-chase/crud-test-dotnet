@@ -1,4 +1,5 @@
-﻿using Domain.Abstractions;
+﻿using AutoMapper;
+using Domain.Abstractions;
 using Domain.Entities;
 using MediatR;
 
@@ -8,25 +9,18 @@ public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerComman
 {
     private readonly ICustomerRepository _customerRepository;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IMapper _mapper;
 
-    public CreateCustomerCommandHandler(ICustomerRepository customerRepository, IUnitOfWork unitOfWork)
+    public CreateCustomerCommandHandler(ICustomerRepository customerRepository, IUnitOfWork unitOfWork, IMapper mapper)
     {
         _customerRepository = customerRepository;
         _unitOfWork = unitOfWork;
+        _mapper = mapper;
     }
 
     public async Task<int> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
     {
-        var customer = new Customer
-        {
-            Id = 0,
-            Firstname = request.Firstname,
-            Lastname = request.Lastname,
-            DateOfBirth = request.DateOfBirth,
-            PhoneNumber = request.PhoneNumber,
-            Email = request.Email,
-            BankAccountNumber = request.BankAccountNumber
-        };
+        var customer = _mapper.Map<Customer>(request);
         await _customerRepository.AddAsync(customer);
         await _unitOfWork.SaveChangeAsync(cancellationToken);
         return customer.Id;

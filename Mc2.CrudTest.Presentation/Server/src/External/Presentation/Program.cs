@@ -4,6 +4,7 @@ using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Hosting;
 using System.Reflection;
 using Application.Customers.Commands.CreateCustomer;
+using Application.MappingProfiles;
 using CQRS.NET;
 using Domain.Abstractions;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,8 @@ builder.Services.AddScoped<IRequestHandler<CreateCustomerCommand, int>, CreateCu
 
 // Register MediatR
 builder.Services.AddMediatR(typeof(Program).Assembly);
-
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddAutoMapper(typeof(CustomerMappings));
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

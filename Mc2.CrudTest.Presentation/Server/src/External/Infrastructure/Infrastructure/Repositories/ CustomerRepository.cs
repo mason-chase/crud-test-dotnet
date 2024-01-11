@@ -31,9 +31,18 @@ public class CustomerRepository : GenericRepository<Customer>, ICustomerReposito
     }
 
     public async Task<bool> UpdateAsync(Customer customer)
-      => await _genericRepository.Update(customer);
+    {
+        try
+        {
+            return await _genericRepository.Update(customer);
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+    }
 
-
+   
     public async Task<bool> DeleteAsync(int id)
     => await _genericRepository.Delete(id);
 }

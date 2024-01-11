@@ -32,7 +32,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         var entity = await GetById(id);
         if (entity is null)
-            throw new Exception($"{id} is not found");
+           return false;
         _dbSet.Remove(entity);
         await _context.SaveChangesAsync();
         return true;

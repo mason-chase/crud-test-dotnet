@@ -1,7 +1,9 @@
-﻿using Azure.Core;
+﻿using AutoMapper;
+using Azure.Core;
 using CQRS.NET;
 using Domain.Abstractions;
 using MediatR;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Application.Customers.Queries.GetCustomerById;
 
@@ -9,10 +11,11 @@ public sealed class GetCustomerQueryHandler : IQueryHandler<GetCustomerByIdQuery
     IRequestHandler<GetCustomerByIdQuery, CustomerResponse>
 {
     private readonly ICustomerRepository _customerRepository;
-
-    public GetCustomerQueryHandler(ICustomerRepository customerRepository)
+    private readonly IMapper _mapper;
+    public GetCustomerQueryHandler(ICustomerRepository customerRepository, IMapper mapper)
     {
         _customerRepository = customerRepository;
+        _mapper = mapper;
     }
 
 
@@ -21,14 +24,11 @@ public sealed class GetCustomerQueryHandler : IQueryHandler<GetCustomerByIdQuery
         var customer = await _customerRepository.GetByIdAsync(request.CustomerId);
         if (customer == null)
         {
-            throw new Exception("das");
+            throw new Exception("custommer didnt find");
 
         }
 
-        return new CustomerResponse
-        {
-            Firstname = customer.Firstname
-        };
+        return _mapper.Map<CustomerResponse>(customer);
     }
 
     public async Task<CustomerResponse> HandleAsync(GetCustomerByIdQuery query)
@@ -36,13 +36,10 @@ public sealed class GetCustomerQueryHandler : IQueryHandler<GetCustomerByIdQuery
         var customer = await _customerRepository.GetByIdAsync(query.CustomerId);
         if (customer == null)
         {
-            throw new Exception("das");
+            throw new Exception("custommer didnt find");
 
         }
 
-        return new CustomerResponse
-        {
-            Firstname = customer.Firstname
-        };
+        return _mapper.Map<CustomerResponse>(customer);
     }
 }

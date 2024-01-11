@@ -1,4 +1,5 @@
 ﻿using Application.Customers.Commands.CreateCustomer;
+using Application.Customers.Queries.GetCustomerById;
 using AutoMapper;
 using Domain.Entities;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -10,5 +11,6 @@ public class CustomerMappings : Profile
     public CustomerMappings()
     {
         CreateMap<CreateCustomerCommand, Customer>();
+        CreateMap<Customer, CustomerResponse>();
     }
 }

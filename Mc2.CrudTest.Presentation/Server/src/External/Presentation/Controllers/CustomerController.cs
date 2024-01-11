@@ -1,4 +1,5 @@
 ﻿using Application.Customers.Commands.CreateCustomer;
+using Application.Customers.Queries.GetAllCustomer;
 using Application.Customers.Queries.GetCustomerById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +17,18 @@ namespace Presentation.Controllers;
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
+        [HttpGet]
+        [ProducesResponseType(typeof(List<CustomerResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetCustomers(CancellationToken cancellationToken)
+        {
+            var query = new GetAllCustomersQuery();
+            var customers = await _mediator.Send(query, cancellationToken);
+
+
+            return Ok(customers);
+        }
+        
         [HttpGet("{customerId:int}")]
         [ProducesResponseType(typeof(CustomerResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

@@ -1,18 +1,15 @@
 using Application.Customers.Queries.GetCustomerById;
 using Infrastructure;
 using Infrastructure.Repositories;
-using Microsoft.AspNetCore.Hosting;
-using System.Reflection;
 using Application.Customers.Commands.CreateCustomer;
+using Application.Customers.Queries.GetAllCustomer;
 using Application.MappingProfiles;
-using CQRS.NET;
 using Domain.Abstractions;
 using Microsoft.EntityFrameworkCore;
-using MediatR; // Import MediatR namespace
+using MediatR; 
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -21,8 +18,8 @@ builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IRequestHandler<GetCustomerByIdQuery, CustomerResponse>, GetCustomerQueryHandler>();
 builder.Services.AddScoped<IRequestHandler<CreateCustomerCommand, int>, CreateCustomerCommandHandler>();
+builder.Services.AddScoped<IRequestHandler<GetAllCustomersQuery,List<CustomerResponse>>, GetAllCustomersQueryHandler>();
 
-// Register MediatR
 builder.Services.AddMediatR(typeof(Program).Assembly);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddAutoMapper(typeof(CustomerMappings));

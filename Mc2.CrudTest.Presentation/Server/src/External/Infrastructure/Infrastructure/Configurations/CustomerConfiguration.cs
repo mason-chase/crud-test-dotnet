@@ -1,8 +1,7 @@
 ﻿using Domain.Entities;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Domain.Configuration;
+namespace Infrastructure.Configurations;
 
 public class CustomerConfiguration
 {

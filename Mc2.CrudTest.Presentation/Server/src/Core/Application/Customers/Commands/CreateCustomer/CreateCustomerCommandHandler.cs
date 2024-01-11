@@ -1,11 +1,9 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Application.Behaviours;
+﻿using Application.Behaviours;
 using AutoMapper;
 using Domain.Abstractions;
 using Domain.Entities;
 using MediatR;
+using Microsoft.Extensions.Logging; 
 
 namespace Application.Customers.Commands.CreateCustomer
 {
@@ -13,46 +11,43 @@ namespace Application.Customers.Commands.CreateCustomer
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly IMapper _mapper;
-        private readonly IMediator _mediator; // Inject Mediator
+        private readonly ILogger<CreateCustomerCommandHandler> _logger; 
 
-        public CreateCustomerCommandHandler(ICustomerRepository customerRepository, IMapper mapper, IMediator mediator)
+        public CreateCustomerCommandHandler(ICustomerRepository customerRepository, IMapper mapper, ILogger<CreateCustomerCommandHandler> logger)
         {
             _customerRepository = customerRepository;
             _mapper = mapper;
-            _mediator = mediator;
+            _logger = logger;
         }
 
         public async Task<int> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
         {
-            if (!CustomerValidator.IsValidEmail(request.Email))
-            {
-                throw new Exception("Invalid email format");
-            }
-
-            if (!CustomerValidator.IsValidPhoneNumber(request.PhoneNumber))
-            {
-                throw new Exception("Invalid phone number");
-            }
-
-            var customer = _mapper.Map<Customer>(request);
-
-            using var transaction = await _customerRepository.BeginTransactionAsync();
-
             try
             {
-                await _customerRepository.AddAsync(customer);
-                await transaction.CommitAsync(cancellationToken);
+                if (!CustomerValidator.IsValidEmail(request.Email))
+                {
+                    _logger.LogError("Invalid email format");
+                    throw new Exception("Invalid email format");
+                }
 
-                // Publish CustomerCreated event
-                await _mediator.Publish(new CustomerCreatedEvent(customer.Id), cancellationToken);
+                if (!CustomerValidator.IsValidPhoneNumber(request.PhoneNumber))
+                {
+                    _logger.LogError("Invalid phone number");
+                    throw new Exception("Invalid phone number");
+                }
+
+                var customer = _mapper.Map<Customer>(request);
+                await _customerRepository.AddAsync(customer);
+
+                _logger.LogInformation($"Customer created successfully. CustomerId: {customer.Id}");
+
+                return customer.Id;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                await transaction.RollbackAsync(cancellationToken);
+                _logger.LogError($"Error creating customer: {ex.Message}");
                 throw;
             }
-
-            return customer.Id;
         }
     }
 }

@@ -11,6 +11,7 @@
     <Folder Include="Behaviours\" />
     <Folder Include="Customers\Queries\GetAllCustomer\" />
     <Folder Include="Exceptions\" />
+    <Folder Include="Services\IContracts\" />
   </ItemGroup>
 
   <ItemGroup>

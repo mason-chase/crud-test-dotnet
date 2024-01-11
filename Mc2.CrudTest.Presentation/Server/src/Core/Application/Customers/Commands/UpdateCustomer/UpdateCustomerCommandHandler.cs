@@ -1,69 +1,61 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Application.Behaviours;
+﻿using Application.Behaviours;
+using Application.Customers.Commands.UpdateCustomer;
+using AutoMapper;
 using Domain.Abstractions;
 using Domain.Entities;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
-namespace Application.Customers.Commands.UpdateCustomer;
-
+namespace Application.Customers.Commands.UpdateCustomer
+{
     public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommand, bool>
     {
         private readonly ICustomerRepository _customerRepository;
+        private readonly IMapper _mapper;
+        private readonly ILogger<UpdateCustomerCommandHandler> _logger;
 
-        public UpdateCustomerCommandHandler(ICustomerRepository customerRepository)
+        public UpdateCustomerCommandHandler(ICustomerRepository customerRepository, IMapper mapper, ILogger<UpdateCustomerCommandHandler> logger)
         {
             _customerRepository = customerRepository;
+            _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<bool> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
         {
-            using var transaction = await _customerRepository.BeginTransactionAsync();
-
             try
             {
                 if (!CustomerValidator.IsValidEmail(request.Email))
                 {
-                    await _customerRepository.RollbackTransactionAsync();
+                    _logger.LogError("Invalid email format");
                     throw new Exception("Invalid email format");
                 }
 
                 if (!CustomerValidator.IsValidPhoneNumber(request.PhoneNumber))
                 {
-                    await _customerRepository.RollbackTransactionAsync();
+                    _logger.LogError("Invalid phone number");
                     throw new Exception("Invalid phone number");
                 }
 
-                var customer = new Customer
-                {
-                    Id = request.Id,
-                    Firstname = request.Firstname,
-                    Lastname = request.Lastname,
-                    DateOfBirth = request.DateOfBirth,
-                    PhoneNumber = request.PhoneNumber,
-                    Email = request.Email,
-                    BankAccountNumber = request.BankAccountNumber
-                };
+                var customer = _mapper.Map<Customer>(request);
+                bool result = await _customerRepository.UpdateAsync(customer);
 
-                var isUpdated = await _customerRepository.UpdateAsync(customer);
-
-                if (isUpdated)
+                if (result)
                 {
-                    await _customerRepository.CommitTransactionAsync();
+                    _logger.LogInformation($"Customer with ID {request.Id} updated successfully.");
                 }
                 else
                 {
-                    await _customerRepository.RollbackTransactionAsync();
+                    _logger.LogWarning($"Customer with ID {request.Id} not found for update.");
                 }
 
-                return isUpdated;
+                return result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                await _customerRepository.RollbackTransactionAsync();
-                throw; 
+                _logger.LogError($"Error updating customer: {ex.Message}");
+                throw;
             }
         }
     }
-
+}

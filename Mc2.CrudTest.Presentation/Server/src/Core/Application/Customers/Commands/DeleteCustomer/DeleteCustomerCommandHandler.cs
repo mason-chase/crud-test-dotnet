@@ -1,44 +1,41 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Domain.Abstractions;
+﻿using Domain.Abstractions;
 using MediatR;
-using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Extensions.Logging;
 
 namespace Application.Customers.Commands.DeleteCustomer
 {
     public class DeleteCustomerCommandHandler : IRequestHandler<DeleteCustomerCommand, bool>
     {
         private readonly ICustomerRepository _customerRepository;
+        private readonly ILogger<DeleteCustomerCommandHandler> _logger;
 
-        public DeleteCustomerCommandHandler(ICustomerRepository customerRepository)
+        public DeleteCustomerCommandHandler(ICustomerRepository customerRepository, ILogger<DeleteCustomerCommandHandler> logger)
         {
             _customerRepository = customerRepository;
+            _logger = logger;
         }
 
         public async Task<bool> Handle(DeleteCustomerCommand request, CancellationToken cancellationToken)
         {
-            using var transaction = await _customerRepository.BeginTransactionAsync();
-
             try
             {
-                var isDeleted = await _customerRepository.DeleteAsync(request.Id);
+                bool result = await _customerRepository.DeleteAsync(request.Id);
 
-                if (isDeleted)
+                if (result)
                 {
-                    await _customerRepository.CommitTransactionAsync();
+                    _logger.LogInformation($"Customer with ID {request.Id} deleted successfully.");
                 }
                 else
                 {
-                    await _customerRepository.RollbackTransactionAsync();
+                    _logger.LogWarning($"Customer with ID {request.Id} not found for delete.");
                 }
 
-                return isDeleted;
+                return result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                await _customerRepository.RollbackTransactionAsync();
-                throw; 
+                _logger.LogError($"Error deleting customer: {ex.Message}");
+                throw;
             }
         }
     }

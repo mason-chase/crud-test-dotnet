@@ -6,10 +6,11 @@ using Application.Customers.Commands.DeleteCustomer;
 using Application.Customers.Commands.UpdateCustomer;
 using Application.Customers.Queries.GetAllCustomer;
 using Application.MappingProfiles;
+using Application.Services;
+using Application.Services.IContracts;
 using Domain.Abstractions;
 using Microsoft.EntityFrameworkCore;
-using MediatR; 
-
+using MediatR;
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -24,7 +25,7 @@ builder.Services.AddScoped<IRequestHandler<UpdateCustomerCommand, bool>, UpdateC
 builder.Services.AddScoped<IRequestHandler<DeleteCustomerCommand, bool>, DeleteCustomerCommandHandler>();
 builder.Services.AddScoped<IRequestHandler<GetAllCustomersQuery,List<CustomerResponse>>, GetAllCustomersQueryHandler>();
 builder.Services.AddScoped<INotificationHandler<CustomerCreatedEvent>, CustomerCreatedEventHandler>();
-
+builder.Services.AddScoped<ILoggerService, LoggerService>();
 builder.Services.AddMediatR(typeof(Program).Assembly);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddAutoMapper(typeof(CustomerMappings));

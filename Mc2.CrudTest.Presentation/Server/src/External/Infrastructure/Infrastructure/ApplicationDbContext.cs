@@ -1,12 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
-using Domain.Configuration;
+﻿using Domain.Configuration;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace Domain;
+namespace Infrastructure;
 
 public class ApplicationDbContext : DbContext
 {
+    
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
     {

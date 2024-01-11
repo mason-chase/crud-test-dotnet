@@ -1,9 +1,5 @@
 ﻿using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using Domain.Entities;
 using Infrastructure;
 

@@ -9,6 +9,7 @@
   <ItemGroup>
     <Folder Include="Abstractions\" />
     <Folder Include="Behaviours\" />
+    <Folder Include="Customers\Queries\GetAllCustomer\" />
     <Folder Include="Exceptions\" />
   </ItemGroup>
 

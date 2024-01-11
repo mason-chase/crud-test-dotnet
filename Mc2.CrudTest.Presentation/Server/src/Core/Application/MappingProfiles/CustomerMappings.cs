@@ -1,4 +1,5 @@
 ﻿using Application.Customers.Commands.CreateCustomer;
+using Application.Customers.Commands.UpdateCustomer;
 using Application.Customers.Queries.GetCustomerById;
 using AutoMapper;
 using Domain.Entities;
@@ -11,6 +12,7 @@ public class CustomerMappings : Profile
     public CustomerMappings()
     {
         CreateMap<CreateCustomerCommand, Customer>();
+        CreateMap<UpdateCustomerCommand, Customer>();
         CreateMap<Customer, CustomerResponse>();
     }
 }

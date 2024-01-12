@@ -18,19 +18,29 @@ namespace Application.Behaviours
             return regex.IsMatch(email);
         }
 
-        public static bool IsValidPhoneNumber(string phoneNumber)
+        public static bool IsValidPhoneNumber(ulong phoneNumber)
         {
-            string regionCode = GetRegionCodeFromPhoneNumber(phoneNumber);
+            // Add a "+" prefix to the phone number directly
+            var phoneNumberStringify = $"+{phoneNumber}";
 
-            if (string.IsNullOrWhiteSpace(phoneNumber) || string.IsNullOrWhiteSpace(regionCode))
+            if (string.IsNullOrWhiteSpace(phoneNumberStringify))
+            {
+                return false;
+            }
+
+            string regionCode = GetRegionCodeFromPhoneNumber(phoneNumberStringify);
+
+            if (string.IsNullOrWhiteSpace(regionCode))
             {
                 return false;
             }
 
             var phoneNumberUtil = PhoneNumberUtil.GetInstance();
+
             try
             {
-                var parsedNumber = phoneNumberUtil.Parse(phoneNumber, regionCode);
+                var parsedNumber = phoneNumberUtil.Parse(phoneNumberStringify, regionCode);
+
                 return phoneNumberUtil.IsValidNumber(parsedNumber) &&
                        phoneNumberUtil.GetNumberType(parsedNumber) == PhoneNumberType.MOBILE;
             }
@@ -39,6 +49,7 @@ namespace Application.Behaviours
                 return false;
             }
         }
+
 
 
         public static bool IsValidBankAccountNumber(string bankAccountNumber)

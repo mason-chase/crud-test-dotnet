@@ -13,7 +13,7 @@ namespace Application.Customers.Commands.UpdateCustomer
         [Required]
         public DateTime DateOfBirth { get; set; }
         [Required]
-        public string PhoneNumber { get; set; } = string.Empty;
+        public ulong PhoneNumber { get; set; } 
         [Required]
         public string Email { get; set; } = string.Empty;
         [Required]

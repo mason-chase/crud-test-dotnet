@@ -40,6 +40,45 @@ namespace Application.Behaviours
             }
         }
 
+
+        public static bool IsValidBankAccountNumber(string bankAccountNumber)
+        {
+            string cleanedCardNumber = new string(bankAccountNumber.Where(char.IsDigit).ToArray());
+
+            if (string.IsNullOrWhiteSpace(cleanedCardNumber))
+            {
+                return false;
+            }
+
+            int length = cleanedCardNumber.Length;
+            if (length is < 13 or > 19)
+            {
+                return false;
+            }
+
+            int sum = 0;
+            bool alternate = false;
+
+            for (int i = length - 1; i >= 0; i--)
+            {
+                int digit = int.Parse(cleanedCardNumber[i].ToString());
+
+                if (alternate)
+                {
+                    digit *= 2;
+
+                    if (digit > 9)
+                    {
+                        digit -= 9;
+                    }
+                }
+
+                sum += digit;
+                alternate = !alternate;
+            }
+            return sum % 10 == 0;
+        }
+
         private static string GetRegionCodeFromPhoneNumber(string phoneNumber)
         {
             if (phoneNumber.Length >= 3)

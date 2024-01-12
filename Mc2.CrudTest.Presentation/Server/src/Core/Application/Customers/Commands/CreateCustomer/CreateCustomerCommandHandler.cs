@@ -36,6 +36,13 @@ namespace Application.Customers.Commands.CreateCustomer
                     throw new Exception("Invalid phone number");
                 }
 
+
+                // if (!CustomerValidator.IsValidBankAccountNumber(request.BankAccountNumber))
+                // {
+                //     _logger.LogError("Invalid BankAccountNumber");
+                //     throw new Exception("Invalid BankAccountNumber");
+                // }
+
                 var customer = _mapper.Map<Customer>(request);
                 await _customerRepository.AddAsync(customer);
 

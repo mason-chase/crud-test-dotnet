@@ -7,8 +7,7 @@ using MediatR;
 
 namespace Application.Customers.Queries.GetAllCustomer;
 
-    public class GetAllCustomersQueryHandler : IQueryHandler<GetAllCustomersQuery,List< CustomerResponse>>,
-        IRequestHandler<GetAllCustomersQuery,List< CustomerResponse>>
+    public class GetAllCustomersQueryHandler : IRequestHandler<GetAllCustomersQuery,List< CustomerResponse>>
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly IMapper _mapper;
@@ -18,17 +17,6 @@ namespace Application.Customers.Queries.GetAllCustomer;
             _mapper = mapper;
         }
 
-
-      
-
-        public async Task<List<CustomerResponse>> HandleAsync(GetAllCustomersQuery query)
-        {
-            var customers = await _customerRepository.GetAllAsync();
-
-            var customerResponses = _mapper.Map<List<CustomerResponse>>(customers);
-
-            return customerResponses;
-        }
 
         public async Task<List<CustomerResponse>> Handle(GetAllCustomersQuery request, CancellationToken cancellationToken)
         {

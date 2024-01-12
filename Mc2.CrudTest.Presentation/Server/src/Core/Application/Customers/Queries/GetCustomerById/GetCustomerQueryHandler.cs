@@ -7,8 +7,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Application.Customers.Queries.GetCustomerById;
 
-public sealed class GetCustomerQueryHandler : IQueryHandler<GetCustomerByIdQuery, CustomerResponse>,
-    IRequestHandler<GetCustomerByIdQuery, CustomerResponse>
+public sealed class GetCustomerQueryHandler : IRequestHandler<GetCustomerByIdQuery, CustomerResponse>
 {
     private readonly ICustomerRepository _customerRepository;
     private readonly IMapper _mapper;
@@ -31,15 +30,5 @@ public sealed class GetCustomerQueryHandler : IQueryHandler<GetCustomerByIdQuery
         return _mapper.Map<CustomerResponse>(customer);
     }
 
-    public async Task<CustomerResponse> HandleAsync(GetCustomerByIdQuery query)
-    {
-        var customer = await _customerRepository.GetByIdAsync(query.CustomerId);
-        if (customer == null)
-        {
-            throw new Exception("custommer didnt find");
-
-        }
-
-        return _mapper.Map<CustomerResponse>(customer);
-    }
+  
 }

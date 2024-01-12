@@ -1,5 +1,9 @@
 This is respond to the crud test by Danial Shokouhmanesh 
 
+this writed for api only 
+
+run docker-compose up for sql database and run the project 
+
 valid data example 
 ```
 {

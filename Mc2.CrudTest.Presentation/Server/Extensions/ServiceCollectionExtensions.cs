@@ -9,7 +9,7 @@ namespace Mc2.CrudTest.Presentation.Server.Extensions
             this IServiceCollection services,
             IConfiguration configuration)
             => services
-                .AddDbContext<CrudContext>(options => options
+                .AddDbContext<CrudDbContext>(options => options
                     .UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
     }
 }

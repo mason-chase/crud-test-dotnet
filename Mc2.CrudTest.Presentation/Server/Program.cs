@@ -1,4 +1,5 @@
-using Microsoft.AspNetCore.ResponseCompression;
+
+using Mc2.CrudTest.Presentation.Server.Extensions;
 
 namespace Mc2.CrudTest.Presentation
 {
@@ -9,6 +10,7 @@ namespace Mc2.CrudTest.Presentation
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddDatabase(builder.Configuration);
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();

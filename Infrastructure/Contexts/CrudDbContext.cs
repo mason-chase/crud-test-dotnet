@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Application.Configuration.Database;
+using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Contexts
 {
@@ -9,8 +11,13 @@ namespace Infrastructure.Contexts
             
         }
 
+        public DbSet<Customer> Customers { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new CustomerConfiguration());
+
+
             base.OnModelCreating(modelBuilder);
         }
     }

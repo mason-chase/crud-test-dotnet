@@ -6,7 +6,7 @@ namespace Infrastructure.Contexts
 {
     public class CrudDbContext :DbContext
     {
-        public CrudDbContext(DbContextOptions<CrudDbContext> options) : base(options)
+        public CrudDbContext(DbContextOptions options) : base(options)
         {
             
         }

@@ -1,6 +1,6 @@
-
-using Mc2.CrudTest.Presentation.Server.Extensions;
 using Microsoft.OpenApi.Models;
+using Infrastructure;
+using Application.Configuration;
 
 namespace Mc2.CrudTest.Presentation
 {
@@ -11,11 +11,16 @@ namespace Mc2.CrudTest.Presentation
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddDatabase(builder.Configuration);
-
+            
             builder.Services.AddControllersWithViews();
             builder.Services.AddControllers();
             builder.Services.AddRazorPages();
+
+            builder.Services.AddInfrastructureServices(builder.Configuration);
+            builder.Services.AddApplicationLayer();
+
+
+
 
             builder.Services.AddSwaggerGen(c =>
             {

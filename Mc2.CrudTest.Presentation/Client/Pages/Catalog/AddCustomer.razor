@@ -1,0 +1,70 @@
+﻿@using Mc2.CrudTest.Presentation.Shared.SSOT
+@using Microsoft.AspNetCore.Components
+@using System.Globalization;
+
+<EditForm Model="@_createCustomerDTOModel" OnValidSubmit="SaveAsync">
+    <FluentValidationValidator @ref="@_fluentValidationValidator" />
+    <DataAnnotationsValidator />
+
+    <MudDialog>
+        <TitleContent>
+            <MudText Typo="Typo.h6">
+                <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                Add Customer
+            </MudText>
+        </TitleContent>
+
+        <DialogContent>
+            <MudGrid>
+                <MudItem xs="12" md="6">
+                    <MudTextField T="string" For="@(() => _createCustomerDTOModel.FirstName)" @bind-Value="_createCustomerDTOModel.FirstName" Label="FirstName" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => _createCustomerDTOModel.LastName)" @bind-Value="_createCustomerDTOModel.LastName" Label="LastName" />
+                </MudItem>
+
+                <MudItem xs="12" md="6">
+                    <MudTextField InputType="@InputType.Date" For="@(() => _createCustomerDTOModel.DateOfBirth)" @bind-Value="_createCustomerDTOModel.DateOfBirth" Label="DateOfBirth" />
+                </MudItem>
+
+                <MudItem xs="12" md="6">
+                    <MudGrid>
+                        <MudItem xs="3" md="3">
+                            <MudSelect @bind-Value="_createCustomerDTOModel.Country" Label=" Country" For="@(() => _createCustomerDTOModel.Country)">
+                                @foreach (CountrySSOT item in Enum.GetValues(typeof(CountrySSOT)))
+                                {
+                                    <MudSelectItem Value="@item">@item</MudSelectItem>
+                                }
+                            </MudSelect>
+                        </MudItem>
+                        <MudItem xs="9" md="9">
+
+                            <MudTextField For="@(() => _createCustomerDTOModel.PhoneNumber)" @bind-Value="_createCustomerDTOModel.PhoneNumber" Label="PhoneNumber" />
+                        </MudItem>
+                    </MudGrid>
+                </MudItem>
+
+                <MudItem xs="12" md="6">
+                    <MudTextField InputType="@InputType.Email" For="@(() => _createCustomerDTOModel.Email)" @bind-Value="_createCustomerDTOModel.Email" Label="Email" />
+                </MudItem>
+
+                <MudItem xs="12" md="6">
+                    <MudTextField For="@(() => _createCustomerDTOModel.BankAccountNumber)" @bind-Value="_createCustomerDTOModel.BankAccountNumber" Label="BankAccountNumber" />
+                </MudItem>
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="Variant.Filled" OnClick="Cancel">Cancel</MudButton>
+             @if (_loading)
+            {
+                <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+            }
+            else
+            {
+
+                <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Disabled="@(!Validated)" Color="Color.Success">Save</MudButton>
+            }
+        </DialogActions>
+    </MudDialog>
+
+</EditForm>

@@ -1,4 +1,6 @@
-﻿namespace Domain.Entities
+﻿using Domain.SSOT;
+
+namespace Domain.Entities
 {
     public class Customer
     {
@@ -26,6 +28,11 @@
         /// PhoneNumber
         /// </summary>
         public ulong PhoneNumber { get; set; }
+
+        /// <summary>
+        /// Country
+        /// </summary>
+        public CountrySSOT Country { get; set; }
 
         /// <summary>
         /// Email

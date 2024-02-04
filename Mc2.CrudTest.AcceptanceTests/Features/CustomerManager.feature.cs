@@ -75,15 +75,13 @@ namespace Mc2.CrudTest.AcceptanceTests.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Operator creates, list, update and delete customers")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
-        public virtual void OperatorCreatesListUpdateAndDeleteCustomers()
+        [NUnit.Framework.DescriptionAttribute("Create, Read, Edit, and Delete Customer")]
+        public virtual void CreateReadEditAndDeleteCustomer()
         {
-            string[] tagsOfScenario = new string[] {
-                    "mytag"};
+            string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Operator creates, list, update and delete customers", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 6
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create, Read, Edit, and Delete Customer", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -103,14 +101,126 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
+#line 6
+ testRunner.Given("platform has 0 customers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                            "FirstName",
+                            "LastName",
+                            "Email",
+                            "PhoneNumber",
+                            "Country",
+                            "DateOfBirth",
+                            "BankAccountNumber"});
+                table1.AddRow(new string[] {
+                            "mohammad",
+                            "Mobasher",
+                            "mohammad@Mobasher.com",
+                            "+09191600836",
+                            "IR",
+                            "2000-JAN-15",
+                            "IR330620000000202901868005"});
 #line 7
- testRunner.Given("to be filled...", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.When("user creates a customer with the following data by sending Create Customer Comman" +
+                        "d through API", ((string)(null)), table1, "When ");
 #line hidden
-#line 8
- testRunner.When("to be filled...", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                            "FirstName",
+                            "LastName",
+                            "Email",
+                            "PhoneNumber",
+                            "Country",
+                            "DateOfBirth",
+                            "BankAccountNumber"});
+                table2.AddRow(new string[] {
+                            "mohammad",
+                            "Mobasher",
+                            "mohammad@Mobasher.com",
+                            "+09191600836",
+                            "IR",
+                            "2000-JAN-15",
+                            "IR330620000000202901868005"});
+#line 10
+ testRunner.Then("user can query to get all customers and must have 1 record with the below data", ((string)(null)), table2, "Then ");
 #line hidden
-#line 9
- testRunner.Then("to be filled...", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                            "FirstName",
+                            "LastName",
+                            "Email",
+                            "PhoneNumber",
+                            "Country",
+                            "DateOfBirth",
+                            "BankAccountNumber"});
+                table3.AddRow(new string[] {
+                            "mohammad",
+                            "Mobasher",
+                            "mohammad@Mobasher.com",
+                            "+09191600836",
+                            "IR",
+                            "2000-JAN-15",
+                            "IR330620000000202901868005"});
+#line 13
+ testRunner.When("user creates a customer with the same data by sending Create Customer Command thr" +
+                        "ough API", ((string)(null)), table3, "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Codes"});
+                table4.AddRow(new string[] {
+                            "400"});
+#line 16
+ testRunner.Then("user must get error codes", ((string)(null)), table4, "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                            "FirstName",
+                            "LastName",
+                            "Email",
+                            "PhoneNumber",
+                            "DateOfBirth",
+                            "BankAccountNumber"});
+                table5.AddRow(new string[] {
+                            "Ali",
+                            "Hasani",
+                            "invalidEmail.com",
+                            "+989121237",
+                            "2000-JAN-13",
+                            "IR33062000000"});
+#line 20
+ testRunner.When("user creates a customer with an invalid mobile number, email, and bank account nu" +
+                        "mber", ((string)(null)), table5, "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Codes"});
+                table6.AddRow(new string[] {
+                            "400"});
+#line 23
+ testRunner.Then("user must get error codes", ((string)(null)), table6, "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Id",
+                            "FirstName",
+                            "LastName",
+                            "Email",
+                            "PhoneNumber",
+                            "Country",
+                            "DateOfBirth",
+                            "BankAccountNumber"});
+                table7.AddRow(new string[] {
+                            "1",
+                            "Hasan",
+                            "Delavar",
+                            "Hasan@delavar.com",
+                            "+09121600836",
+                            "IR",
+                            "2000-FEB-01",
+                            "IR330620000000202901868006"});
+#line 27
+ testRunner.When("user edits customer with new data", ((string)(null)), table7, "When ");
+#line hidden
+#line 31
+ testRunner.When("user deletes customer by Id 1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 32
+ testRunner.Then("user can query to get all customers and get 0 records", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

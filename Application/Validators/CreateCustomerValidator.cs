@@ -77,7 +77,7 @@ namespace Application.Validators
         {
             if (string.IsNullOrWhiteSpace(bankAccountNumber))
                 return false;
-            string strRegex = @"^[0-9]{9,18}$";
+            string strRegex = @"IR\d{24}";
             return Regex.IsMatch(bankAccountNumber, strRegex);
         }
     }

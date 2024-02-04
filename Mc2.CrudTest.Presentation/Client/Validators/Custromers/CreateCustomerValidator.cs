@@ -19,10 +19,10 @@ namespace Mc2.CrudTest.Presentation.Client.Validators.Custromers
                 .NotEmpty().WithMessage("Email is requierd.")
                 .EmailAddress().WithMessage("Email is not valid.");
 
-            RuleFor(x => x.DateOfBirth)
-               .NotNull().WithMessage("Date of birth is requierd.")
-               .Must(IsValidDate)
-               .WithMessage("Date of Birth is not valid");
+            //RuleFor(x => x.DateOfBirth)
+            //   .NotNull().WithMessage("Date of birth is requierd.")
+            //   .Must(IsValidDate)
+            //   .WithMessage("Date of Birth is not valid");
 
             RuleFor(x => new { x.PhoneNumber, x.Country })
                 .NotEmpty().WithMessage("Phone number is requierd.")
@@ -61,7 +61,7 @@ namespace Mc2.CrudTest.Presentation.Client.Validators.Custromers
         {
             if (string.IsNullOrWhiteSpace(bankAccountNumber))
                 return false;
-            string strRegex = @"^[0-9]{9,18}$";
+            string strRegex = @"IR\d{24}";
             return Regex.IsMatch(bankAccountNumber, strRegex);
         }
     }

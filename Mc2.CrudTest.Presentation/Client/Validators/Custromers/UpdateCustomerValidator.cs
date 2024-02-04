@@ -20,9 +20,9 @@ namespace Mc2.CrudTest.Presentation.Client.Validators.Custromers
                 .EmailAddress().WithMessage("Email is not valid.");
 
             RuleFor(x => x.DateOfBirth)
-               .NotNull().WithMessage("Date of birth is requierd.")
-               .Must(IsValidDate)
-               .WithMessage("Date of Birth is not valid");
+               .NotNull().WithMessage("Date of birth is requierd.");
+               //.Must(IsValidDate)
+               //.WithMessage("Date of Birth is not valid");
 
             RuleFor(x => new { x.PhoneNumber, x.Country })
                .NotEmpty().WithMessage("Phone number is requierd.")

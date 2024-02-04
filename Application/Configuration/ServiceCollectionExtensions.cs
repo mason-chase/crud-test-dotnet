@@ -1,5 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System.Net.NetworkInformation;
+﻿using Application.Validators;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
 namespace Application.Configuration
@@ -12,6 +14,9 @@ namespace Application.Configuration
 
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
+            services.AddFluentValidationAutoValidation();
+            services.AddFluentValidationClientsideAdapters();
+            services.AddValidatorsFromAssemblyContaining<CreateCustomerValidator>();
         }
     }
 }

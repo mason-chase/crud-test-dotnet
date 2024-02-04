@@ -23,7 +23,7 @@ namespace Mc2.CrudTest.Presentation.Client.Models.Customers
         /// <summary>
         /// DateOfBirth
         /// </summary>
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         /// <summary>
         /// PhoneNumber

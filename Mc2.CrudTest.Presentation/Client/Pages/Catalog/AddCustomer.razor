@@ -24,7 +24,7 @@
                 </MudItem>
 
                 <MudItem xs="12" md="6">
-                    <MudTextField InputType="@InputType.Date" For="@(() => _createCustomerDTOModel.DateOfBirth)" @bind-Value="_createCustomerDTOModel.DateOfBirth" Label="DateOfBirth" />
+                    <MudDatePicker For="@(() => _createCustomerDTOModel.DateOfBirth)" @bind-Date="_createCustomerDTOModel.DateOfBirth" Label="DateOfBirth" />
                 </MudItem>
 
                 <MudItem xs="12" md="6">

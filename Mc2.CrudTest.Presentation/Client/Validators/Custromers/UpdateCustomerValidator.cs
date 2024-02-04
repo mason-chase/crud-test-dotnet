@@ -21,8 +21,6 @@ namespace Mc2.CrudTest.Presentation.Client.Validators.Custromers
 
             RuleFor(x => x.DateOfBirth)
                .NotNull().WithMessage("Date of birth is requierd.");
-               //.Must(IsValidDate)
-               //.WithMessage("Date of Birth is not valid");
 
             RuleFor(x => new { x.PhoneNumber, x.Country })
                .NotEmpty().WithMessage("Phone number is requierd.")
@@ -35,12 +33,7 @@ namespace Mc2.CrudTest.Presentation.Client.Validators.Custromers
 
         }
 
-        private bool IsValidDate(string value)
-        {
-            if (string.IsNullOrEmpty(value))
-                return false;
-            return DateTime.TryParse(value, out _);
-        }
+        
 
         public static void IsValidPhoneNumber(ulong phoneNumber, string coutryCode, ValidationContext<UpdateCustomerDTO> context)
         {

@@ -1,4 +1,6 @@
-﻿namespace Mc2.CrudTest.Presentation.Client.Models.Customers
+﻿using Mc2.CrudTest.Presentation.Shared.SSOT;
+
+namespace Mc2.CrudTest.Presentation.Client.Models.Customers
 {
     public class CustomerDTO
     {
@@ -26,6 +28,11 @@
         /// PhoneNumber
         /// </summary>
         public ulong PhoneNumber { get; set; }
+
+        /// <summary>
+        /// Country
+        /// </summary>
+        public CountrySSOT Country { get; set; }
 
         /// <summary>
         /// Email

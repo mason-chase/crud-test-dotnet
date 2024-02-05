@@ -1,0 +1,69 @@
+﻿@page "/customers"
+@using Mc2.CrudTest.Presentation.Client.Models.Customers
+
+@* @inject Microsoft.Extensions.Localization.IStringLocalizer<Brands> _localizer
+@using BlazorHero.CleanArchitecture.Application.Features.Brands.Queries.GetAll *@
+
+<style>
+    .mud-table-container {
+        overflow: auto;
+    }
+</style>
+
+<MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-2">Customers</MudText>
+<MudText Color="Color.Surface" Class="mb-4">Manage Customers</MudText>
+
+
+
+ @if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary" OnClick="(() => InvokeCreateModal())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">Create</MudButton>
+    <MudTable Hover="true" Elevation="25" Items="_cutomerList" Dense="@_dense" Bordered="@_bordered" Striped="@_striped">
+
+        <HeaderContent>
+            <MudTh><MudTableSortLabel SortBy="new Func<CustomerDTO, object>(x => x.Id)">Id</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<CustomerDTO, object>(x => x.FirstName)">First Name</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<CustomerDTO, object>(x => x.LastName)">Last Name</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<CustomerDTO, object>(x => x.PhoneNumber)">Phone Number</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<CustomerDTO, object>(x => x.DateOfBirth)">Birthday</MudTableSortLabel></MudTh>
+            <MudTh Style="text-align:right">Actions</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Id">@context.Id</MudTd>
+                <MudTd DataLabel="First Name">
+                    <MudHighlighter Text="@context.FirstName" />
+                </MudTd>
+
+                <MudTd DataLabel="Last Name">
+                    <MudHighlighter Text="@context.LastName" />
+                </MudTd>
+
+                <MudTd DataLabel="Phone Number">
+                    <MudHighlighter Text="@context.PhoneNumber.ToString()" />
+                </MudTd>
+
+                <MudTd DataLabel="Birthday">
+                    <MudHighlighter Text="@context.DateOfBirth.ToString("mm/dd/yyyy")" />
+                </MudTd>
+
+                <MudTd DataLabel="Actions" Style="text-align: right">
+                    <MudMenu Label="Actions" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Material.Filled.KeyboardArrowDown" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
+                        <MudMenuItem @onclick="@(() => InvokeEditModal(@context.Id))">Edit</MudMenuItem> 
+                        <MudMenuItem @onclick="@(() => Delete(@context.Id))">Delete</MudMenuItem>
+                    </MudMenu>
+                </MudTd>
+            </RowTemplate>
+            <FooterContent>
+                <MudSwitch @bind-Checked="@_dense" Color="Color.Secondary" Style="margin-left: 5px;">Dense</MudSwitch>
+                <MudSwitch @bind-Checked="@_striped" Color="Color.Tertiary" Style="margin-left: 5px;">Striped</MudSwitch>
+                <MudSwitch @bind-Checked="@_bordered" Color="Color.Warning" Style="margin-left: 5px;">Bordered</MudSwitch>
+            </FooterContent>
+
+        </MudTable>
+}
+
+

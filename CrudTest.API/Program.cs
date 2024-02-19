@@ -1,3 +1,4 @@
+using CrudTest.API.Middlewares;
 using CrudTest.Data.ExtensionMethods;
 using CrudTest.Services.ExtensionMethods;
 
@@ -25,8 +26,12 @@ namespace CrudTest.API
 
             builder.Services.ApplyApplicationConfig();
 
+            builder.Services.AddSingleton<ExceptionHandlerMiddleware>();
 
             var app = builder.Build();
+
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
+
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -41,6 +46,7 @@ namespace CrudTest.API
 
 
             app.MapControllers();
+
 
             app.Run();
         }

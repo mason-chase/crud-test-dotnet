@@ -1,4 +1,5 @@
 ﻿using CrudTest.Models.Errors;
+using CrudTest.Models.Exceptions;
 using FluentValidation;
 using MediatR;
 using System;
@@ -39,8 +40,7 @@ namespace CrudTest.Services.Behaviors
 
             if (errors.Any())
             {
-                //Todo: Define custom exception
-                throw new Exception("Validation Exception");
+                throw new CrudTest.Models.Exceptions.ValidationException(errors);
             }
 
             var response = await next();

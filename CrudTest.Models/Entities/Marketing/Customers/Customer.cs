@@ -27,6 +27,12 @@ namespace CrudTest.Models.Entities.Marketing.Customers
 
         }
 
+        private Customer(Guid id)
+        {
+            Id = id;
+        }
+
+
         public static Customer Create(string firstName, string lastName,
             DateOnly dateOfBirth, ulong phoneNumber,
             string email, ulong bankAccountNumber)

@@ -5,9 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace CrudTest.Data.ExtensionMethods
 {
-    public static class DataServiceConfig
+    public static class InfrastructureConfig
     {
-        public static IServiceCollection ApplyDataConfig(this IServiceCollection services,string connectionString)
+        public static IServiceCollection ApplyInfrastructureConfig(this IServiceCollection services,string connectionString)
         {
             services.AddDbContext<MarketingDbContext>(x=>x.UseSqlServer(connectionString,y=>y.UseDateOnlyTimeOnly()));
 

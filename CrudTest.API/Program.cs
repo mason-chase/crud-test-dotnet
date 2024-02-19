@@ -1,4 +1,7 @@
 using CrudTest.Data.ExtensionMethods;
+using CrudTest.Services.ExtensionMethods;
+
+
 namespace CrudTest.API
 {
     public class Program
@@ -18,7 +21,10 @@ namespace CrudTest.API
             builder.Services.AddSwaggerGen();
 
 
-            builder.Services.ApplyDataConfig(builder.Configuration.GetConnectionString(DEFAULT_CONNECTION_STRING_ALIAS)!);
+            builder.Services.ApplyInfrastructureConfig(builder.Configuration.GetConnectionString(DEFAULT_CONNECTION_STRING_ALIAS)!);
+
+            builder.Services.ApplyApplicationConfig();
+
 
             var app = builder.Build();
 

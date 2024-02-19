@@ -10,17 +10,17 @@ namespace CrudTest.Models.Entities.Marketing.Customers
 {
     public class Customer : BaseEntity
     {
-        public string FirstName { get; set; } = null!;
+        public string FirstName { get; private set; } = null!;
 
-        public string LastName { get; set; } = null!;
+        public string LastName { get; private set; } = null!;
 
-        public DateOnly DateOfBirth { get; set; }
+        public DateOnly DateOfBirth { get; private set; }
 
-        public ulong PhoneNumber { get; set; }
+        public ulong PhoneNumber { get; private set; }
 
-        public string Email { get; set; } = null!;
+        public string Email { get; private set; } = null!;
 
-        public ulong BankAccountNumber { get; set; }
+        public ulong BankAccountNumber { get; private set; }
 
         private Customer()
         {

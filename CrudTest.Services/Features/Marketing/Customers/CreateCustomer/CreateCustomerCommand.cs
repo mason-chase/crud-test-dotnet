@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MediatR;
 namespace CrudTest.Services.Features.Marketing.Customers.CreateCustomer
 {
-    public class CreateCustomerCommand: IRequest<int> 
+    public class CreateCustomerCommand: IRequest<int>
     {
         public string FirstName { get; set; } = null!;
 

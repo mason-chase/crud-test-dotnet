@@ -1,4 +1,7 @@
+using CrudTest.Services.Features.Marketing.Customers.CreateCustomer;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
 
 namespace CrudTest.API.Controllers
 {
@@ -12,10 +15,12 @@ namespace CrudTest.API.Controllers
     };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IMediator _mediator;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger,IMediator mediator)
         {
             _logger = logger;
+            _mediator = mediator;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
@@ -28,6 +33,15 @@ namespace CrudTest.API.Controllers
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+        [HttpPost("Test")]
+
+        public async Task<int> TestMe(CreateCustomerCommand createCustomerCommand)
+        {
+            var result = await _mediator.Send(createCustomerCommand);
+
+            return result;
         }
     }
 }

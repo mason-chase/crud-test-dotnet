@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CrudTest.Services.Behaviors;
+using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
 namespace CrudTest.Services.ExtensionMethods
@@ -7,7 +9,14 @@ namespace CrudTest.Services.ExtensionMethods
     {
         public static IServiceCollection ApplyApplicationConfig(this IServiceCollection services)
         {
-            services.AddMediatR(x => x.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+            services.AddMediatR(config =>
+            {
+
+                config.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly());
+                config.AddOpenBehavior(typeof(ValidationBehavior<,>));
+            });
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
 
 
             return services;

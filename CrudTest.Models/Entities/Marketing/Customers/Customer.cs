@@ -20,7 +20,7 @@ namespace CrudTest.Models.Entities.Marketing.Customers
 
         public string Email { get; set; } = null!;
 
-        public string BankAccountNumber { get; set; } = null!;
+        public ulong BankAccountNumber { get; set; }
 
         private Customer()
         {
@@ -29,7 +29,7 @@ namespace CrudTest.Models.Entities.Marketing.Customers
 
         public static Customer Create(string firstName, string lastName,
             DateOnly dateOfBirth, ulong phoneNumber,
-            string email,string bankAccountNumber)
+            string email, ulong bankAccountNumber)
         {
             //Todo: Add domain level validation and throw exception in case bad data was entered
 

@@ -11,6 +11,7 @@ namespace CrudTest.API
             // Add services to the container.
 
             const string DEFAULT_CONNECTION_STRING_ALIAS = "DefaultConnection";
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

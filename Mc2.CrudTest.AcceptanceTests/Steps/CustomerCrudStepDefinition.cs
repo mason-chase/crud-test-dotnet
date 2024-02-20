@@ -19,12 +19,48 @@ namespace Mc2.CrudTest.AcceptanceTests.Steps
             _customerApi = customerApi;
         }
 
+        [Given("first name (.*)")]
+
+        public void GivenFirstName(string firstName)
+        {
+            _customerApi.CreateCustomerCommand.FirstName = firstName;
+        }
+
+        [Given("last name (.*)")]
+
+        public void GivenLastName(string lastName)
+        {
+            _customerApi.CreateCustomerCommand.LastName = lastName;
+        }
+
+        [Given("date of birth (.*)")]
+
+        public void GivenDateOfBirth(DateOnly dateofBirth)
+        {
+            _customerApi.CreateCustomerCommand.DateOfBirth = dateofBirth;
+        }
+
         [Given("phone number (.*)")]
 
         public void GivenPhoneNumber(ulong phoneNumber)
         {
-            _customerApi.PhoneNumber = phoneNumber;
+            _customerApi.CreateCustomerCommand.PhoneNumber = phoneNumber;
         }
+
+        [Given("email (.*)")]
+
+        public void GivenEmail(string email)
+        {
+            _customerApi.CreateCustomerCommand.Email = email;
+        }
+
+        [Given("bank account number (.*)")]
+
+        public void GivenBankAccountNumber(ulong bankAccountNumber)
+        {
+            _customerApi.CreateCustomerCommand.BankAccountNumber = bankAccountNumber;
+        }
+
 
         [When("the customer is being created")]
 

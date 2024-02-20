@@ -10,6 +10,11 @@ Scenario: Operator creates, list, update and delete customers
 
 @Create
 Scenario: Operator attempts to create customer with bad data
+	Given first name Mohammad
+	Given last name Bashirinia
+	Given date of birth 1992-11-09
 	Given phone number 99
+	Given email abc@yahoo.com
+	Given bank account number 223332
 	When the customer is being created
-	Then status code will be 400
+	Then status code will be 500

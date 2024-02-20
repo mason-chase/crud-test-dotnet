@@ -14,6 +14,8 @@ namespace CrudTest.API.Middlewares
         {
             try
             {
+                
+
                 await next.Invoke(context);
             }
             catch(ValidationException validationException)

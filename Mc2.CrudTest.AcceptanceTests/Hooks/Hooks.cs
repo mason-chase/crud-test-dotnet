@@ -7,12 +7,12 @@ namespace Mc2.CrudTest.AcceptanceTests.Hooks
     [Binding]
     public class Hooks
     {
-        private static IHost _host;
+        private static IHost? _host;
 
         [BeforeTestRun]
         public static void BeforeTestRun()
         {
-            _host = Program.CreateHostBuilder(null).Build();
+            _host = Program.CreateHostBuilder(null!).Build();
 
             _host.Start();
         }
@@ -20,7 +20,7 @@ namespace Mc2.CrudTest.AcceptanceTests.Hooks
         [AfterTestRun]
         public static void AfterTestRun()
         {
-            _host.StopAsync().Wait();
+            _host!.StopAsync().Wait();
         }
     }
 }

@@ -1,8 +1,11 @@
 ﻿using CrudTest.Data.Context;
 using CrudTest.Models.Entities.Marketing.Customers;
+using CrudTest.Services.Common;
+using CrudTest.Services.Features.Marketing.Customers.DeleteCustomer;
 using CrudTest.Services.Features.Marketing.Customers.DTOs;
 using FluentAssertions;
 using Mc2.CrudTest.AcceptanceTests.API;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -18,9 +21,13 @@ namespace Mc2.CrudTest.AcceptanceTests.Steps
         private readonly CustomerApi _customerApi;
 
         private int _statusCode;
+
+        private Response<dynamic>? _response;
         private List<CustomerResponseDto>? _customers;
 
         private readonly MarketingDbContext _context;
+
+        private Guid? _existingId;
         public CustomerCrudStepDefinition(CustomerApi customerApi)
         {
             _customerApi = customerApi;
@@ -75,6 +82,20 @@ namespace Mc2.CrudTest.AcceptanceTests.Steps
 
             await _context.SaveChangesAsync();
         }
+
+        [Given("There is another user with Id")]
+        public async Task GivenThereIsAnotherUserWithId()
+        {
+            var customer = Customer.Create(Guid.NewGuid().ToString(), Guid.NewGuid().ToString()
+                , DateOnly.Parse("1995-10-11"), 12141, "abc@yahoo.com", 12314);
+
+
+            _context.Customers.Add(customer);
+
+            await _context.SaveChangesAsync();
+            _existingId = customer.Id;
+        }
+
         [Given("first name (.*)")]
 
         public void GivenFirstName(string firstName)
@@ -135,6 +156,34 @@ namespace Mc2.CrudTest.AcceptanceTests.Steps
 
         }
 
+        [When("we want to delete customer with id (.*)")]
+
+        public async Task WeWantToDeleteCustomerWithId(string id)
+        {
+            Guid deleteId;
+
+            if(id == "existing")
+            {
+                deleteId = _existingId!.Value;
+            }
+
+            else
+            {
+                deleteId = Guid.Parse(id);
+            }
+
+            var result = await _customerApi.DeleteAsync(deleteId);
+
+            _statusCode = result.StatusCode;
+            _response = result;
+
+        }
+
+        [Then("the response has success true")]
+        public void ResponseHasSuccessTrue()
+        {
+            _response!.Success.Should().BeTrue();
+        }
         [Then("customer list will be empty")]
         public void CustomerListWillBeEmpty()
         {
@@ -152,6 +201,14 @@ namespace Mc2.CrudTest.AcceptanceTests.Steps
         public void ThenTheStatusCodeWillBe(int statusCode)
         {
             _statusCode.Should().Be(statusCode);
+        }
+
+        [Then("there will not be a customer with existing id")]
+        public async void ThereWillNotBeCustomerWithExistingId()
+        {
+            var result = await _context.Customers.AnyAsync(x => x.Id == _existingId);
+
+            result.Should().BeFalse();
         }
     }
 }

@@ -104,3 +104,16 @@ Scenario: Operator gets all the data and there is 3 data so a list of 3 is retur
 	Given There is another user with email abc3@yahoo.com
 	When we want to see all customers
 	Then customer list will have 3 customers
+
+
+@DeleteCustomerBadId
+Scenario: Operator attempts to delete a customer that does not exists and gets 404 error
+	When we want to delete customer with id a286eced-b158-4f81-b51d-c412f1298b8d
+	Then status code will be 404
+
+@DeleteCustomerGoodId
+Scenario: Operator attempts to delete a customer that exists and gets success
+	Given There is another user with Id
+	When we want to delete customer with id existing
+	Then the response has success true
+	Then there will not be a customer with existing id

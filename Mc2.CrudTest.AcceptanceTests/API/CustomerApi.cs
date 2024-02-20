@@ -1,5 +1,6 @@
 ﻿using CrudTest.Models.Entities.Marketing.Customers;
 using CrudTest.Services.Features.Marketing.Customers.CreateCustomer;
+using CrudTest.Services.Features.Marketing.Customers.DeleteCustomer;
 using CrudTest.Services.Features.Marketing.Customers.DTOs;
 using CrudTest.Services.Features.Marketing.Customers.GetAllCustomers;
 using Mc2.CrudTest.AcceptanceTests.Factories;
@@ -26,7 +27,7 @@ namespace Mc2.CrudTest.AcceptanceTests.API
 
         public CustomerApi()
         {
-            _httpClient = Factory.CreateDefaultClient(new Uri("http://localhost:8080/api/Customers"));
+            _httpClient = Factory.CreateDefaultClient(new Uri("http://localhost:8080/api/"));
 
             ServicePointManager.ServerCertificateValidationCallback +=
                 (sender, cert, chain, sslPolicyErrors) => true;
@@ -36,16 +37,23 @@ namespace Mc2.CrudTest.AcceptanceTests.API
 
         public async Task<HttpResponseMessage> CreateAsync()
         {
-            var result = await _httpClient.PostAsJsonAsync("", CreateCustomerCommand);
+            var result = await _httpClient.PostAsJsonAsync("Customers", CreateCustomerCommand);
 
             return result;
         }
 
         public async Task<List<CustomerResponseDto>> GetAllAsync()
         {
-            var result = await _httpClient.GetFromJsonAsync<GetAllCustomersResponse>("");
+            var result = await _httpClient.GetFromJsonAsync<GetAllCustomersResponse>("Customers");
 
             return result!.Data!;
+        }
+
+        public async Task<DeleteCustomerResponse> DeleteAsync(Guid customerId)
+        {
+            var result = await _httpClient.DeleteFromJsonAsync<DeleteCustomerResponse>($"Customers/{customerId}");
+
+            return result!;
         }
     }
 }

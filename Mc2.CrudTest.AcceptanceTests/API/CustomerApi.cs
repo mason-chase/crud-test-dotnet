@@ -17,13 +17,13 @@ namespace Mc2.CrudTest.AcceptanceTests.API
     {
         public CreateCustomerCommand CreateCustomerCommand { get; } = new CreateCustomerCommand();
 
-        private BddWebApplicationFactory _factory = new BddWebApplicationFactory();
+        public BddWebApplicationFactory Factory { get; } =  new BddWebApplicationFactory();
 
         private readonly HttpClient _httpClient;
 
         public CustomerApi()
         {
-            _httpClient = _factory.CreateDefaultClient(new Uri("http://localhost:8080/api/Customers"));
+            _httpClient = Factory.CreateDefaultClient(new Uri("http://localhost:8080/api/Customers"));
 
             ServicePointManager.ServerCertificateValidationCallback +=
                 (sender, cert, chain, sslPolicyErrors) => true;
@@ -36,6 +36,8 @@ namespace Mc2.CrudTest.AcceptanceTests.API
             var result = await _httpClient.PostAsJsonAsync("", CreateCustomerCommand);
 
             var content = await result.Content.ReadAsStringAsync();
+
+            
             return result;
         }
     }

@@ -1,5 +1,8 @@
-﻿using FluentAssertions;
+﻿using CrudTest.Data.Context;
+using CrudTest.Models.Entities.Marketing.Customers;
+using FluentAssertions;
 using Mc2.CrudTest.AcceptanceTests.API;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +17,16 @@ namespace Mc2.CrudTest.AcceptanceTests.Steps
         private readonly CustomerApi _customerApi;
 
         private int _statusCode;
+
+        private readonly MarketingDbContext _context;
         public CustomerCrudStepDefinition(CustomerApi customerApi)
         {
             _customerApi = customerApi;
+            _context =  customerApi.Factory.Server.Services.GetService<MarketingDbContext>()!;
+            
         }
+
+        
 
         [Given("first name (.*)")]
 

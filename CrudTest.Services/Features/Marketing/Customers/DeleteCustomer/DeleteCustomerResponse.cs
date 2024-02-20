@@ -9,6 +9,5 @@ namespace CrudTest.Services.Features.Marketing.Customers.DeleteCustomer
 {
     public class DeleteCustomerResponse: Response<object>
     {
-        public int StatusCode { get; set; }
     }
 }

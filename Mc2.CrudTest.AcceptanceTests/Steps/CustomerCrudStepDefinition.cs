@@ -101,6 +101,7 @@ namespace Mc2.CrudTest.AcceptanceTests.Steps
         public void GivenFirstName(string firstName)
         {
             _customerApi.CreateCustomerCommand.FirstName = firstName;
+            _customerApi.UpdateCustomerCommand.FirstName = firstName;
         }
 
         [Given("last name (.*)")]
@@ -108,6 +109,7 @@ namespace Mc2.CrudTest.AcceptanceTests.Steps
         public void GivenLastName(string lastName)
         {
             _customerApi.CreateCustomerCommand.LastName = lastName;
+            _customerApi.UpdateCustomerCommand.LastName = lastName;
         }
 
         [Given("date of birth (.*)")]
@@ -115,6 +117,7 @@ namespace Mc2.CrudTest.AcceptanceTests.Steps
         public void GivenDateOfBirth(DateOnly dateofBirth)
         {
             _customerApi.CreateCustomerCommand.DateOfBirth = dateofBirth;
+            _customerApi.UpdateCustomerCommand.DateOfBirth = dateofBirth;
         }
 
         [Given("phone number (.*)")]
@@ -122,6 +125,7 @@ namespace Mc2.CrudTest.AcceptanceTests.Steps
         public void GivenPhoneNumber(ulong phoneNumber)
         {
             _customerApi.CreateCustomerCommand.PhoneNumber = phoneNumber;
+            _customerApi.UpdateCustomerCommand.PhoneNumber = phoneNumber;
         }
 
         [Given("email (.*)")]
@@ -129,6 +133,7 @@ namespace Mc2.CrudTest.AcceptanceTests.Steps
         public void GivenEmail(string email)
         {
             _customerApi.CreateCustomerCommand.Email = email;
+            _customerApi.UpdateCustomerCommand.Email = email;
         }
 
         [Given("bank account number (.*)")]
@@ -136,6 +141,7 @@ namespace Mc2.CrudTest.AcceptanceTests.Steps
         public void GivenBankAccountNumber(ulong bankAccountNumber)
         {
             _customerApi.CreateCustomerCommand.BankAccountNumber = bankAccountNumber;
+            _customerApi.UpdateCustomerCommand.BankAccountNumber = bankAccountNumber;
         }
 
 
@@ -179,6 +185,26 @@ namespace Mc2.CrudTest.AcceptanceTests.Steps
 
         }
 
+        [When("the customer with existing id is being updated")]
+
+        public async Task TheCustomerWithExistingIdIsBeingUpdated()
+        {
+            var result = await _customerApi.UpdateAsync(_existingId!.Value);
+
+            _statusCode = result.StatusCode;
+            _response = result;
+        }
+
+        [When("we want to update customer with id (.*)")]
+        public async Task WeWantToUpdateCustomerWithId(Guid id)
+        {
+            var result = await _customerApi.UpdateAsync(id);
+
+            _statusCode = result.StatusCode;
+            _response = result;
+        }
+
+
         [Then("the response has success true")]
         public void ResponseHasSuccessTrue()
         {
@@ -210,5 +236,7 @@ namespace Mc2.CrudTest.AcceptanceTests.Steps
 
             result.Should().BeFalse();
         }
+
+
     }
 }

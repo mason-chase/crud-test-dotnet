@@ -49,5 +49,17 @@ namespace CrudTest.Models.Entities.Marketing.Customers
                 PhoneNumber = phoneNumber,
             };
         }
+
+        public void Update(string firstName, string lastName,
+            DateOnly dateOfBirth, ulong phoneNumber,
+            string email, ulong bankAccountNumber)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            DateOfBirth = dateOfBirth;
+            BankAccountNumber = bankAccountNumber;
+            Email = email;
+            PhoneNumber = phoneNumber;
+        }
     }
 }

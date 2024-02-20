@@ -2,6 +2,7 @@
 using CrudTest.Services.Features.Marketing.Customers.CreateCustomer;
 using CrudTest.Services.Features.Marketing.Customers.DeleteCustomer;
 using CrudTest.Services.Features.Marketing.Customers.GetAllCustomers;
+using CrudTest.Services.Features.Marketing.Customers.UpdateCustomer;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -45,6 +46,17 @@ namespace CrudTest.API.Controllers
         public async Task<DeleteCustomerResponse> DeleteCustomerAsync(Guid customerId)
         {
             var result = await _mediator.Send(new DeleteCustomerCommand(customerId));
+
+            return result;
+        }
+
+        [HttpPut("{customerId}")]
+
+        public async Task<UpdateCustomerResponse> UpdateCustomerAsync(Guid customerId,UpdateCustomerCommand command)
+        {
+            command.CustomerId = customerId;
+
+            var result = await _mediator.Send(command);
 
             return result;
         }

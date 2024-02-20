@@ -117,3 +117,102 @@ Scenario: Operator attempts to delete a customer that exists and gets success
 	When we want to delete customer with id existing
 	Then the response has success true
 	Then there will not be a customer with existing id
+
+@UpdateCustomerBadId
+	Scenario: Operator attempts to update a customer that does not exists and gets 404 error
+	Given first name Mohammad
+	Given last name Bashirinia
+	Given date of birth 1992-11-09
+	Given phone number 09375226105
+	Given email abcd@yahoo.com
+	Given bank account number 223332
+	When we want to update customer with id a286eced-b158-4f81-b51d-c412f1298b8d
+	Then status code will be 404
+
+@UpdateBadEmail
+Scenario: Operator attempts to update customer with bad email and gets bad request error
+	Given There is another user with Id
+	Given first name Mohammad
+	Given last name Bashirinia
+	Given date of birth 1992-11-09
+	Given phone number 09375226105
+	Given email badEmail
+	Given bank account number 223332
+	When the customer with existing id is being updated
+	Then status code will be 400
+
+@UpdateBadPhoneNumber
+Scenario: Operator attempts to update customer with bad IR phone number and gets bad request error
+	Given There is another user with Id
+	Given first name Mohammad
+	Given last name Bashirinia
+	Given date of birth 1992-11-09
+	Given phone number 044875226105
+	Given email abc@yahoo.com
+	Given bank account number 223332
+	When the customer with existing id is being updated
+	Then status code will be 400
+
+@UpdateDuplicateFirstName
+Scenario: Operator attempts to update customer with duplicate first name and gets bad request error
+	Given There is another user with Id
+	Given There is another user with first name Mohammad
+	Given first name Mohammad
+	Given last name Bashirinia
+	Given date of birth 1992-11-09
+	Given phone number 09375226105
+	Given email abc@yahoo.com
+	Given bank account number 223332
+	When the customer with existing id is being updated
+	Then status code will be 400
+
+@UpdateDuplicateLastName
+Scenario: Operator attempts to update customer with duplicate last name and gets bad request error
+	Given There is another user with Id
+	Given There is another user with last name Bashirinia
+	Given first name Mohammad
+	Given last name Bashirinia
+	Given date of birth 1992-11-09
+	Given phone number 09375226105
+	Given email abc@yahoo.com
+	Given bank account number 223332
+	When the customer with existing id is being updated
+	Then status code will be 400
+
+@UpdateDuplicateDateOfBirth
+Scenario: Operator attempts to update customer with duplicate date of birth and gets bad request error
+	Given There is another user with Id
+	Given There is another user with date of birth 1992-11-09
+	Given first name Mohammad
+	Given last name Bashirinia
+	Given date of birth 1992-11-09
+	Given phone number 09375226105
+	Given email abc@yahoo.com
+	Given bank account number 223332
+	When the customer with existing id is being updated
+	Then status code will be 400
+
+@UpdateDuplicateEmail
+Scenario: Operator attempts to update customer with duplicate Email and gets bad request error
+	Given There is another user with Id
+	Given There is another user with email abc@yahoo.com
+	Given first name Mohammad
+	Given last name Bashirinia
+	Given date of birth 1992-11-09
+	Given phone number 09375226105
+	Given email abc@yahoo.com
+	Given bank account number 223332
+	When the customer with existing id is being updated
+	Then status code will be 400
+
+@UpdateGoodData
+Scenario: Operator attempts to update customer with good data
+	Given There is another user with Id
+	Given first name Mohammad
+	Given last name Bashirinia
+	Given date of birth 1992-11-09
+	Given phone number 09375226105
+	Given email abcd@yahoo.com
+	Given bank account number 223332
+	When the customer with existing id is being updated
+	Then status code will be 200

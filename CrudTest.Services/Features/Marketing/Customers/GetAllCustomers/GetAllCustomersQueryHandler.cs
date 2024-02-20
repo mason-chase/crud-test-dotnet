@@ -30,7 +30,8 @@ namespace CrudTest.Services.Features.Marketing.Customers.GetAllCustomers
                     Email = x.Email,
                     FirstName = x.FirstName,
                     LastName = x.LastName,
-                    PhoneNumber = x.PhoneNumber
+                    PhoneNumber = x.PhoneNumber,
+                    Id = x.Id,
                 }).ToListAsync();
 
             return new GetAllCustomersResponse

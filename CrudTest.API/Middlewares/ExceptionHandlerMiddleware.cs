@@ -24,7 +24,7 @@ namespace CrudTest.API.Middlewares
 
                 context.Response.StatusCode = 400;
 
-                await context.Response.WriteAsJsonAsync(new {Errors = validationException.Errors});
+                await context.Response.WriteAsJsonAsync(new {Errors = validationException.Errors,StatusCode = 400});
             }
             catch(Exception ex)
             {
@@ -32,7 +32,7 @@ namespace CrudTest.API.Middlewares
 
                 context.Response.StatusCode = 500;
 
-                await context.Response.WriteAsJsonAsync(new {Error=ex.Message});
+                await context.Response.WriteAsJsonAsync(new {Error=ex.Message, StatusCode = 500});
             }
         }
     }

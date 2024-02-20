@@ -1,4 +1,6 @@
-﻿using CrudTest.Services.Features.Marketing.Customers.CreateCustomer;
+﻿using CrudTest.Models.Entities.Marketing.Customers;
+using CrudTest.Services.Features.Marketing.Customers.CreateCustomer;
+using CrudTest.Services.Features.Marketing.Customers.GetAllCustomers;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +27,15 @@ namespace CrudTest.API.Controllers
             {
                 HttpContext.Response.StatusCode = 201;
             }
+
+            return result;
+        }
+
+        [HttpGet("")]
+
+        public async Task<GetAllCustomersResponse> GetCustomersAsync()
+        {
+            var result = await _mediator.Send(new GetAllCustomersQuery());
 
             return result;
         }

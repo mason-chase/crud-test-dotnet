@@ -1,5 +1,6 @@
 ﻿using CrudTest.Data.Context;
 using CrudTest.Models.Entities.Marketing.Customers;
+using CrudTest.Services.Features.Marketing.Customers.DTOs;
 using FluentAssertions;
 using Mc2.CrudTest.AcceptanceTests.API;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,7 @@ namespace Mc2.CrudTest.AcceptanceTests.Steps
         private readonly CustomerApi _customerApi;
 
         private int _statusCode;
+        private List<CustomerResponseDto>? _customers;
 
         private readonly MarketingDbContext _context;
         public CustomerCrudStepDefinition(CustomerApi customerApi)
@@ -123,6 +125,26 @@ namespace Mc2.CrudTest.AcceptanceTests.Steps
             var result = await _customerApi.CreateAsync();
 
             _statusCode = (int)result.StatusCode;
+        }
+
+        [When("we want to see all customers")]
+
+        public async Task WhenWeWantToSeeAllCustomers()
+        {
+            _customers = await _customerApi.GetAllAsync();
+
+        }
+
+        [Then("customer list will be empty")]
+        public void CustomerListWillBeEmpty()
+        {
+            _customers.Should().BeEmpty();
+        }
+
+        [Then("customer list will have (.*) customers")]
+        public void CustomerListWillBeEmpty(int count)
+        {
+            _customers.Should().HaveCount(count);
         }
 
         [Then("status code will be (.*)")]

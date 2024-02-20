@@ -1,4 +1,7 @@
-﻿using CrudTest.Services.Features.Marketing.Customers.CreateCustomer;
+﻿using CrudTest.Models.Entities.Marketing.Customers;
+using CrudTest.Services.Features.Marketing.Customers.CreateCustomer;
+using CrudTest.Services.Features.Marketing.Customers.DTOs;
+using CrudTest.Services.Features.Marketing.Customers.GetAllCustomers;
 using Mc2.CrudTest.AcceptanceTests.Factories;
 using RestSharp;
 using System;
@@ -35,10 +38,14 @@ namespace Mc2.CrudTest.AcceptanceTests.API
         {
             var result = await _httpClient.PostAsJsonAsync("", CreateCustomerCommand);
 
-            var content = await result.Content.ReadAsStringAsync();
-
-            
             return result;
+        }
+
+        public async Task<List<CustomerResponseDto>> GetAllAsync()
+        {
+            var result = await _httpClient.GetFromJsonAsync<GetAllCustomersResponse>("");
+
+            return result!.Data!;
         }
     }
 }

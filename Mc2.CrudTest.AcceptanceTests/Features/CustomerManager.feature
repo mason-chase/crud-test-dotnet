@@ -84,3 +84,23 @@ Scenario: Operator attempts to create customer with good data
 	Given bank account number 223332
 	When the customer is being created
 	Then status code will be 201
+
+
+@GetAllNoData
+Scenario: Operator gets all the data but there are none so empty list is returned
+	When we want to see all customers
+	Then customer list will be empty
+	
+@GetAllOneData
+Scenario: Operator gets all the data and there is 1 data so a list of 1 is returned
+	Given There is another user with email abc@yahoo.com
+	When we want to see all customers
+	Then customer list will have 1 customers
+
+@GetAllThreeData
+Scenario: Operator gets all the data and there is 3 data so a list of 3 is returned
+	Given There is another user with email abc1@yahoo.com
+	Given There is another user with email abc2@yahoo.com
+	Given There is another user with email abc3@yahoo.com
+	When we want to see all customers
+	Then customer list will have 3 customers

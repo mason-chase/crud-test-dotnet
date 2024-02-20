@@ -7,10 +7,17 @@ namespace CrudTest.Data.ExtensionMethods
 {
     public static class InfrastructureConfig
     {
-        public static IServiceCollection ApplyInfrastructureConfig(this IServiceCollection services,string connectionString)
+        public static IServiceCollection ApplyInfrastructureConfig(this IServiceCollection services,string connectionString,bool isTesting=false)
         {
-            services.AddDbContext<MarketingDbContext>(x=>x.UseSqlServer(connectionString,y=>y.UseDateOnlyTimeOnly()));
+            if (!isTesting)
+            {
+                services.AddDbContext<MarketingDbContext>(x => x.UseSqlServer(connectionString, y => y.UseDateOnlyTimeOnly()));
+            }
 
+            else
+            {
+                services.AddDbContext<MarketingDbContext>(x => x.UseInMemoryDatabase(Guid.NewGuid().ToString()));
+            }
             return services;
         }
     }

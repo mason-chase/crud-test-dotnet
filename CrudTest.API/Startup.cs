@@ -9,9 +9,12 @@ namespace CrudTest.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IWebHostEnvironment _appEnv;
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment appEnv)
         {
             Configuration = configuration;
+            _appEnv = appEnv;
         }
 
         public IConfiguration Configuration { get; }
@@ -26,7 +29,8 @@ namespace CrudTest.API
             services.AddSwaggerGen();
 
 
-            services.ApplyInfrastructureConfig(Configuration.GetConnectionString(DEFAULT_CONNECTION_STRING_ALIAS)!);
+
+            services.ApplyInfrastructureConfig(Configuration.GetConnectionString(DEFAULT_CONNECTION_STRING_ALIAS)!,_appEnv.EnvironmentName == "Testing");
 
             services.ApplyApplicationConfig();
 

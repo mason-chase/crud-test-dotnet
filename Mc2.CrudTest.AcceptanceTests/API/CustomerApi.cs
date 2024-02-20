@@ -1,4 +1,5 @@
 ﻿using CrudTest.Services.Features.Marketing.Customers.CreateCustomer;
+using Mc2.CrudTest.AcceptanceTests.Factories;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -16,13 +17,13 @@ namespace Mc2.CrudTest.AcceptanceTests.API
     {
         public CreateCustomerCommand CreateCustomerCommand { get; } = new CreateCustomerCommand();
 
+        private BddWebApplicationFactory _factory = new BddWebApplicationFactory();
 
         private readonly HttpClient _httpClient;
 
         public CustomerApi()
         {
-            _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri("http://localhost:8080/api/Customers");
+            _httpClient = _factory.CreateDefaultClient(new Uri("http://localhost:8080/api/Customers"));
 
             ServicePointManager.ServerCertificateValidationCallback +=
                 (sender, cert, chain, sslPolicyErrors) => true;

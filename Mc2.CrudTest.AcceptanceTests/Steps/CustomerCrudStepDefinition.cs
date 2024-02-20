@@ -70,6 +70,7 @@ namespace Mc2.CrudTest.AcceptanceTests.Steps
 
             _statusCode = (int)result.StatusCode;
         }
+
         [Then("status code will be (.*)")]
 
         public void ThenTheStatusCodeWillBe(int statusCode)

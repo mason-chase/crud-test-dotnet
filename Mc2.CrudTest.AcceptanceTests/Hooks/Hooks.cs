@@ -12,15 +12,13 @@ namespace Mc2.CrudTest.AcceptanceTests.Hooks
         [BeforeTestRun]
         public static void BeforeTestRun()
         {
-            //_host = Program.CreateHostBuilder(null!).Build();
-
-            //_host.Start();
+            
         }
 
         [AfterTestRun]
         public static void AfterTestRun()
         {
-            //_host!.StopAsync().Wait();
+            
         }
     }
 }

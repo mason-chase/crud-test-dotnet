@@ -17,9 +17,16 @@ namespace CrudTest.API.Controllers
         }
 
         [HttpPost("")]
-        public async Task<object> CreateCustomerAsync(CreateCustomerCommand command)
+        public async Task<int> CreateCustomerAsync(CreateCustomerCommand command)
         {
-            throw new NotImplementedException();
+            var result = await _mediator.Send(command);
+
+            if(result == 1)
+            {
+                HttpContext.Response.StatusCode = 201;
+            }
+
+            return result;
         }
     }
 }

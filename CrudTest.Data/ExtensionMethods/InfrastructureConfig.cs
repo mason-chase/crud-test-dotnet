@@ -16,7 +16,7 @@ namespace CrudTest.Data.ExtensionMethods
 
             else
             {
-                services.AddDbContext<MarketingDbContext>(x => x.UseInMemoryDatabase(Guid.NewGuid().ToString()));
+                services.AddDbContext<MarketingDbContext>(x => x.UseInMemoryDatabase(Guid.NewGuid().ToString()),ServiceLifetime.Singleton);
             }
             return services;
         }

@@ -26,8 +26,53 @@ namespace Mc2.CrudTest.AcceptanceTests.Steps
             
         }
 
-        
+        [Given("There is another user with first name (.*)")]
+        public async Task GivenThereIsAnotherUserWithFirstName(string firstName)
+        {
+            var customer = Customer.Create(firstName, Guid.NewGuid().ToString()
+                , DateOnly.Parse("1995-10-11"), 12141, $"{Guid.NewGuid()}@yahoo.com", 12314);
 
+
+            _context.Customers.Add(customer);
+
+            await _context.SaveChangesAsync();
+        }
+
+        [Given("There is another user with last name (.*)")]
+        public async Task GivenThereIsAnotherUserWithLastName(string lastName)
+        {
+            var customer = Customer.Create(Guid.NewGuid().ToString(), lastName
+                , DateOnly.Parse("1995-10-11"), 12141, $"{Guid.NewGuid()}@yahoo.com", 12314);
+
+
+            _context.Customers.Add(customer);
+
+            await _context.SaveChangesAsync();
+        }
+
+        [Given("There is another user with date of birth (.*)")]
+        public async Task GivenThereIsAnotherUserWithDateOfBirth(DateOnly dateofBirth)
+        {
+            var customer = Customer.Create(Guid.NewGuid().ToString(), Guid.NewGuid().ToString()
+                , dateofBirth, 12141, $"{Guid.NewGuid()}@yahoo.com", 12314);
+
+
+            _context.Customers.Add(customer);
+
+            await _context.SaveChangesAsync();
+        }
+
+        [Given("There is another user with email (.*)")]
+        public async Task GivenThereIsAnotherUserWithEmail(string email)
+        {
+            var customer = Customer.Create(Guid.NewGuid().ToString(), Guid.NewGuid().ToString()
+                , DateOnly.Parse("1995-10-11"), 12141, email, 12314);
+
+
+            _context.Customers.Add(customer);
+
+            await _context.SaveChangesAsync();
+        }
         [Given("first name (.*)")]
 
         public void GivenFirstName(string firstName)

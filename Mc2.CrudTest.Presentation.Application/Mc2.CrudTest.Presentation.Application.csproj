@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mc2.CrudTest.Presentation.Contracts\Mc2.CrudTest.Presentation.Contracts.csproj" />
+    <ProjectReference Include="..\Mc2.CrudTest.Presentation.Domain\Mc2.CrudTest.Presentation.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

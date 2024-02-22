@@ -4,16 +4,10 @@ using Mc2.CrudTest.Presentation.Domain.Customers;
 
 namespace Mc2.CrudTest.Presentation.Application.Customers;
 
-public class CustomerAppService : ICustomerAppService
+public class CustomerAppService(IMapper mapper, ICustomerRepository customerRepository) : ICustomerAppService
 {
-    private readonly IMapper _mapper;
-    private ICustomerRepository _customerRepository;
-
-    public CustomerAppService(IMapper mapper, ICustomerRepository customerRepository)
-    {
-        _mapper = mapper;
-        _customerRepository = customerRepository;
-    }
+    private readonly IMapper _mapper = mapper;
+    private readonly ICustomerRepository _customerRepository = customerRepository;
 
     public async Task CreateCustomer(CreateCustomerCommand command)
     {

@@ -1,4 +1,13 @@
 
+using AutoMapper;
+using Mc2.CrudTest.Presentation.Application.Customers;
+using Mc2.CrudTest.Presentation.Contracts.Customers;
+using Mc2.CrudTest.Presentation.Domain.Customers;
+using Mc2.CrudTest.Presentation.EntityFrameworkCore.EntityFrameworkCore;
+using Mc2.CrudTest.Presentation.EntityFrameworkCore.EntityFrameworkCore.Customers;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+
 namespace Mc2.CrudTest.Presentation.Api
 {
     public class Program
@@ -7,16 +16,10 @@ namespace Mc2.CrudTest.Presentation.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
-            builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            ConfigureServices(builder.Services, builder.Configuration);
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -32,5 +35,20 @@ namespace Mc2.CrudTest.Presentation.Api
 
             app.Run();
         }
+        public static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+
+            services.AddControllers();
+            services.AddDbContextFactory<CustomerManagementDbContext>(options =>
+            options.UseSqlServer(configuration.GetConnectionString("ApplicationDbContext")));
+
+            services.AddEndpointsApiExplorer();
+            services.AddSwaggerGen();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddScoped<ICustomerAppService, CustomerAppService>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+        }
     }
+
 }

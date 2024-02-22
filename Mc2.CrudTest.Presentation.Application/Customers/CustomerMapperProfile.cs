@@ -9,6 +9,7 @@ namespace Mc2.CrudTest.Presentation.Application.Customers
         public CustomerMapperProfile()
         {
             CreateMap<Customer, CreateCustomerCommand>();
+            CreateMap<CreateCustomerCommand, Customer>();
         }
 
     }

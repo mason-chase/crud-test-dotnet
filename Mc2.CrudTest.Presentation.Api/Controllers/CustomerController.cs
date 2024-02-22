@@ -16,7 +16,7 @@ namespace Mc2.CrudTest.Presentation.Server.Controllers
             _customerAppService = customerAppService;
         }
 
-        [HttpPost("customers/{id}")]
+        [HttpPost("customers")]
         public async Task<IActionResult> CreateCustomer(CreateCustomerCommand command)
         {
             await _customerAppService.CreateCustomer(command);

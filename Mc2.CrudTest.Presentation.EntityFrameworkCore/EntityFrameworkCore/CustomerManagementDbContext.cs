@@ -4,12 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Mc2.CrudTest.Presentation.EntityFrameworkCore.EntityFrameworkCore;
 
-public class CustomerManagementDbContext : DbContext
+public class CustomerManagementDbContext(DbContextOptions options) : DbContext(options)
 {
-    public CustomerManagementDbContext(DbContextOptions options) : base(options)
-    {
-    }
-
     public DbSet<Customer> Customers { get; private set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

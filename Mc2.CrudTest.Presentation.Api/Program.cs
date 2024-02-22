@@ -1,11 +1,14 @@
 
 using AutoMapper;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Mc2.CrudTest.Presentation.Application.Customers;
 using Mc2.CrudTest.Presentation.Contracts.Customers;
 using Mc2.CrudTest.Presentation.Domain.Customers;
 using Mc2.CrudTest.Presentation.EntityFrameworkCore.EntityFrameworkCore;
 using Mc2.CrudTest.Presentation.EntityFrameworkCore.EntityFrameworkCore.Customers;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Reflection;
 
 namespace Mc2.CrudTest.Presentation.Api
@@ -48,6 +51,8 @@ namespace Mc2.CrudTest.Presentation.Api
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<ICustomerAppService, CustomerAppService>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IValidator<CreateCustomerCommand>, CustomerValidator>();
+
         }
     }
 

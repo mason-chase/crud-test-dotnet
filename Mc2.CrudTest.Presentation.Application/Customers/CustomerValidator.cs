@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace Mc2.CrudTest.Presentation.Application.Customers;
 
-public class CustomerValidator : AbstractValidator<CreateCustomerCommand>
+public class CustomerValidator : AbstractValidator<CustomerCommand>
 {
     public CustomerValidator()
     {

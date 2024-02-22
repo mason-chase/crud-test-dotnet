@@ -2,5 +2,8 @@
 
 public interface ICustomerAppService
 {
-    Task CreateCustomer(CreateCustomerCommand command);
+    Task CreateCustomer(CustomerCommand command);
+    Task DeleteCustomer(int customerId);
+    Task<List<CustomerQuery>> GetCustomers();
+    Task UpdateCustomer(int customerId, CustomerCommand command);
 }

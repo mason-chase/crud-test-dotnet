@@ -51,7 +51,7 @@ namespace Mc2.CrudTest.Presentation.Api
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<ICustomerAppService, CustomerAppService>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
-            services.AddScoped<IValidator<CreateCustomerCommand>, CustomerValidator>();
+            services.AddScoped<IValidator<CustomerCommand>, CustomerValidator>();
 
         }
     }

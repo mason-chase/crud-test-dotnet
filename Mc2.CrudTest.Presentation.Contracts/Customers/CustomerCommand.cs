@@ -1,6 +1,6 @@
 ﻿namespace Mc2.CrudTest.Presentation.Contracts.Customers;
 
-public class CreateCustomerCommand
+public class CustomerCommand
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }

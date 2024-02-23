@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>false</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mc2.CrudTest.Presentation.Application\Mc2.CrudTest.Presentation.Application.csproj" />
+    <ProjectReference Include="..\Mc2.CrudTest.Presentation.Contracts\Mc2.CrudTest.Presentation.Contracts.csproj" />
+    <ProjectReference Include="..\Mc2.CrudTest.Presentation.Domain\Mc2.CrudTest.Presentation.Domain.csproj" />
+    <ProjectReference Include="..\Mc2.CrudTest.Presentation.EntityFrameworkCore\Mc2.CrudTest.Presentation.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Mc2.CrudTest.Presentation\Shared\Mc2.CrudTest.Presentation.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

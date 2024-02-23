@@ -12,7 +12,7 @@ public class CustomerValidator : AbstractValidator<CustomerCommand>
         RuleFor(x => x.LastName).NotEmpty().WithMessage("Please specify a first name");
         RuleFor(x => x.Email).Must(BeAValidEmail).WithMessage("Email format is not valid");
         RuleFor(x => x.PhoneNumber).Must(BeAValidPhoneNumber).WithMessage("Phone number format is not valid");
-        RuleFor(x => x.DateOfBirth).GreaterThan(DateTime.Now).WithMessage("Date of birth should not greater than today date");
+        RuleFor(x => x.DateOfBirth).LessThan(DateTime.Now).WithMessage("Date of birth should not greater than today date");
     }
 
     private bool BeAValidEmail(string email)
@@ -29,7 +29,7 @@ public class CustomerValidator : AbstractValidator<CustomerCommand>
         var phoneNumberUtil = PhoneNumbers.PhoneNumberUtil.GetInstance();
         try
         {
-            PhoneNumbers.PhoneNumber number = phoneNumberUtil.Parse(phoneNumber, default);
+            PhoneNumbers.PhoneNumber number = phoneNumberUtil.Parse(phoneNumber,"IR");
             return phoneNumberUtil.IsValidNumber(number);
         }
         catch

@@ -15,7 +15,8 @@ public sealed class CalculatorStepDefinitions
     {
 
         _scenarioContext.Pending();
-    }
+
+	}
 
     [When("to be filled...")]
     public void WhenTheTwoNumbersAreAdded()

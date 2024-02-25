@@ -1,4 +1,7 @@
-using Microsoft.AspNetCore.ResponseCompression;
+using Mc2.CrudTest.Presentation.Server.Core.Repository;
+using Mc2.CrudTest.Presentation.Server.Core.Server;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Mc2.CrudTest.Presentation
 {
@@ -10,10 +13,14 @@ namespace Mc2.CrudTest.Presentation
 
             // Add services to the container.
 
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContextFactory<InMemoryDBContext>(
+                options =>
+                    options.UseInMemoryDatabase(@"StoreDb"));//todo: read from appsetting
+
+			builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
 
-            var app = builder.Build();
+			var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -41,5 +48,6 @@ namespace Mc2.CrudTest.Presentation
 
             app.Run();
         }
-    }
+		
+	}
 }

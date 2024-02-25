@@ -1,0 +1,91 @@
+﻿@page "/AddCustomer"
+@using Mc2.CrudTest.Presentation.Shared
+@inject NavigationManager navigationManager
+@inject HttpClient Http
+
+
+<PageTitle>AddCustomer:</PageTitle>
+
+<h1>New Customer:</h1>
+
+
+
+<MudTextField @bind-Value="FirstName" Label="FirstName:" Variant="Variant.Outlined" Margin="Margin.Normal" Required></MudTextField>
+ <MudTextField @bind-Value="LastName" Label="LastName:" Variant="Variant.Outlined" Margin="Margin.Normal" Required></MudTextField>
+
+<div class="field">
+    <label>Email</label>
+    <small>You must provide a working email address to register. Your email address will not be visible to other users. We will not share your email address with third parties.</small>
+     <InputText type="email" @bind-Value="Email" id="email" ></InputText>
+</div>
+
+ <MudTextField T="DateTime?" Format="yyyy-MM-dd" Label="BirthDate" @bind-Value="BirthDate" InputType="InputType.Date" Required />
+ <MudTextField Label="BankAccountNo" @bind-Value="BankAccountNo" Variant="Variant.Filled" Margin="Margin.Normal" Required></MudTextField>
+ <MudTextField InputType="InputType.Number" @bind-Value="@CountryCode" Label="CountryCode" Variant="Variant.Outlined" Margin="Margin.Normal" Required />
+ <MudTextField InputType="InputType.Number" @bind-Value="@NationalNo" Label="NationalCode" Variant="Variant.Outlined" Margin="Margin.Normal" Required />
+
+
+
+
+<MudButton Disabled="@_processing" OnClick="AddNewCustomer" Variant="Variant.Filled" Color="Color.Primary">
+    @if (_processing)
+    {
+        <MudProgressCircular Class="ms-n1" Size="Size.Large" Indeterminate="true" />
+        <MudText Class="ms-2">Processing</MudText>
+    }
+    else
+    {
+        <MudText>Save </MudText>
+@*         <MudText>Result: @Result </MudText>
+ *@
+    }
+</MudButton>
+<MudTd><MudButton Variant="Variant.Outlined" Size="Size.Large" OnClick="@(() => BackToHome())">Back</MudButton></MudTd>
+
+
+
+@code
+{
+    private bool _processing = false;
+    private string FirstName;
+    private string LastName;
+    private DateTime? BirthDate;
+    private string Email;
+    private string BankAccountNo;
+    private uint NationalNo { get; set; }
+    private uint CountryCode { get; set; }
+    private string Result;
+
+
+    async Task AddNewCustomer()
+    {
+        _processing = true;
+
+        var result = await Http.PutAsJsonAsync("customer", new Customer
+            {
+                FirstName = FirstName,
+                LastName = LastName,
+                BirthDate = BirthDate != null ? BirthDate.Value : DateTime.MinValue,
+                Email = Email,
+                BankAccountNumber = BankAccountNo,
+                PhoneNum =
+                         new Customer.PhoneNumber
+                         {
+                             CountryCode = CountryCode,
+                             NationalNo = NationalNo
+                         }
+            }
+             );
+
+        Result = result.StatusCode.ToString();
+
+        _processing = false;
+    }
+
+    async Task BackToHome()
+    {
+        navigationManager
+            .NavigateTo($"/fetchdata");
+    }
+}
+

@@ -1,0 +1,85 @@
+﻿@page "/UpdateCustomer/{Id:int}"
+@using Mc2.CrudTest.Presentation.Shared
+@using System.ComponentModel.DataAnnotations
+@inject NavigationManager navigationManager
+@inject HttpClient Http
+
+
+
+<PageTitle>UpdateCustomer:</PageTitle>
+
+<p>Updating Employee Id: @Id</p>
+
+<MudTextField @bind-Value="customer.FirstName" Label="FirstName:" Variant="Variant.Outlined" Margin="Margin.Normal" Required></MudTextField>
+ <MudTextField @bind-Value="customer.LastName" Label="LastName:" Variant="Variant.Outlined" Margin="Margin.Normal" Required></MudTextField>
+
+ <div class="field">
+     <label>Email</label>
+     <small>You must provide a working email address to register. Your email address will not be visible to other users. We will not share your email address with third parties.</small>
+     <InputText type="email" @bind-Value="customer.Email" id="email"></InputText>
+ </div>
+
+  <MudTextField T="DateTime" Format="yyyy-MM-dd" Label="BirthDate" @bind-Value="customer.BirthDate" InputType="InputType.Date" Required />
+ <MudTextField Label="BankAccountNo" @bind-Value="@customer.BankAccountNumber" Variant="Variant.Filled" Margin="Margin.Normal" Required></MudTextField> 
+ <MudTextField InputType="InputType.Number" @bind-Value="@customer.PhoneNum.CountryCode" Label="CountryCode" Variant="Variant.Outlined" Margin="Margin.Normal" Required />
+ <MudTextField InputType="InputType.Number" @bind-Value="@customer.PhoneNum.NationalNo" Label="NationalCode" Variant="Variant.Outlined" Margin="Margin.Normal" Required />
+
+
+
+ <MudButton Disabled="@_processing" OnClick="UpdateCustomer" Variant="Variant.Filled" Color="Color.Primary">
+     @if (_processing)
+    {
+        <MudProgressCircular Class="ms-n1" Size="Size.Large" Indeterminate="true" />
+        <MudText Class="ms-2">Processing</MudText>
+    }
+    else
+    {
+        <MudText>Save </MudText>
+@*         <MudText>Result: @Result </MudText>
+ *@
+    }
+</MudButton>
+<MudTd><MudButton Variant="Variant.Outlined" Size="Size.Large" OnClick="@(() => BackToHome())">Back</MudButton></MudTd>
+
+
+
+@code
+{
+    private bool _processing = false;
+    Customer customer = new Customer();
+    Customer[] Customers;
+    [Required]
+    [Parameter]
+    public int Id { get; set; }
+
+    private string Result;
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        var url = $"/customer/{Id}";
+        Customers = await Http.GetFromJsonAsync<Customer[]>(url);
+        customer = Customers[0];
+    }
+
+
+    async Task UpdateCustomer()
+    {
+        _processing = true;
+
+        var result = await Http.PostAsJsonAsync("customer", customer);
+
+        Result = result.StatusCode.ToString();
+
+        _processing = false;
+    }
+
+    async Task BackToHome()
+    {
+        navigationManager
+            .NavigateTo($"/fetchdata");
+    }
+
+}
+

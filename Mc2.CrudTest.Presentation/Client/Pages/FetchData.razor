@@ -1,47 +1,114 @@
 ﻿@page "/fetchdata"
+@using System.Net.Http.Json
 @using Mc2.CrudTest.Presentation.Shared
-@inject HttpClient Http
+@inject NavigationManager navigationManager
 
-<PageTitle>Weather forecast</PageTitle>
+@inject HttpClient httpClient
 
-<h1>Weather forecast</h1>
+<MudTd><MudButton Variant="Variant.Outlined" Size="Size.Large" OnClick="@(() => AddCustomer())">AddCustomer</MudButton></MudTd>
 
-<p>This component demonstrates fetching data from the server.</p>
+<MudTable Items="@Customers" Hover="true" Breakpoint="Breakpoint.Sm">
 
-@if (forecasts == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var forecast in forecasts)
-            {
-                <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+	<HeaderContent>
+		@* <MudTh >Id</MudTh> *@
+		<MudTh>FirstName</MudTh>
+		 <MudTh>LastName</MudTh>
+		<MudTh>Email</MudTh>
+		<MudTh>PhoneNumber_Country</MudTh>
+		<MudTh>PhoneNumber_National</MudTh>
+		<MudTh>BirthDate</MudTh>
+		<MudTh>BankAccountNumber</MudTh> 
+	</HeaderContent>
+	<RowTemplate>
+@* 		<MudTd DataLabel="ID">@context.Id</MudTd>
+ *@			<MudTd DataLabel="FirstName">@context.FirstName</MudTd>
+			 <MudTd DataLabel="LastName">@context.LastName</MudTd>
+			<MudTd DataLabel="Email">@context.Email</MudTd> 
+			<MudTd DataLabel="PhoneNumber_Country">@context.PhoneNum.CountryCode</MudTd>
+			<MudTd DataLabel="PhoneNumber_National">@context.PhoneNum.NationalNo</MudTd> 
+
+			<MudTd DataLabel="BirthDate" >@context.BirthDate.Date</MudTd>
+			<MudTd DataLabel="BankAccountNumber">@context.BankAccountNumber</MudTd>
+			<MudTd><MudButton Variant="Variant.Outlined" Size="Size.Small" OnClick="@(() => DeleteCustomer(context.Id))">Delete</MudButton></MudTd>
+			<MudTd><MudButton Variant="Variant.Outlined" Size="Size.Small" OnClick="@(() => UpdateCustomer(context.Id))">Update</MudButton></MudTd>
+
+			<MudTd><MudButton Variant="Variant.Outlined" Size="Size.Small" OnClick="@(() => ShowCustomerEvents(context.Id))">@((context.ShowDetails == true) ? "Hide" : "Show") History</MudButton></MudTd>
+
+ 	</RowTemplate>
+		<ChildRowContent>
+			@if (context.ShowDetails)
+		{
+			<MudTr>
+				<td colspan="4">
+					<MudCard Elevation="0">
+						<MudCardHeader>
+							<CardHeaderContent>
+								<MudText Typo="Typo.body1">CustomerEvents for <strong>@context.Id</strong></MudText>
+							</CardHeaderContent>
+						</MudCardHeader>
+						<MudCardContent Class="pa-0">
+							<MudTable Items="@customerEvents" Context="CustomerEvent" Hover="true" Breakpoint="Breakpoint.Sm" Elevation="0">
+								<ColGroup>
+									<col />
+									<col />
+									<col style="width:200px;" />
+								</ColGroup>
+								<HeaderContent>
+									<MudTh>ID</MudTh>
+									<MudTh>CustomerData</MudTh>
+									<MudTh>CustomerEventType</MudTh>
+								</HeaderContent>
+								<RowTemplate>
+									<MudTd DataLabel="Id">@CustomerEvent.Id>Id</MudTd>
+									<MudTd DataLabel="CustomerData">@CustomerEvent.CustomerData</MudTd>
+										<MudTd DataLabel="CustomerEventType">@CustomerEvent.CustomerEventType</MudTd>
+									</RowTemplate>
+								</MudTable>
+							</MudCardContent>
+						</MudCard>
+					</td>
+				</MudTr>
+		}
+	</ChildRowContent> 
+		
+</MudTable>
 
 @code {
-    private WeatherForecast[]? forecasts;
+	private Customer[] Customers;
+	private CustomerEvent[] customerEvents;
 
-    protected override async Task OnInitializedAsync()
-    {
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
-    }
+	protected override async Task OnInitializedAsync()//todo:pageing
+	{
+		Customers = await httpClient.GetFromJsonAsync<Customer[]>("customer");
+	}
+
+	private async Task ShowCustomerEvents(long id)
+	{
+		Customer tmpPerson = Customers.First(f => f.Id == id);
+		tmpPerson.ShowDetails = !tmpPerson.ShowDetails;
+		var url = $"/customerevent/{id}";
+		customerEvents = await httpClient.GetFromJsonAsync<CustomerEvent[]>(url);
+	}
+	async Task DeleteCustomer(int id)
+	{
+		var url=$"/customer/{id}";
+		await httpClient.DeleteAsync(url);
+		await OnInitializedAsync();
+	}
+	async Task UpdateCustomer(int Id)
+	{
+		navigationManager
+			.NavigateTo($"/UpdateCustomer/{Id}");
+		await OnInitializedAsync();
+
+	}
+
+	async Task AddCustomer()
+	{
+		navigationManager
+			.NavigateTo($"/AddCustomer");
+		await OnInitializedAsync();
+
+	}
 }
+

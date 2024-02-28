@@ -13,6 +13,7 @@ public class CustomerRepository : ICustomerRepository
     public CustomerRepository(DataContext dataContext)
     {
         _dataContext = dataContext;
+        dataContext.Database.EnsureCreated();
     }
 
     public async Task AddAsync(Customer customer, CancellationToken cancellationToken)

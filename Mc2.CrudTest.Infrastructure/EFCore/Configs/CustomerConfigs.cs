@@ -16,5 +16,8 @@ public class CustomerConfigs : IEntityTypeConfiguration<Customer>
         builder.Property(p => p.PhoneNumber).HasMaxLength(12).IsRequired();
         builder.Property(p => p.Email).HasMaxLength(100).IsRequired();
         builder.Property(p => p.BankAccount).HasMaxLength(100).IsRequired();
+
+        builder.HasIndex(p => new { p.FirstName, p.LastName, p.Email }).IsUnique();
+        builder.HasIndex(p => new { p.PhoneNumber }).IsUnique();
     }
 }

@@ -1,3 +1,7 @@
+using Mc2.CrudTest.Infrastructure.EFCore;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
+
 namespace Mc2.CrudTest.Presentation
 {
     public class Program
@@ -11,6 +15,11 @@ namespace Mc2.CrudTest.Presentation
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
             builder.Services.AddSwaggerGen();
+
+            var connection = new SqliteConnection("DataSource=:memory:;Foreign Keys=False");
+            connection.Open();
+            builder.Services.AddDbContext<DataContext>(options => options.UseSqlite(connection));
+
 
             var app = builder.Build();
 

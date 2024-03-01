@@ -1,9 +1,184 @@
 ﻿@page "/"
+@using Mc2.CrudTest.Presentation.Shared
+@using Mc2.CrudTest.Presentation.Shared.Domain
+@inject HttpClient Http
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Customers List</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Customers List</h1>
 
-Welcome to your new app.
+<p>This component demonstrates fetching data from the server.</p>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+
+<div>
+    <EditForm Model="@customer" OnSubmit="@(customer.Id > 0 ? UpdateCustomer : AddCustomer )">
+        <DataAnnotationsValidator />
+        <InputNumber @bind-Value="customer.Id" style="margin-right: 10px;display : none" id="Id" />
+        <div style=" width: 400px;">
+            <div class="form-group">
+                <label for="FirstName">First Name</label>
+                <InputText @bind-Value="customer.FirstName"
+                           class="form-control"
+                           style="margin-right: 10px"
+                           id="FirstName" />
+            </div>
+            <div class="form-group">
+                <label for="LastName">Last Name</label>
+
+                <InputText @bind-Value="customer.LastName"
+                           class="form-control"
+                           style="margin-right: 10px"
+                           id="LastName" />
+            </div>
+            <div class="form-group">
+                <label for="DateOfBirth">Date Of Birth</label>
+                <InputDate @bind-Value="customer.DateOfBirth"
+                           class="form-control"
+                           style="margin-right: 10px"
+                           id="DateOfBirth" />
+            </div>
+            <div class="form-group">
+                <label for="PhoneNumber">Phone Number</label>
+                <InputText @bind-Value="customer.PhoneNumber"
+                           class="form-control"
+                           style="margin-right: 10px"
+                           id="PhoneNumber" />
+            </div>
+            <div class="form-group">
+                <label for="Email">Email</label>
+                <InputText @bind-Value="customer.Email"
+                           class="form-control"
+                           style="margin-right: 10px"
+                           id="Email" />
+
+            </div>
+            <div class="form-group">
+                <label for="BankAccountNumber">Bank Account Number</label>
+                <InputText @bind-Value="customer.BankAccountNumber"
+                           class="form-control"
+                           style="margin-right: 10px"
+                           id="BankAccountNumber" />
+
+            </div>
+
+            <div style="margin: 10px">
+                <ValidationSummary />
+            </div>
+            <div style="margin: 10px">
+                <input type="submit"
+                       class="btn btn-primary"
+                       style="margin-right: 10px"
+                       value="@(customer.Id > 0 ? "Save" : "Add" )" />
+                <input type="reset"
+                       class="btn btn-secondary"
+                       value="Clear" />
+            </div>
+
+        </div>
+    </EditForm>
+</div>
+
+
+
+@if (customers == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Birth Date</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Bank Account</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in customers)
+            {
+                <tr>
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                    <td>@item.DateOfBirth.ToShortDateString()</td>
+                    <td>@item.Email</td>
+                    <td>@item.PhoneNumber</td>
+                    <td>@item.BankAccountNumber</td>
+                    <td>
+                        <input class="btn btn-success"
+                               style="margin-right: 10px; width : 70px"
+                               value="Edit" onclick="@(()=>GetCustomer(item.Id))" />
+                        <input class="btn btn-danger"
+                               style="margin-right: 10px; width : 90px"
+                               value="Delete" onclick="@(()=>DeleteCustomer(item.Id))" />
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private CustomerModel customer = new();
+    private List<CustomerModel> customers = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        customers = await LoadCustomers();
+    }
+
+    public async Task<List<CustomerModel>> LoadCustomers()
+    {
+        return await Http.GetFromJsonAsync<List<CustomerModel>>("Customer/GetCustomers");
+    }
+
+    public async Task ItemsChanged()
+    {
+        customers = await LoadCustomers();
+        StateHasChanged();
+    }
+
+    public async Task AddCustomer()
+    {
+
+        var result = await Http.PostAsJsonAsync<CustomerModel>("Customer/AddCustomer", customer);
+        if (result.IsSuccessStatusCode)
+        {
+            customer = new();
+            await ItemsChanged();
+        }
+    }
+    public async Task UpdateCustomer()
+    {
+
+        var result = await Http.PostAsJsonAsync<CustomerModel>("Customer/UpdateCustomer", customer);
+        if (result.IsSuccessStatusCode)
+        {
+            customer = new();
+            await ItemsChanged();
+        }
+        else
+        {
+            Console.WriteLine(result);
+        }
+    }
+
+    public async Task GetCustomer(int id)
+    {
+        customer = await Http.GetFromJsonAsync<CustomerModel>("Customer/GetCustomer?id=" + id);
+        StateHasChanged();
+    }
+
+    public async Task DeleteCustomer(int id)
+    {
+        var result = await Http.DeleteFromJsonAsync<bool>("Customer/DeleteCustomer/" + id);
+        await ItemsChanged();
+    }
+
+
+}

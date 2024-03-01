@@ -8,7 +8,7 @@ namespace Mc2.CrudTest.Presentation
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // Add services to the container. t
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();

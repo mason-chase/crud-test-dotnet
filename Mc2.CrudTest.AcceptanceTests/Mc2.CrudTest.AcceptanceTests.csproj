@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Compile Remove="Steps\CalculatorStepDefinitions.cs" />
+      <Compile Remove="FunctionalTests\Customes\CalculatorStepDefinitions.cs" />
     </ItemGroup>
 
 	<ItemGroup>

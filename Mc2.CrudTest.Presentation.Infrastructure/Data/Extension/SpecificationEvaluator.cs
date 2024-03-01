@@ -2,7 +2,7 @@
 // Copyright (c) TanvirArjel. All rights reserved.
 // </copyright>
 
-using Mc2.CrudTest.Presentation.Shared.Extensions;
+using Mc2.CrudTest.Presentation.Application.Common.Models;
 using System.Linq.Expressions;
 
 namespace Mc2.CrudTest.Presentation.Infrastructure.Data.Extension

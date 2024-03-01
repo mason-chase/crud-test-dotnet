@@ -4,10 +4,10 @@
 
 using System.Linq.Expressions;
 using EFCoreSecondLevelCacheInterceptor;
+using Mc2.CrudTest.Presentation.Application.Common.Interfaces;
+using Mc2.CrudTest.Presentation.Application.Common.Models;
+using Mc2.CrudTest.Presentation.Domain.Common;
 using Mc2.CrudTest.Presentation.Infrastructure.Data.Extension;
-using Mc2.CrudTest.Presentation.Shared;
-using Mc2.CrudTest.Presentation.Shared.Extensions;
-using Mc2.CrudTest.Presentation.Shared.Interfaces.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 

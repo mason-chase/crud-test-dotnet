@@ -1,5 +1,5 @@
-﻿using Mc2.CrudTest.Presentation.Infrastructure.EntityConfiguration;
-using Mc2.CrudTest.Presentation.Shared.Domain;
+﻿using Mc2.CrudTest.Presentation.Domain.Entities;
+using Mc2.CrudTest.Presentation.Infrastructure.Data.EntityConfiguration;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -26,12 +26,8 @@ namespace Mc2.CrudTest.Presentation.Infrastructure.Data
 
         }
 
-
-        #region Cms DbSet
-
         public DbSet<Customer> Customer { get; set; }
 
-        #endregion
 
     }
 }

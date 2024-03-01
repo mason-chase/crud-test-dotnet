@@ -1,11 +1,13 @@
-using Mc2.CrudTest.Presentation.Shared;
-using Mc2.CrudTest.Presentation.Shared.Commands;
-using Mc2.CrudTest.Presentation.Shared.Domain;
-using Mc2.CrudTest.Presentation.Shared.Queries;
+using Mc2.CrudTest.Presentation.Application.Common.Models;
+using Mc2.CrudTest.Presentation.Application.Customers.Commands.AddCustomer;
+using Mc2.CrudTest.Presentation.Application.Customers.Commands.DeleteCustomer;
+using Mc2.CrudTest.Presentation.Application.Customers.Commands.UpdateCustomer;
+using Mc2.CrudTest.Presentation.Application.Customers.Queries.GetCustomerById;
+using Mc2.CrudTest.Presentation.Application.Customers.Queries.GetCustomers;
+using Mc2.CrudTest.Presentation.Application.Customers.Queries.IsExistCustomer;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using System.Numerics;
+
 
 namespace Mc2.CrudTest.Presentation.Server.Controllers
 {

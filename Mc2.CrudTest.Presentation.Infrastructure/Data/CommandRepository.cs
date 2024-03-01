@@ -3,7 +3,7 @@
 // </copyright>
 
 using System.Data;
-using Mc2.CrudTest.Presentation.Shared.Interfaces.Data;
+using Mc2.CrudTest.Presentation.Application.Common.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage;

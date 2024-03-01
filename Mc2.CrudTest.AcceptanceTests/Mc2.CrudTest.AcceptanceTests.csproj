@@ -1,22 +1,39 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net7.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
     <ItemGroup>
-        <Using Include="TechTalk.SpecFlow" />
+      <Compile Remove="FunctionalTests\Customes\CalculatorStepDefinitions.cs" />
     </ItemGroup>
 
+	<ItemGroup>
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+		<!--<PackageReference Include="Moq" Version="4.18.2" />-->
+		<PackageReference Include="AutoFixture" Version="4.17.0" />
+		<PackageReference Include="AutoFixture.AutoMoq" Version="4.17.0" />
+		<PackageReference Include="AutoFixture.Xunit2" Version="4.17.0" />
+		<PackageReference Include="FluentAssertions" Version="6.0.0-beta0003" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.9" />
+		<PackageReference Include="Moq.EntityFrameworkCore" Version="7.0.0.2" />
+		<PackageReference Include="xunit" Version="2.4.1" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="coverlet.collector" Version="3.1.0">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+	</ItemGroup>
+
     <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
-        <PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.9.57" />
-        <PackageReference Include="SpecFlow.NUnit" Version="3.9.22" />
-        <PackageReference Include="nunit" Version="3.13.2" />
-        <PackageReference Include="NUnit3TestAdapter" Version="4.1.0" />
-        <PackageReference Include="FluentAssertions" Version="6.2.0" />
+      <ProjectReference Include="..\Mc2.CrudTest.Presentation.Infrastructure\Mc2.CrudTest.Presentation.Infrastructure.csproj" />
+      <ProjectReference Include="..\Mc2.CrudTest.Presentation\Server\Mc2.CrudTest.Presentation.Server.csproj" />
+      <ProjectReference Include="..\Mc2.CrudTest.Presentation\Shared\Mc2.CrudTest.Presentation.Shared.csproj" />
     </ItemGroup>
 
 </Project>

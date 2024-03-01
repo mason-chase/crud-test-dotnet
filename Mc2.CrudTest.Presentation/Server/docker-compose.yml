@@ -1,0 +1,30 @@
+﻿version: '3.1'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    #image: mcr.microsoft.com/mssql/server:2017-CU11-ubuntu
+    container_name: sql-server
+    restart: always
+    ports:
+      - 1433:1433
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "1"
+    volumes:
+      - sqlsystem:/var/opt/mssql
+  cache:
+   image: redis
+   container_name: redis
+   restart: always
+   ports:
+     - '6379:6379'
+   command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+   volumes: 
+      - cache:/data
+  
+volumes:
+ sqlsystem:
+ cache:
+
+

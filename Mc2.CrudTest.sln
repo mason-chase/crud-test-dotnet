@@ -3,13 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.Presentation.Server", "Mc2.CrudTest.Presentation\Server\Mc2.CrudTest.Presentation.Server.csproj", "{D2AD2F7D-C1E0-4C84-A2A4-6900CED15599}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Presentation.Server", "Mc2.CrudTest.Presentation\Server\Mc2.CrudTest.Presentation.Server.csproj", "{D2AD2F7D-C1E0-4C84-A2A4-6900CED15599}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.Presentation.Client", "Mc2.CrudTest.Presentation\Client\Mc2.CrudTest.Presentation.Client.csproj", "{817C1B83-0CAC-4345-A0BE-5CCF30B15C26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Presentation.Client", "Mc2.CrudTest.Presentation\Client\Mc2.CrudTest.Presentation.Client.csproj", "{817C1B83-0CAC-4345-A0BE-5CCF30B15C26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.Presentation.Shared", "Mc2.CrudTest.Presentation\Shared\Mc2.CrudTest.Presentation.Shared.csproj", "{D6F1EC1A-CE1D-4E6D-B61D-07033DD442BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Presentation.Shared", "Mc2.CrudTest.Presentation\Shared\Mc2.CrudTest.Presentation.Shared.csproj", "{D6F1EC1A-CE1D-4E6D-B61D-07033DD442BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.AcceptanceTests", "Mc2.CrudTest.AcceptanceTests\Mc2.CrudTest.AcceptanceTests.csproj", "{6776DF76-1054-486C-A79A-57100C47032F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.AcceptanceTests", "Mc2.CrudTest.AcceptanceTests\Mc2.CrudTest.AcceptanceTests.csproj", "{6776DF76-1054-486C-A79A-57100C47032F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Presentation.Infrastructure", "Mc2.CrudTest.Presentation.Infrastructure\Mc2.CrudTest.Presentation.Infrastructure.csproj", "{244BEF4F-5C1A-4CBA-81C6-C8DDA98F5CF7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{FAAA0ECB-D090-4361-B0E8-AB8B5BF151F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.Presentation.Domain", "Mc2.CrudTest.Presentation.Domain\Mc2.CrudTest.Presentation.Domain.csproj", "{4E03817E-E766-4D7D-A10D-F15672B27F37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.Presentation.Application", "Mc2.CrudTest.Presentation.Application\Mc2.CrudTest.Presentation.Application.csproj", "{36D418E6-5BE1-4A44-9A27-7618E8EB8503}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,9 +41,24 @@ Global
 		{6776DF76-1054-486C-A79A-57100C47032F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6776DF76-1054-486C-A79A-57100C47032F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6776DF76-1054-486C-A79A-57100C47032F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{244BEF4F-5C1A-4CBA-81C6-C8DDA98F5CF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{244BEF4F-5C1A-4CBA-81C6-C8DDA98F5CF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{244BEF4F-5C1A-4CBA-81C6-C8DDA98F5CF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{244BEF4F-5C1A-4CBA-81C6-C8DDA98F5CF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E03817E-E766-4D7D-A10D-F15672B27F37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E03817E-E766-4D7D-A10D-F15672B27F37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E03817E-E766-4D7D-A10D-F15672B27F37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E03817E-E766-4D7D-A10D-F15672B27F37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36D418E6-5BE1-4A44-9A27-7618E8EB8503}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36D418E6-5BE1-4A44-9A27-7618E8EB8503}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36D418E6-5BE1-4A44-9A27-7618E8EB8503}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36D418E6-5BE1-4A44-9A27-7618E8EB8503}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6776DF76-1054-486C-A79A-57100C47032F} = {FAAA0ECB-D090-4361-B0E8-AB8B5BF151F2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4B5A26C9-68C1-49D9-9F32-AF907A1730C2}

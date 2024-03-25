@@ -14,7 +14,7 @@ public class MongoDbContext : IMongoDbContext
     public MongoDbContext()
     {
         MongoClient  = new MongoClient(Util.MongoDbConnectionString);
-        _database = MongoClient.GetDatabase(Util.CustomerCollection);
+        _database = MongoClient.GetDatabase(Util.DatabaseName);
         _commands = new List<Func<Task>>();
     }
     

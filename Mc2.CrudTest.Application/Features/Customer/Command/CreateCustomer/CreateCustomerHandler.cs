@@ -12,8 +12,9 @@ public class CreateCustomerHandler : IRequestHandler<CreateCustomerRequest, Cust
 {
     private readonly IMongoCollection<CustomerModel> _customerCollection;
     private readonly IMapper _mapper;
+    private readonly ICustomerService _customerService;
 
-    public CreateCustomerHandler(IMongoDbContext mongoDbContext, IMapper mapper)
+    public CreateCustomerHandler(IMongoDbContext mongoDbContext, IMapper mapper, ICustomerService customerService)
     {
         _customerCollection = mongoDbContext.GetCollection<CustomerModel>("customers");
         _mapper = mapper;
@@ -21,13 +22,21 @@ public class CreateCustomerHandler : IRequestHandler<CreateCustomerRequest, Cust
 
     public async  Task<CustomerModel> Handle(CreateCustomerRequest request, CancellationToken cancellationToken)
     {
-        CustomerModel responseModel = _mapper.Map<CustomerModel>(request);
-        responseModel.IsDeleted = false;
-        responseModel.CreatedAt = DateTime.UtcNow;
-        responseModel.Id = ObjectId.GenerateNewId().ToString();
-        
-        await _customerCollection.InsertOneAsync(responseModel, null, cancellationToken);
+        CustomerModel customerModel = _mapper.Map<CustomerModel>(request);
 
-        return responseModel;
+        try
+        {
+            await _customerService.ValidateCustomer(customerModel, cancellationToken);
+            customerModel.IsDeleted = false;
+            customerModel.CreatedAt = DateTime.UtcNow;
+            customerModel.Id = ObjectId.GenerateNewId().ToString();
+            await _customerCollection.InsertOneAsync(customerModel, null, cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            throw;
+        }
+        
+        return customerModel;
     }
 }

@@ -12,26 +12,29 @@ public class UpdateCustomerHandler : IRequestHandler<UpdateCustomerRequest, Cust
 {
     private readonly IMongoCollection<CustomerModel> _customerCollection;
     private readonly IMapper _mapper;
+    private readonly ICustomerService _customerService;
 
-    public UpdateCustomerHandler(IMongoDbContext mongoDbContext, IMapper mapper)
+    public UpdateCustomerHandler(IMongoDbContext mongoDbContext, IMapper mapper, ICustomerService customerService)
     {
         _customerCollection = mongoDbContext.GetCollection<CustomerModel>("customers");
         _mapper = mapper;
+        _customerService = customerService;
     }
 
-    public async  Task<CustomerModel> Handle(UpdateCustomerRequest request, CancellationToken cancellationToken)
+    public async Task<CustomerModel> Handle(UpdateCustomerRequest request, CancellationToken cancellationToken)
     {
-        var updateModel = _mapper.Map<CustomerModel>(request);
+        var customerModel = _mapper.Map<CustomerModel>(request);
 
-        var filter = Builders<CustomerModel>.Filter.Eq(a => a.Id, request.Id);
-        
-        var options = new FindOneAndReplaceOptions<CustomerModel, CustomerModel>
+        try
         {
-            ReturnDocument = ReturnDocument.After
-        };
+            await _customerService.ValidateCustomer(customerModel, cancellationToken);
+            var filter = Builders<CustomerModel>.Filter.Eq(a => a.Id, request.Id);
+            await _customerCollection.FindOneAndReplaceAsync(filter, customerModel, null, cancellationToken);
+        }
+        catch (Exception ex)
+        {
+        }
 
-        var updatedModel = await _customerCollection.FindOneAndReplaceAsync(filter, updateModel, options, cancellationToken);
-
-        return updatedModel;
+        return customerModel;
     }
 }

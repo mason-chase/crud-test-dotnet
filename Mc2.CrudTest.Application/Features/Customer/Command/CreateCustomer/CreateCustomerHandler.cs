@@ -8,25 +8,25 @@ using MongoDB.Driver;
 
 namespace Mc2.CrudTest.Application.Features.Customer.Command.CreateCustomer;
 
-public class CreateCustomerHandler : IRequestHandler<CreateCustomerRequest, CreateCustomerResponse>
+public class CreateCustomerHandler : IRequestHandler<CreateCustomerRequest, CustomerModel>
 {
-    private readonly IMongoCollection<CreateCustomerRequest> _customerCollection;
+    private readonly IMongoCollection<CustomerModel> _customerCollection;
     private readonly IMapper _mapper;
 
     public CreateCustomerHandler(IMongoDbContext mongoDbContext, IMapper mapper)
     {
-        _customerCollection = mongoDbContext.GetCollection<CreateCustomerRequest>("customers");
+        _customerCollection = mongoDbContext.GetCollection<CustomerModel>("customers");
         _mapper = mapper;
     }
 
-    public async  Task<CreateCustomerResponse> Handle(CreateCustomerRequest request, CancellationToken cancellationToken)
+    public async  Task<CustomerModel> Handle(CreateCustomerRequest request, CancellationToken cancellationToken)
     {
-        CreateCustomerResponse responseModel = _mapper.Map<CreateCustomerResponse>(request);
+        CustomerModel responseModel = _mapper.Map<CustomerModel>(request);
         responseModel.IsDeleted = false;
         responseModel.CreatedAt = DateTime.UtcNow;
         responseModel.Id = ObjectId.GenerateNewId().ToString();
         
-        await _customerCollection.InsertOneAsync(request, null, cancellationToken);
+        await _customerCollection.InsertOneAsync(responseModel, null, cancellationToken);
 
         return responseModel;
     }

@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Mc2.CrudTest.Application.Features.Customer.Command.CreateCustomer;
 
-public class CreateCustomerRequest : IRequest<CreateCustomerResponse>
+public class CreateCustomerRequest : IRequest<CustomerModel>
 {
     public string FirstName { get; set;}
     public string LastName { get; set; }

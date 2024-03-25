@@ -5,7 +5,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Mc2.CrudTest.Application.Features.Customer.Query.GetAllCustomers;
 
-public class GetAllCustomersRequest : IRequest<List<GetAllCustomersResponse>>
+public class GetAllCustomersRequest : IRequest<List<CustomerModel>>
 {
     public int Skip { get; set; }
     public int Limit { get; set; }

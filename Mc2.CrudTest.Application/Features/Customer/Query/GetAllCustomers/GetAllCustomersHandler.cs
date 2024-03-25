@@ -6,17 +6,17 @@ using MongoDB.Driver;
 
 namespace Mc2.CrudTest.Application.Features.Customer.Query.GetAllCustomers;
 
-public class GetAllCustomersHandler : IRequestHandler<GetAllCustomersRequest, List<GetAllCustomersResponse>>
+public class GetAllCustomersHandler : IRequestHandler<GetAllCustomersRequest, List<CustomerModel>>
 {
-    private readonly IMongoCollection<GetAllCustomersResponse> _customerCollection;
+    private readonly IMongoCollection<CustomerModel> _customerCollection;
 
     public GetAllCustomersHandler(IMongoDbContext mongoDbContext)
     {
-        _customerCollection = mongoDbContext.GetCollection<GetAllCustomersResponse>("customers");
+        _customerCollection = mongoDbContext.GetCollection<CustomerModel>("customers");
 
     }
     
-    public async Task<List<GetAllCustomersResponse>> Handle(GetAllCustomersRequest request, CancellationToken cancellationToken)
+    public async Task<List<CustomerModel>> Handle(GetAllCustomersRequest request, CancellationToken cancellationToken)
     {
         var customerModelList = await _customerCollection.Find(a => !a.IsDeleted).ToListAsync(cancellationToken);
         

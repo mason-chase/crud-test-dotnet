@@ -41,7 +41,7 @@ public class CustomerController : ControllerBase
         return StatusCode(StatusCodes.Status201Created, createdCustomer);
     }
     
-    [HttpDelete("update")]
+    [HttpPut("update")]
     public async Task<ActionResult<CustomerModel>> Update([FromQuery] UpdateCustomerRequest updateCustomerRequest, CancellationToken cancellationToken)
     {
         CustomerModel updatedCustomer = await _mediator.Send(updateCustomerRequest, cancellationToken);

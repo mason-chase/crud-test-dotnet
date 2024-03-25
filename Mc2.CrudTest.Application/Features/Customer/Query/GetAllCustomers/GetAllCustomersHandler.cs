@@ -17,7 +17,7 @@ public class GetAllCustomersHandler : IRequestHandler<GetAllCustomersRequest, Li
     
     public async Task<List<CustomerModel>> Handle(GetAllCustomersRequest request, CancellationToken cancellationToken)
     {
-        var customerModelList = await _customerCollection.Find(a => !a.IsDeleted).ToListAsync(cancellationToken);
+        var customerModelList = await _customerCollection.Find(a => !a.IsDeleted).Skip(request.Skip).Limit(request.Limit).ToListAsync(cancellationToken);
         
         return customerModelList;
     }

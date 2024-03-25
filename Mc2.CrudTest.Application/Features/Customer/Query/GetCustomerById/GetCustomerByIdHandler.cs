@@ -13,8 +13,7 @@ public class GetCustomerByIdHandler : IRequestHandler<GetCustomerByIdRequest, Cu
     {
         _customerCollection = mongoDbContext.GetCollection<CustomerModel>("customers");
     }
-
-
+    
     public async Task<CustomerModel> Handle(GetCustomerByIdRequest request, CancellationToken cancellationToken)
     {
         var customerModel = await _customerCollection.Find(a => a.Id == request.id & !a.IsDeleted).FirstOrDefaultAsync(cancellationToken);

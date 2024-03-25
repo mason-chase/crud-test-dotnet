@@ -20,7 +20,7 @@ public class CustomerService : ICustomerService
     {
         await CheckUniqueCustomer(customerModel.FirstName, customerModel.LastName, customerModel.DateOfBirth, cancellationToken);
         await CheckEmailUnique(customerModel.Email, cancellationToken);
-        await CheckValidPhoneNumber(customerModel.PhoneNumber, cancellationToken);
+        await CheckValidPhoneNumber(customerModel.PhoneNumber);
     }
 
     public async Task CustomerUpdateValidation(CustomerModel customerModel, CancellationToken cancellationToken)
@@ -64,7 +64,7 @@ public class CustomerService : ICustomerService
         }
     }
 
-    private async Task CheckValidPhoneNumber(string phoneNumber, CancellationToken cancellationToken)
+    private async Task CheckValidPhoneNumber(string phoneNumber)
     {
         var phoneNumberUtil = PhoneNumberUtil.GetInstance();
         

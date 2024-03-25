@@ -1,4 +1,5 @@
 using Mc2.CrudTest.Application.Features.Customer.Command.CreateCustomer;
+using Mc2.CrudTest.Application.Features.Customer.Command.DeleteCustomer;
 using Mc2.CrudTest.Application.Features.Customer.Query.GetAllCustomers;
 using Mc2.CrudTest.Application.Features.Customer.Query.GetCustomerById;
 using Mc2.CrudTest.Domain.Models;
@@ -37,6 +38,13 @@ public class CustomerController : ControllerBase
     {
         var createdCustomer = await _mediator.Send(createCustomerRequest, cancellationToken);
         return StatusCode(StatusCodes.Status201Created, createdCustomer);
+    }
+    
+    [HttpDelete("delete")]
+    public async Task<ActionResult<CustomerModel>> Delete([FromQuery] DeleteCustomerRequest deleteCustomerRequest, CancellationToken cancellationToken)
+    {
+        var deletedCustomer = await _mediator.Send(deleteCustomerRequest, cancellationToken);
+        return StatusCode(StatusCodes.Status200OK, deletedCustomer);
     }
 
 }

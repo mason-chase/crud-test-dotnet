@@ -1,7 +1,6 @@
 using Mc2.CrudTest.Domain.Models;
 using MediatR;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
+
 
 namespace Mc2.CrudTest.Application.Features.Customer.Query.GetAllCustomers;
 

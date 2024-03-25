@@ -3,8 +3,7 @@ using Mc2.CrudTest.Application.Interfaces;
 using Mc2.CrudTest.Domain.Models;
 using MediatR;
 using MongoDB.Driver;
-using MongoDB.Driver.Core.Operations;
-using ReturnDocument = MongoDB.Driver.ReturnDocument;
+
 
 namespace Mc2.CrudTest.Application.Features.Customer.Command.UpdateCustomer;
 

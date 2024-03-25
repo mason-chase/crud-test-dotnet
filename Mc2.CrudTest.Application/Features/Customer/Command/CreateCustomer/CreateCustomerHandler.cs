@@ -1,5 +1,4 @@
 using AutoMapper;
-using Mc2.CrudTest.Application.Features.Customer.Query.GetAllCustomers;
 using Mc2.CrudTest.Application.Interfaces;
 using Mc2.CrudTest.Domain.Models;
 using MediatR;

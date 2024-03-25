@@ -1,8 +1,6 @@
-using AutoMapper;
 using Mc2.CrudTest.Application.Interfaces;
 using Mc2.CrudTest.Domain.Models;
 using MediatR;
-using MongoDB.Bson;
 using MongoDB.Driver;
 
 

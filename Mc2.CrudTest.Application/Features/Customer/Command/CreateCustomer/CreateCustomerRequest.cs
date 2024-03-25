@@ -10,4 +10,5 @@ public class CreateCustomerRequest : IRequest<CustomerModel>
     public string Email { get; set; }
     public string PhoneNumber { get; set; }
     public string BankAccountNumber { get; set; }
+    public DateTime DateOfBirth { get; set; }
 }

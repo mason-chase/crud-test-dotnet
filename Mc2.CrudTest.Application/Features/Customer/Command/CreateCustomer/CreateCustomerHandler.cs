@@ -18,6 +18,7 @@ public class CreateCustomerHandler : IRequestHandler<CreateCustomerRequest, Cust
     {
         _customerCollection = mongoDbContext.GetCollection<CustomerModel>("customers");
         _mapper = mapper;
+        _customerService = customerService;
     }
 
     public async  Task<CustomerModel> Handle(CreateCustomerRequest request, CancellationToken cancellationToken)
@@ -26,7 +27,7 @@ public class CreateCustomerHandler : IRequestHandler<CreateCustomerRequest, Cust
 
         try
         {
-            await _customerService.ValidateCustomer(customerModel, cancellationToken);
+            await _customerService.CustomerCreateValidation(customerModel, cancellationToken);
             customerModel.IsDeleted = false;
             customerModel.CreatedAt = DateTime.UtcNow;
             customerModel.Id = ObjectId.GenerateNewId().ToString();

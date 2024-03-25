@@ -4,5 +4,6 @@ namespace Mc2.CrudTest.Application.Interfaces;
 
 public interface ICustomerService
 {
-    Task ValidateCustomer(CustomerModel customerModel, CancellationToken cancellationToken);
+    Task CustomerCreateValidation(CustomerModel customerModel, CancellationToken cancellationToken);
+    Task CustomerUpdateValidation(CustomerModel customerModel, CancellationToken cancellationToken);
 }

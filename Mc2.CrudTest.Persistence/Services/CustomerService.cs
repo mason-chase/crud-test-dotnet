@@ -16,13 +16,19 @@ public class CustomerService : ICustomerService
         _customerCollection = mongoDbContext.GetCollection<CustomerModel>("customers");
     }
 
-    public async Task ValidateCustomer(CustomerModel customerModel, CancellationToken cancellationToken)
+    public async Task CustomerCreateValidation(CustomerModel customerModel, CancellationToken cancellationToken)
     {
         await CheckUniqueCustomer(customerModel.FirstName, customerModel.LastName, customerModel.DateOfBirth, cancellationToken);
         await CheckEmailUnique(customerModel.Email, cancellationToken);
         await CheckValidPhoneNumber(customerModel.PhoneNumber, cancellationToken);
     }
 
+    public async Task CustomerUpdateValidation(CustomerModel customerModel, CancellationToken cancellationToken)
+    {
+        await CheckUpdatedEmailUnique(customerModel.Id, customerModel.Email, cancellationToken);
+        await CheckCustomerUpdateValid(customerModel, cancellationToken);
+    }
+    
     private async Task CheckUniqueCustomer(string firstName, string lastName, DateTime dateOfBirth, CancellationToken cancellationToken)
     {
         try
@@ -37,7 +43,6 @@ public class CustomerService : ICustomerService
         }
         catch (Exception ex)
         {
-            throw new Exception("Operation failed");
         }
     }
 
@@ -55,7 +60,7 @@ public class CustomerService : ICustomerService
         }
         catch (Exception ex)
         {
-            throw new Exception("Operation failed");
+            throw;
         }
     }
 
@@ -73,7 +78,35 @@ public class CustomerService : ICustomerService
         }
         catch (Exception ex)
         {
-            throw new Exception("Operation failed");
+            throw;
+        }
+    }
+
+    private async Task CheckUpdatedEmailUnique(string id, string email, CancellationToken cancellationToken)
+    {
+        var previousModel = await _customerCollection.Find(a => a.Id == id).FirstOrDefaultAsync(cancellationToken);
+
+        if (!string.Equals(previousModel.Email, email))
+        {
+            await CheckEmailUnique(email, cancellationToken);
+        }
+    }
+
+    private async Task CheckCustomerUpdateValid(CustomerModel customerModel, CancellationToken cancellationToken)
+    {
+        var previousModel = await _customerCollection.Find(a => a.Id == customerModel.Id).FirstOrDefaultAsync(cancellationToken);
+
+        if (!string.Equals(previousModel.FirstName, customerModel.FirstName) || !string.Equals(previousModel.LastName, customerModel.LastName) || previousModel.DateOfBirth != customerModel.DateOfBirth)
+        {
+            try
+            {
+                await CheckUniqueCustomer(customerModel.FirstName, customerModel.LastName, customerModel.DateOfBirth, cancellationToken);
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }

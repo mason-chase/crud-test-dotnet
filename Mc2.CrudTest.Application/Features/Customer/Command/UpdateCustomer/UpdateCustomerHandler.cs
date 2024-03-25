@@ -27,12 +27,13 @@ public class UpdateCustomerHandler : IRequestHandler<UpdateCustomerRequest, Cust
 
         try
         {
-            await _customerService.ValidateCustomer(customerModel, cancellationToken);
+            await _customerService.CustomerUpdateValidation(customerModel, cancellationToken);
             var filter = Builders<CustomerModel>.Filter.Eq(a => a.Id, request.Id);
             await _customerCollection.FindOneAndReplaceAsync(filter, customerModel, null, cancellationToken);
         }
         catch (Exception ex)
         {
+            throw;
         }
 
         return customerModel;

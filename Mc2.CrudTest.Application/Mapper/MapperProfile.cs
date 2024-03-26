@@ -15,7 +15,6 @@ public class MapperProfile : Profile
         CreateMap<GetAllCustomersRequest, CustomerModel>().ReverseMap();
         CreateMap<GetCustomerByIdRequest, CustomerModel>().ReverseMap();
         CreateMap<UpdateCustomerRequest, CustomerModel>().ReverseMap();
-
     }
     
 }

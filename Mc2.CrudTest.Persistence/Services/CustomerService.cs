@@ -54,6 +54,7 @@ public class CustomerService : ICustomerService
                 .AsQueryable()
                 .Where(a => a.Email == email)
                 .AnyAsync(cancellationToken);
+            
 
             if (isEmailExists)
                 throw new Exception("Email should be unique");

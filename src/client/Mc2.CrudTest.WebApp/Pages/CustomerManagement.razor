@@ -1,0 +1,213 @@
+﻿@page "/"
+@using Mc2.CrudTest.WebApp.ViewModels
+
+@inject ICustomerService CustomerService
+
+<PageTitle>Customer Management Service</PageTitle>
+
+<div class="table-responsive" style="max-height: 80%; overflow-y: auto;">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-center">Id</th>
+                <th class="text-center">First Name</th>
+                <th class="text-center">Last Name</th>
+                <th class="text-center">Date of Birth</th>
+                <th class="text-center">Phone Number</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">Bank Account Number</th>
+                <th class="text-center"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (customers != null)
+            {
+                @foreach (var customer in customers)
+                {
+                    <tr>
+                        <td class="text-center">@customer.Id</td>
+                        <td class="text-center">@customer.FirstName</td>
+                        <td class="text-center">@customer.LastName</td>
+                        <td class="text-center">@customer.DateOfBirth.ToShortDateString()</td>
+                        <td class="text-center">@customer.PhoneNumber</td>
+                        <td class="text-center">@customer.Email</td>
+                        <td class="text-center">@customer.BankAccountNumber</td>
+                        <td class="text-center">
+                            <div class="btn-group">
+                                <button class="btn btn-outline-primary">Edit</button>
+                                <button class="btn btn-outline-danger">Remove</button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="8">No customers found</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@code
+{
+    List<Customer> customers = new List<Customer>
+    {
+        new ()
+        {
+            Id = 1,
+            BankAccountNumber = "6219861816994444",
+            DateOfBirth = new DateTime(1402,2,24),
+            Email = "Amirhossein.sami1275@gmail.com",
+            FirstName = "Amirhossein",
+            LastName = "Sami",
+            PhoneNumber = "+989028538715"
+        },
+        new ()
+        {
+            Id = 1,
+            BankAccountNumber = "6219861816994444",
+            DateOfBirth = new DateTime(1402,2,24),
+            Email = "Amirhossein.sami1275@gmail.com",
+            FirstName = "Amirhossein",
+            LastName = "Sami",
+            PhoneNumber = "+989028538715"
+        },
+        new ()
+        {
+            Id = 1,
+            BankAccountNumber = "6219861816994444",
+            DateOfBirth = new DateTime(1402,2,24),
+            Email = "Amirhossein.sami1275@gmail.com",
+            FirstName = "Amirhossein",
+            LastName = "Sami",
+            PhoneNumber = "+989028538715"
+        },
+        new ()
+        {
+            Id = 1,
+            BankAccountNumber = "6219861816994444",
+            DateOfBirth = new DateTime(1402,2,24),
+            Email = "Amirhossein.sami1275@gmail.com",
+            FirstName = "Amirhossein",
+            LastName = "Sami",
+            PhoneNumber = "+989028538715"
+        },
+        new ()
+        {
+            Id = 1,
+            BankAccountNumber = "6219861816994444",
+            DateOfBirth = new DateTime(1402,2,24),
+            Email = "Amirhossein.sami1275@gmail.com",
+            FirstName = "Amirhossein",
+            LastName = "Sami",
+            PhoneNumber = "+989028538715"
+        },
+        new ()
+        {
+            Id = 1,
+            BankAccountNumber = "6219861816994444",
+            DateOfBirth = new DateTime(1402,2,24),
+            Email = "Amirhossein.sami1275@gmail.com",
+            FirstName = "Amirhossein",
+            LastName = "Sami",
+            PhoneNumber = "+989028538715"
+        },
+        new ()
+        {
+            Id = 1,
+            BankAccountNumber = "6219861816994444",
+            DateOfBirth = new DateTime(1402,2,24),
+            Email = "Amirhossein.sami1275@gmail.com",
+            FirstName = "Amirhossein",
+            LastName = "Sami",
+            PhoneNumber = "+989028538715"
+        },
+        new ()
+        {
+            Id = 1,
+            BankAccountNumber = "6219861816994444",
+            DateOfBirth = new DateTime(1402,2,24),
+            Email = "Amirhossein.sami1275@gmail.com",
+            FirstName = "Amirhossein",
+            LastName = "Sami",
+            PhoneNumber = "+989028538715"
+        },
+        new ()
+        {
+            Id = 1,
+            BankAccountNumber = "6219861816994444",
+            DateOfBirth = new DateTime(1402,2,24),
+            Email = "Amirhossein.sami1275@gmail.com",
+            FirstName = "Amirhossein",
+            LastName = "Sami",
+            PhoneNumber = "+989028538715"
+        },
+        new ()
+        {
+            Id = 1,
+            BankAccountNumber = "6219861816994444",
+            DateOfBirth = new DateTime(1402,2,24),
+            Email = "Amirhossein.sami1275@gmail.com",
+            FirstName = "Amirhossein",
+            LastName = "Sami",
+            PhoneNumber = "+989028538715"
+        },
+        new ()
+        {
+            Id = 1,
+            BankAccountNumber = "6219861816994444",
+            DateOfBirth = new DateTime(1402,2,24),
+            Email = "Amirhossein.sami1275@gmail.com",
+            FirstName = "Amirhossein",
+            LastName = "Sami",
+            PhoneNumber = "+989028538715"
+        },
+        new ()
+        {
+            Id = 1,
+            BankAccountNumber = "6219861816994444",
+            DateOfBirth = new DateTime(1402,2,24),
+            Email = "Amirhossein.sami1275@gmail.com",
+            FirstName = "Amirhossein",
+            LastName = "Sami",
+            PhoneNumber = "+989028538715"
+        },
+        new ()
+        {
+            Id = 1,
+            BankAccountNumber = "6219861816994444",
+            DateOfBirth = new DateTime(1402,2,24),
+            Email = "Amirhossein.sami1275@gmail.com",
+            FirstName = "Amirhossein",
+            LastName = "Sami",
+            PhoneNumber = "+989028538715"
+        },
+        new ()
+        {
+            Id = 1,
+            BankAccountNumber = "6219861816994444",
+            DateOfBirth = new DateTime(1402,2,24),
+            Email = "Amirhossein.sami1275@gmail.com",
+            FirstName = "Amirhossein",
+            LastName = "Sami",
+            PhoneNumber = "+989028538715"
+        },
+        new ()
+        {
+            Id = 1,
+            BankAccountNumber = "6219861816994444",
+            DateOfBirth = new DateTime(1402,2,24),
+            Email = "Amirhossein.sami1275@gmail.com",
+            FirstName = "Amirhossein",
+            LastName = "Sami",
+            PhoneNumber = "+989028538715"
+        }
+    };
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     customers = await CustomerService.GetCustomers();
+    // }
+}

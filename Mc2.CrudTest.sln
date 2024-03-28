@@ -13,21 +13,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "client", "client", "{6E473B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{A059781C-3C77-4EF4-9343-778D5B1BE193}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.Application", "src\server\Mc2.CrudTest.Application\Mc2.CrudTest.Application.csproj", "{FC4DCA24-598D-4E17-BBF1-F59E78C546DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Application", "src\server\Mc2.CrudTest.Application\Mc2.CrudTest.Application.csproj", "{FC4DCA24-598D-4E17-BBF1-F59E78C546DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.Domain", "src\server\Mc2.CrudTest.Domain\Mc2.CrudTest.Domain.csproj", "{9B2260C0-35C0-40B1-835A-AAD7399A176F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Domain", "src\server\Mc2.CrudTest.Domain\Mc2.CrudTest.Domain.csproj", "{9B2260C0-35C0-40B1-835A-AAD7399A176F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.Infra", "src\server\Mc2.CrudTest.Infra\Mc2.CrudTest.Infra.csproj", "{0864D855-CB4E-4A77-8632-9A4A3221E76F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Infra", "src\server\Mc2.CrudTest.Infra\Mc2.CrudTest.Infra.csproj", "{0864D855-CB4E-4A77-8632-9A4A3221E76F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.API", "src\server\Mc2.CrudTest.API\Mc2.CrudTest.API.csproj", "{62B00881-8CEA-4B43-BAA6-224E327DA042}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.API", "src\server\Mc2.CrudTest.API\Mc2.CrudTest.API.csproj", "{62B00881-8CEA-4B43-BAA6-224E327DA042}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.Common", "src\shared\Mc2.CrudTest.Common\Mc2.CrudTest.Common.csproj", "{48E4F34C-3DD4-4378-A65E-A3F3A0B210B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Common", "src\shared\Mc2.CrudTest.Common\Mc2.CrudTest.Common.csproj", "{48E4F34C-3DD4-4378-A65E-A3F3A0B210B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.Contracts", "src\shared\Mc2.CrudTest.Contracts\Mc2.CrudTest.Contracts.csproj", "{37676C9C-09C1-45EA-B5D9-0ACD038C4FDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Contracts", "src\shared\Mc2.CrudTest.Contracts\Mc2.CrudTest.Contracts.csproj", "{37676C9C-09C1-45EA-B5D9-0ACD038C4FDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.WebApp", "src\client\Mc2.CrudTest.WebApp\Mc2.CrudTest.WebApp.csproj", "{8C11F6D3-1E3F-4A82-AB7E-6D539B772F47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.WebApp", "src\client\Mc2.CrudTest.WebApp\Mc2.CrudTest.WebApp.csproj", "{8C11F6D3-1E3F-4A82-AB7E-6D539B772F47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mc2.CrudTest.AcceptanceTests", "tests\Mc2.CrudTest.AcceptanceTests\Mc2.CrudTest.AcceptanceTests.csproj", "{8CEB129D-13AA-4492-A6E7-4A31783B9913}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.AcceptanceTests", "tests\Mc2.CrudTest.AcceptanceTests\Mc2.CrudTest.AcceptanceTests.csproj", "{8CEB129D-13AA-4492-A6E7-4A31783B9913}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

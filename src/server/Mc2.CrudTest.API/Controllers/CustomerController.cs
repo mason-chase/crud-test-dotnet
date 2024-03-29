@@ -1,64 +1,103 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Mc2.CrudTest.Application.UseCases.Customer;
+using Mc2.CrudTest.Application.UseCases.Customer.Queries;
+using Mc2.CrudTest.Domain.Entities;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Mc2.CrudTest.API.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class CustomerController : ControllerBase
 {
+    private readonly IMediator _mediator;
+
+    public CustomerController(IMediator mediator) => _mediator = mediator;
+
     /// <summary>
-    /// 
+    /// Get All The Customers
     /// </summary>
     /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
     [HttpGet("Get")]
     public async Task<IActionResult> GetCustomers()
     {
-        throw new NotImplementedException();
+        List<Customer> res = await _mediator.Send(new GetAllCustomerReq());
+
+        if (res.Count > 0)
+            return Ok(res);
+        return NotFound();
     }
 
     /// <summary>
-    /// 
+    /// Get customer By CustomerId
     /// </summary>
-    /// <param name="customerId"></param>
+    /// <param name="query"></param>
     /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
-    [HttpGet("Get/{customerId}")]
-    public async Task<IActionResult> GetCustomerById(int customerId)
+    [HttpGet("GetById")]
+    public async Task<IActionResult> GetCustomerById(GetCustomerByIdReq query)
     {
-        throw new NotImplementedException();
+        Customer res = await _mediator.Send(new GetCustomerByIdReq { CustomerId = query.CustomerId });
+
+        return Ok(res);
     }
 
+
     /// <summary>
-    /// 
+    /// Insert New Customer
     /// </summary>
+    /// <param name="command"></param>
     /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
     [HttpPost("create")]
-    public async Task<IActionResult> CreateCustomer()
+    public async Task<IActionResult> CreateCustomer(CreateCustomerReq command)
     {
-        throw new NotImplementedException();
+        await _mediator.Send(new CreateCustomerReq
+        {
+            FirstName = command.FirstName,
+            LastName = command.LastName,
+            PhoneNumber = command.PhoneNumber,
+            Email = command.Email,
+            DateOfBirth = command.DateOfBirth,
+            BankAccountNumber = command.BankAccountNumber
+        });
+
+        return Created();
     }
 
+
     /// <summary>
-    /// 
+    /// Update Already Added Customer
     /// </summary>
+    /// <param name="command"></param>
     /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
     [HttpPut("update")]
-    public async Task<IActionResult> UpdateCustomer()
+    public async Task<IActionResult> UpdateCustomer(UpdateCustomerReq command)
     {
-        throw new NotImplementedException();
+        Customer res = await _mediator.Send(new UpdateCustomerReq
+        {
+            FirstName = command.FirstName,
+            LastName = command.LastName,
+            PhoneNumber = command.PhoneNumber,
+            Email = command.Email,
+            DateOfBirth = command.DateOfBirth,
+            BankAccountNumber = command.BankAccountNumber
+        });
+
+        return Ok(res);
     }
 
     /// <summary>
-    /// 
+    /// Remove Customer
     /// </summary>
+    /// <param name="command"></param>
     /// <returns></returns>
-    /// <exception cref="NotSupportedException"></exception>
     [HttpDelete("remove")]
-    public async Task<IActionResult> RemoveCustomer()
+    public async Task<IActionResult> RemoveCustomer(RemoveCustomerReq command)
     {
-        throw new NotSupportedException();
+        await _mediator.Send(new RemoveCustomerReq
+        {
+            CustomerId = command.CustomerId,
+        });
+
+        return Ok();
     }
 }

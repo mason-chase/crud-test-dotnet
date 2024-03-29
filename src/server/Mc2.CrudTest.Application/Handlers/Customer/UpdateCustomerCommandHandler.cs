@@ -1,4 +1,5 @@
 ﻿using Mc2.CrudTest.Application.Commands.Customer;
+using Mc2.CrudTest.Common;
 using Mc2.CrudTest.Domain.IRepos.Customer;
 using MediatR;
 
@@ -14,16 +15,25 @@ public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerComman
     {
         try
         {
-            var existingCustomer = await _customerRepo.GetByIdAsync(request.CustomerId);
+            if (ValidationHelper.IsValidCreditCardNumber(request.BankAccountNumber) &&
+                ValidationHelper.IsValidEmail(request.Email) &&
+                ValidationHelper.IsValidPhoneNumber(request.PhoneNumber.ToString()))
+            {
+                var existingCustomer = await _customerRepo.GetByIdAsync(request.CustomerId);
 
-            if (existingCustomer is null)
-                throw new Exception("Customer Not Found");
+                if (existingCustomer is null)
+                    throw new Exception("Customer Not Found");
 
-            existingCustomer.PhoneNumber = request.PhoneNumber;
-            existingCustomer.Email = request.Email;
-            existingCustomer.BankAccountNumber = request.BankAccountNumber;
+                existingCustomer.PhoneNumber = request.PhoneNumber;
+                existingCustomer.Email = request.Email;
+                existingCustomer.BankAccountNumber = request.BankAccountNumber;
 
-            await _customerRepo.UpdateAsync(existingCustomer);
+                await _customerRepo.UpdateAsync(existingCustomer);
+            }
+            else
+            {
+                throw new Exception("Invalid Parameters");
+            }
         }
         catch (Exception e)
         {

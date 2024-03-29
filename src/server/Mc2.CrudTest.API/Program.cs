@@ -1,10 +1,12 @@
 using System.Reflection;
 using Mc2.CrudTest.Application.Handlers.Customer;
+using Mc2.CrudTest.Contracts;
 using Mc2.CrudTest.Domain.IRepos;
 using Mc2.CrudTest.Domain.IRepos.Customer;
 using Mc2.CrudTest.Infra.Data;
 using Mc2.CrudTest.Infra.Data.Repos;
 using Mc2.CrudTest.Infra.Data.Repos.Customer;
+using Mc2.CrudTest.Infra.Logging;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,12 +26,14 @@ builder.Services.AddCors(opt =>
             .AllowAnyMethod()
             .AllowAnyHeader());
 });
+
 #region Inject Services To Container
 
 builder.Services.AddScoped(typeof(IRepo<>), typeof(Repo<>));
 builder.Services.AddScoped<ICustomerRepo, CustomerRepo>();
 builder.Services.AddDbContext<ApplicationDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("CnnStr")));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(CreateCustomerCommandHandler).GetTypeInfo().Assembly));
+builder.Services.AddScoped(typeof(ILoggerAdapter<>), typeof(SerilogAdapter<>));
 
 #endregion
 

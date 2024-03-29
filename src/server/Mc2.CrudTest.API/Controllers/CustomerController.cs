@@ -1,5 +1,5 @@
-﻿using Mc2.CrudTest.Application.UseCases.Customer;
-using Mc2.CrudTest.Application.UseCases.Customer.Queries;
+﻿using Mc2.CrudTest.Application.Commands.Customer;
+using Mc2.CrudTest.Application.DTOs;
 using Mc2.CrudTest.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -17,26 +17,28 @@ public class CustomerController : ControllerBase
     /// <summary>
     /// Get All The Customers
     /// </summary>
+    /// <param name="ct"></param>
     /// <returns></returns>
-    [HttpGet("Get")]
-    public async Task<IActionResult> GetCustomers()
+    [HttpGet()]
+    public async Task<IActionResult> GetCustomers(CancellationToken ct)
     {
-        List<Customer> res = await _mediator.Send(new GetAllCustomerReq());
-
-        if (res.Count > 0)
-            return Ok(res);
-        return NotFound();
+        var query = new GetAllCustomerQuery();
+        List<Customer> res = await _mediator.Send(query, ct);
+        return Ok(res);
     }
 
     /// <summary>
     /// Get customer By CustomerId
     /// </summary>
-    /// <param name="query"></param>
+    /// <param name="customerId"></param>
+    /// <param name="ct"></param>
     /// <returns></returns>
-    [HttpGet("GetById")]
-    public async Task<IActionResult> GetCustomerById(GetCustomerByIdReq query)
+    [HttpGet("{customerId}")]
+    public async Task<IActionResult> GetCustomerById(int customerId, CancellationToken ct)
     {
-        Customer res = await _mediator.Send(new GetCustomerByIdReq { CustomerId = query.CustomerId });
+        var query = new GetCustomerByIdQuery() { CustomerId = customerId };
+
+        Customer res = await _mediator.Send(query, ct);
 
         return Ok(res);
     }
@@ -45,20 +47,23 @@ public class CustomerController : ControllerBase
     /// <summary>
     /// Insert New Customer
     /// </summary>
-    /// <param name="command"></param>
+    /// <param name="dto"></param>
+    /// <param name="ct"></param>
     /// <returns></returns>
     [HttpPost("create")]
-    public async Task<IActionResult> CreateCustomer(CreateCustomerReq command)
+    public async Task<IActionResult> CreateCustomer(CustomerCreateDTO dto, CancellationToken ct)
     {
-        await _mediator.Send(new CreateCustomerReq
+        var command = new CreateCustomerCommand
         {
-            FirstName = command.FirstName,
-            LastName = command.LastName,
-            PhoneNumber = command.PhoneNumber,
-            Email = command.Email,
-            DateOfBirth = command.DateOfBirth,
-            BankAccountNumber = command.BankAccountNumber
-        });
+            FirstName = dto.FirstName,
+            LastName = dto.LastName,
+            DateOfBirth = dto.DateOfBirth,
+            BankAccountNumber = dto.BankAccountNumber,
+            Email = dto.Email,
+            PhoneNumber = dto.PhoneNumber,
+        };
+
+        await _mediator.Send(command, ct);
 
         return Created();
     }
@@ -67,36 +72,38 @@ public class CustomerController : ControllerBase
     /// <summary>
     /// Update Already Added Customer
     /// </summary>
-    /// <param name="command"></param>
+    /// <param name="customerId"></param>
+    /// <param name="dto"></param>
+    /// <param name="ct"></param>
     /// <returns></returns>
-    [HttpPut("update")]
-    public async Task<IActionResult> UpdateCustomer(UpdateCustomerReq command)
+    [HttpPut("update/{customerId}")]
+    public async Task<IActionResult> UpdateCustomer(int customerId, [FromBody] CustomerUpdateDTO dto, CancellationToken ct)
     {
-        Customer res = await _mediator.Send(new UpdateCustomerReq
+        var command = new UpdateCustomerCommand
         {
-            FirstName = command.FirstName,
-            LastName = command.LastName,
-            PhoneNumber = command.PhoneNumber,
-            Email = command.Email,
-            DateOfBirth = command.DateOfBirth,
-            BankAccountNumber = command.BankAccountNumber
-        });
-
-        return Ok(res);
+            CustomerId = customerId,
+            BankAccountNumber = dto.BankAccountNumber,
+            Email = dto.Email,
+            PhoneNumber = dto.PhoneNumber,
+        };
+        await _mediator.Send(command, ct);
+        return Ok();
     }
 
     /// <summary>
     /// Remove Customer
     /// </summary>
-    /// <param name="command"></param>
+    /// <param name="customerId"></param>
+    /// <param name="ct"></param>
     /// <returns></returns>
-    [HttpDelete("remove")]
-    public async Task<IActionResult> RemoveCustomer(RemoveCustomerReq command)
+    [HttpDelete("remove/{customerId}")]
+    public async Task<IActionResult> RemoveCustomer(int customerId, CancellationToken ct)
     {
-        await _mediator.Send(new RemoveCustomerReq
+        var command = new RemoveCustomerCommand
         {
-            CustomerId = command.CustomerId,
-        });
+            CustomerId = customerId
+        };
+        await _mediator.Send(command, ct);
 
         return Ok();
     }

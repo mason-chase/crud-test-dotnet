@@ -1,14 +1,16 @@
-﻿using Mc2.CrudTest.Domain.IRepos.Customer;
+﻿using Mc2.CrudTest.Application.Commands.Customer;
+using Mc2.CrudTest.Domain.IRepos.Customer;
 using MediatR;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace Mc2.CrudTest.Application.UseCases.Customer.Comands.Customer;
+namespace Mc2.CrudTest.Application.Handlers.Customer;
 
-public class CreateCustomerCommand : IRequestHandler<CreateCustomerReq>
+public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand>
 {
     private readonly ICustomerRepo _customerRepo;
 
-    public CreateCustomerCommand(ICustomerRepo customerRepo) => _customerRepo = customerRepo;
-    public async Task Handle(CreateCustomerReq request, CancellationToken cancellationToken)
+    public CreateCustomerCommandHandler(ICustomerRepo customerRepo) => _customerRepo = customerRepo;
+    public async Task Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
     {
         try
         {

@@ -1,7 +1,4 @@
-﻿using Mc2.CrudTest.Application.UseCases.Customer.Comands;
-using Mc2.CrudTest.Domain.Entities;
-using Mc2.CrudTest.Domain.IRepos.Customer;
-using Microsoft.EntityFrameworkCore;
+﻿using Mc2.CrudTest.Domain.IRepos.Customer;
 
 namespace Mc2.CrudTest.Infra.Data.Repos.Customer;
 

@@ -1,8 +1,8 @@
 ﻿using MediatR;
 
-namespace Mc2.CrudTest.Application.UseCases.Customer;
+namespace Mc2.CrudTest.Application.Commands.Customer;
 
-public class CreateCustomerReq : IRequest
+public class CreateCustomerCommand : IRequest
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
@@ -12,24 +12,22 @@ public class CreateCustomerReq : IRequest
     public string BankAccountNumber { get; set; }
 }
 
-public class UpdateCustomerReq : IRequest<Domain.Entities.Customer>
+public class UpdateCustomerCommand : IRequest
 {
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public DateTime DateOfBirth { get; set; }
+    public int CustomerId { get; set; }
     public ulong PhoneNumber { get; set; }
     public string Email { get; set; }
     public string BankAccountNumber { get; set; }
 }
 
-public class RemoveCustomerReq : IRequest
+public class RemoveCustomerCommand : IRequest
 {
     public int CustomerId { get; set; }
 }
 
-public class GetCustomerByIdReq : IRequest<Domain.Entities.Customer>
+public class GetCustomerByIdQuery : IRequest<Domain.Entities.Customer>
 {
     public int CustomerId { get; set; }
 }
 
-public class GetAllCustomerReq : IRequest<List<Domain.Entities.Customer>> { }
+public class GetAllCustomerQuery : IRequest<List<Domain.Entities.Customer>> { }

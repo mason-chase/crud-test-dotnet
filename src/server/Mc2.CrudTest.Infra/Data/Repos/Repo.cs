@@ -25,12 +25,10 @@ public class Repo<TEntity> : IRepo<TEntity> where TEntity : class
         await _context.SaveChangesAsync();
     }
 
-    public async Task<TEntity> UpdateAsync(TEntity entity)
+    public async Task UpdateAsync(TEntity entity)
     {
-        var entry = _context.Set<TEntity>().Update(entity);
+        _context.Entry(entity).State = EntityState.Modified;
         await _context.SaveChangesAsync();
-        entry.State = EntityState.Detached;
-        return entry.Entity;
     }
 
     public async Task DeleteAsync(TEntity entity)

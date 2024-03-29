@@ -1,7 +1,7 @@
 ﻿@page "/"
 @using Mc2.CrudTest.WebApp.ViewModels
-
 @inject ICustomerService CustomerService
+@inject NavigationManager NavigationManager
 
 <PageTitle>Customer Management Service</PageTitle>
 
@@ -34,8 +34,8 @@
                         <td class="text-center">@customer.BankAccountNumber</td>
                         <td class="text-center">
                             <div class="btn-group">
-                                <button class="btn btn-outline-primary">Edit</button>
-                                <button class="btn btn-outline-danger">Remove</button>
+                                <button class="btn btn-outline-primary" @onclick="() =>  ShowEditModal(customer.Id)">Edit</button>
+                                <button class="btn btn-outline-danger" @onclick="() => RemoveCustomer(customer.Id)">Remove</button>
                             </div>
                         </td>
                     </tr>
@@ -51,23 +51,27 @@
     </table>
 </div>
 
+
 @code
 {
-    List<Customer> customers = new List<Customer>
+    List<Customer> customers;
+
+
+    protected override async Task OnInitializedAsync()
     {
-        new ()
-        {
-            Id = 1,
-            BankAccountNumber = "6219861816994444",
-            DateOfBirth = new DateTime(1402,2,24),
-            Email = "Amirhossein.sami1275@gmail.com",
-            FirstName = "Amirhossein",
-            LastName = "Sami",
-            PhoneNumber = Convert.ToUInt64(+989028538715)
-        },
-    };
-    // protected override async Task OnInitializedAsync()
-    // {
-    //     customers = await CustomerService.GetCustomers();
-    // }
+        customers = await CustomerService.GetCustomers();
+    }
+
+    private void ShowEditModal(int customerId)
+    {
+        string url = $"/customer/update/{customerId}";
+
+        NavigationManager.NavigateTo(url);
+    }
+
+    private async Task RemoveCustomer(int customerId)
+    {
+        var resCode = await CustomerService.DeleteCustomer(customerId);
+        NavigationManager.NavigateTo(NavigationManager.Uri, true);
+    }
 }

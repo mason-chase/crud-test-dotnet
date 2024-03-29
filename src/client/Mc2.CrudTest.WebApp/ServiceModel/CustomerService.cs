@@ -1,40 +1,43 @@
-﻿using Mc2.CrudTest.WebApp.ViewModels;
+﻿using System.Net;
+using System.Net.Http.Json;
+using Mc2.CrudTest.WebApp.ViewModels;
 
 namespace Mc2.CrudTest.WebApp.ServiceModel;
 
-public class CustomerService : ICustomerService
+public class CustomerService(HttpClient httpClient, IConfiguration configuration) : ICustomerService
 {
-    private readonly HttpClient _httpClient;
+    private readonly HttpClient _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+    private readonly IConfiguration _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 
-    public CustomerService(HttpClient httpClient)
-    {
-        _httpClient = httpClient;
-    }
-
-    private const string baseUrl = "";
 
     public async Task<List<Customer>> GetCustomers()
     {
-        throw new NotImplementedException();
+        return (await _httpClient.GetFromJsonAsync<List<Customer>>("/api/customer"))!;
     }
 
-    public async Task<Customer> GetCustomerById(int id)
+    public async Task<Customer> GetCustomerById(int customerId)
     {
-        throw new NotImplementedException();
+        return (await _httpClient.GetFromJsonAsync<Customer>($"api/customer/{customerId}"))!;
     }
 
-    public Task DeleteCustomer(int id)
+    public async Task<HttpStatusCode> AddCustomer(CustomerCreateInput input)
     {
-        throw new NotImplementedException();
+        HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/api/Customer/create", input);
+        HttpStatusCode resCode = response.StatusCode;
+
+        return response.StatusCode;
     }
 
-    public Task UpdateCustomer(Customer customer)
+    public async Task<HttpStatusCode> UpdateCustomer(int customerId, CustomerUpdateInput input)
     {
-        throw new NotImplementedException();
+        var response = await _httpClient.PutAsJsonAsync($"api/customer/update/{customerId}", input);
+        response.EnsureSuccessStatusCode();
+        return response.StatusCode;
     }
 
-    public Task AddCustomer(Customer customer)
+    public async Task<HttpStatusCode> DeleteCustomer(int customerId)
     {
-        throw new NotImplementedException();
+        var response = await _httpClient.DeleteAsync($"api/customer/remove/{customerId}");
+        return response.StatusCode;
     }
 }

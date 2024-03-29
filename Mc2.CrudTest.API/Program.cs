@@ -1,5 +1,10 @@
 
 using Mc2.CrudTest.Application.Interfaces.Context;
+using Mc2.CrudTest.Application.Services.Customers.Command.EditCustomer;
+using Mc2.CrudTest.Application.Services.Customers.Command.RegisterCustomer;
+using Mc2.CrudTest.Application.Services.Customers.Command.RemoveCustomer;
+using Mc2.CrudTest.Application.Services.Customers.Query.GetCustomerByID;
+using Mc2.CrudTest.Application.Services.Customers.Query.GetCustomers;
 using Mc2.CrudTest.Presistance.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +19,12 @@ namespace Mc2.CrudTest.API
 
             // Add services to the container.
             builder.Services.AddScoped<IDataBaseContext, DataBaseContext>();
+            builder.Services.AddScoped<IGetCustomersService, GetCustomersService>();
+            builder.Services.AddScoped<IRegisterCustomerService, RegisterCustomerService>();
+            builder.Services.AddScoped<IEditCustomerService, EditCustomerService>();
+            builder.Services.AddScoped<IGetCustomerByID, GetCustomerByID>();
+            builder.Services.AddScoped<IRemoveCustomer, RemoveCustomer>();
+
             string connectionString = builder.Configuration.GetConnectionString("ConnStr");
             builder.Services.AddEntityFrameworkSqlServer().AddDbContext<DataBaseContext>(option => option.UseSqlServer(connectionString));
             builder.Services.AddControllers();

@@ -1,5 +1,5 @@
 ﻿using Mc2.CrudTest.Application.Interfaces.Context;
-using Mc2.CrudTest.Domain.Entities.Customer;
+using Mc2.CrudTest.Domain.Entities.Customers;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace Mc2.CrudTest.Presistance.Context
         {
 
         }
-        public DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Customer>().HasIndex(c => new { c.FirstName, c.LastName, c.DateOfBirth }).IsUnique();

@@ -8,7 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Mc2.CrudTest.Domain.Entities.Customer
+namespace Mc2.CrudTest.Domain.Entities.Customers
 {
     public class Customer
     {

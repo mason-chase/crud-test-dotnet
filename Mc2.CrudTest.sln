@@ -4,8 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B4CAEC2D-89A3-4595-90BA-03268DAF283F}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{DC077ED9-5EC4-4012-90D5-6086225D9051}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yaml = docker-compose.yaml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "server", "server", "{CCF7C041-BA19-48E3-89F3-89B78E3D1F99}"
 EndProject
@@ -26,8 +27,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.Contracts", "src\shared\Mc2.CrudTest.Contracts\Mc2.CrudTest.Contracts.csproj", "{37676C9C-09C1-45EA-B5D9-0ACD038C4FDC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.WebApp", "src\client\Mc2.CrudTest.WebApp\Mc2.CrudTest.WebApp.csproj", "{8C11F6D3-1E3F-4A82-AB7E-6D539B772F47}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mc2.CrudTest.AcceptanceTests", "tests\Mc2.CrudTest.AcceptanceTests\Mc2.CrudTest.AcceptanceTests.csproj", "{8CEB129D-13AA-4492-A6E7-4A31783B9913}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,10 +62,6 @@ Global
 		{8C11F6D3-1E3F-4A82-AB7E-6D539B772F47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C11F6D3-1E3F-4A82-AB7E-6D539B772F47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C11F6D3-1E3F-4A82-AB7E-6D539B772F47}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8CEB129D-13AA-4492-A6E7-4A31783B9913}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8CEB129D-13AA-4492-A6E7-4A31783B9913}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8CEB129D-13AA-4492-A6E7-4A31783B9913}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8CEB129D-13AA-4492-A6E7-4A31783B9913}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,7 +77,6 @@ Global
 		{48E4F34C-3DD4-4378-A65E-A3F3A0B210B6} = {A059781C-3C77-4EF4-9343-778D5B1BE193}
 		{37676C9C-09C1-45EA-B5D9-0ACD038C4FDC} = {A059781C-3C77-4EF4-9343-778D5B1BE193}
 		{8C11F6D3-1E3F-4A82-AB7E-6D539B772F47} = {6E473BDD-7F38-41D0-B71E-B5B132FE92D3}
-		{8CEB129D-13AA-4492-A6E7-4A31783B9913} = {DC077ED9-5EC4-4012-90D5-6086225D9051}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4B5A26C9-68C1-49D9-9F32-AF907A1730C2}

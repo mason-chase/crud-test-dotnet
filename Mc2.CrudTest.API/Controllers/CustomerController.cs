@@ -57,7 +57,7 @@ namespace Mc2.CrudTest.API.Controllers
             }
         }
         [HttpPost]
-        public IActionResult Post([FromBody] CustomerDto reqDTO)
+        public IActionResult CreateCustomer([FromBody] CustomerDto reqDTO)
         {
             try
             {

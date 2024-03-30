@@ -14,14 +14,18 @@ namespace Mc2.CrudTest.Domain.Entities.Customers
     {
         [Key]
         public long Id { get; set; }
+        [StringLength(50, ErrorMessage = "First name cannot exceed 50 characters.")]
         public string? FirstName { get; set; }
+        [StringLength(150, ErrorMessage = "First name cannot exceed 50 characters.")]
         public string? LastName { get; set; }
+        [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
-        [MobilePhoneNumber]
+        [MobilePhoneNumber(ErrorMessage = "Invalid phone number.")]
         public ulong? PhoneNumber { get; set; }
         [Required(ErrorMessage = "Email address is required")]
+        [EmailAddress(ErrorMessage = "Invalid email address.")]
         public string Email { get; set; }
-        [RegularExpression(@"((\\d{4})-){3}\\d{4}", ErrorMessage = "Invalid Bank Account Number")]
+        [RegularExpression(@"^\d{10}$", ErrorMessage = "Bank account number must be a 10-digit number.")]
         public string? BankAccountNumber { get; set; }
 
     }

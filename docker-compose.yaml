@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: /src/server/Mc2.CrudTest.API
+      dockerfile: Dockerfile   
+    ports:
+      - "5000:80"           
+    depends_on:
+      - db         
+    environment:
+        ConnectionStrings__CnnStr: "Server=db;Database=Customer;User Id=sa;Password=FckSociety@#$%123;TrustServerCertificate=True"
+
+  blazor:
+    build:
+      context: /src/client/Mc2.CrudTest.WebApp     
+      dockerfile: Dockerfile   
+    ports:
+      - "5001:80"           
+
+  db:
+    image: "mcr.microsoft.com/mssql/server:2019-latest"   
+    environment:
+      SA_PASSWORD: "FckSociety@#$%123"   
+      ACCEPT_EULA: "Y"                    
+    ports:
+      - "1433:1433"             

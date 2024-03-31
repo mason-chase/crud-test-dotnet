@@ -1,0 +1,6 @@
+@Mc2.CrudTest.API_HostAddress = http://localhost:5143
+
+GET {{Mc2.CrudTest.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

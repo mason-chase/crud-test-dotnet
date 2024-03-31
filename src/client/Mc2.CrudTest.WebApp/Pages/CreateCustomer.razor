@@ -1,0 +1,66 @@
+﻿@page "/customer/create"
+@using Mc2.CrudTest.WebApp.ViewModels
+@inject ICustomerService CustomerService
+@inject NavigationManager NavigationManager
+
+<h3>Create Customer</h3>
+<hr />
+
+<div class="d-flex justify-content-start">
+    <div class="card" style="width: 600px;">
+        <div class="card-body">
+            <form @onsubmit="AddCustomer">
+
+                <div class="form-group" style="margin-bottom: 5px">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" class="form-control" id="firstName" @bind="customer.FirstName" />
+                </div>
+
+                <div class="form-group" style="margin-bottom: 5px">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" class="form-control" id="lastName" @bind="customer.LastName" />
+                </div>
+
+                <div class="form-group" style="margin-bottom: 5px">
+                    <label for="DateOfBirth">Birth Date:</label>
+                    <input type="date" class="form-control" id="DateOfBirth" @bind="customer.DateOfBirth" />
+                </div>
+
+                <div class="form-group" style="margin-bottom: 5px">
+                    <label for="PhoneNumber">Phone Number:</label>
+                    <input type="text" class="form-control" id="PhoneNumber" @bind="customer.PhoneNumber" />
+                </div>
+
+                <div class="form-group" style="margin-bottom: 5px">
+                    <label for="Email">Email:</label>
+                    <input type="text" class="form-control" id="Email" @bind="customer.Email" />
+                </div>
+
+
+                <div class="form-group" style="margin-bottom: 5px">
+                    <label for="BankAccountNumber">Account No:</label>
+                    <input type="text" class="form-control" id="BankAccountNumber" @bind="customer.BankAccountNumber" />
+                </div>
+
+
+                <br />
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@code {
+    CustomerCreateInput customer = new CustomerCreateInput();
+
+    protected override Task OnInitializedAsync()
+    {
+        return base.OnInitializedAsync();
+    }
+
+    private async Task AddCustomer()
+    {
+        await CustomerService.AddCustomer(customer);
+        NavigationManager.NavigateTo(NavigationManager.Uri, true);
+    }
+}

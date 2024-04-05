@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.ResponseCompression;
-
 namespace Mc2.CrudTest.Presentation
 {
     public class Program

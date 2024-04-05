@@ -13,7 +13,12 @@ namespace Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configure entity mappings or relationships here if needed
+            modelBuilder.Entity<Customer>()
+                        .HasIndex(_ => _.Email)
+                        .IsUnique();
+            modelBuilder.Entity<Customer>()
+                        .HasIndex(_ => new { _.FirstName, _.LastName, _.DateOfBirth })
+                        .IsUnique();
         }
     }
 }

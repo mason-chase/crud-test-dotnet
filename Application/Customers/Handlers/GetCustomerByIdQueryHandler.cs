@@ -16,7 +16,7 @@ namespace Application.Customers.Handlers
 
         public async Task<Customer> Handle(GetCustomerByIdQuery request, CancellationToken cancellationToken)
         {
-            return await _unitOfWork.Customers.GetById(request.Id);
+            return await _unitOfWork.CustomerRepository.FindById(request.Id);
         }
     }
 }

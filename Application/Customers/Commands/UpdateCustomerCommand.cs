@@ -4,8 +4,9 @@ using static Common.Attributes.CustomizedValidationAttribute;
 
 namespace Application.Customers.Commands
 {
-    public class CreateCustomerCommand : IRequest<(int, string)>
+    public class UpdateCustomerCommand : IRequest<(bool, string)>
     {
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime DateOfBirth { get; set; }

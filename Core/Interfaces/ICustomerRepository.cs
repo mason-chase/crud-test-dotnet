@@ -1,13 +1,16 @@
 ﻿using Core.Models;
+using System.Linq.Expressions;
 
 namespace Core.Interfaces
 {
     public interface ICustomerRepository
     {
-        Task<Customer> GetById(int id);
+        Task<Customer> FindById(int id);
+        Task<Customer> FindByEmail(string email);
         Task<List<Customer>> GetAll();
-        Task Add(Customer customer);
-        void Update(Customer customer);
-        Task Delete(int id);
+        bool Add(Customer customer);
+        bool Update(Customer customer);
+        Task<(bool, string)> Delete(int id);
+        Task<Customer> FirstOrDefaultAsync(Expression<Func<Customer, bool>> predicate);
     }
 }

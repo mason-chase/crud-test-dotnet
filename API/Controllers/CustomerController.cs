@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     public class CustomerController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -19,52 +19,52 @@ namespace API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateCustomerCommand command)
         {
-            var id = await _mediator.Send(command);
-            if (id > 0)
-                return Ok(id);
-            return BadRequest("There was a problem creating the customer");
+            var result = await _mediator.Send(command);
+            if (result.Item1 > 0)
+                return Ok(result.Item1);
+            return BadRequest(result.Item2);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update(CreateCustomerCommand command)
+        public async Task<IActionResult> Update(UpdateCustomerCommand command)
         {
-            var id = await _mediator.Send(command);
-            if (id > 0)
-                return Ok(id);
-            return BadRequest("There was a problem creating the customer");
+            var result = await _mediator.Send(command);
+            if (result.Item1)
+                return Ok(result.Item2);
+            return BadRequest(result.Item2);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var customer = await _mediator.Send(new GetCustomerByIdQuery { Id = id });
-            if (customer == null)
+            var result = await _mediator.Send(new GetCustomerByIdQuery { Id = id });
+            if (result is null)
             {
                 return NotFound();
             }
-            return Ok(customer);
+            return Ok(result);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll(int id)
+        public async Task<IActionResult> GetAll()
         {
-            var customer = await _mediator.Send(new GetCustomerByIdQuery { Id = id });
-            if (customer == null)
+            var result = await _mediator.Send(new GetAllCustomersQuery { });
+            if (result is null)
             {
-                return NotFound();
+                return NotFound("None Found!");
             }
-            return Ok(customer);
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteById(int id)
         {
-            var customer = await _mediator.Send(new GetCustomerByIdQuery { Id = id });
-            if (customer == null)
+            var result = await _mediator.Send(new DeleteCustomerCommand { Id = id });
+            if (!result.Item1)
             {
-                return NotFound();
+                return NotFound(result.Item2);
             }
-            return Ok(customer);
+            return Ok(result.Item2);
         }
     }
 }

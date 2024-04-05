@@ -1,19 +1,18 @@
 ﻿using Core.Interfaces;
-using Infrastructure.Repositories;
 
 namespace Infrastructure
 {
     public class UnitOfWork : IUnitOfWork
     {
         private readonly CustomerDbContext _context;
-        private ICustomerRepository _customerRepository;
+        public ICustomerRepository CustomerRepository { get; }
 
-        public UnitOfWork(CustomerDbContext context)
+        public UnitOfWork(CustomerDbContext context, ICustomerRepository customerRepository)
         {
             _context = context;
+            CustomerRepository = customerRepository;
         }
 
-        public ICustomerRepository Customers => _customerRepository ??= new CustomerRepository(_context);
 
         public void SaveChanges()
         {

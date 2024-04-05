@@ -2,7 +2,7 @@
 {
     public interface IUnitOfWork : IDisposable
     {
-        ICustomerRepository Customers { get; }
+        public ICustomerRepository CustomerRepository { get; }
         void SaveChanges();
     }
 }

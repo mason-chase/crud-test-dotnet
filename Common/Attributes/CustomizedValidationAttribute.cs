@@ -8,11 +8,17 @@ namespace Common.Attributes
     {
         public enum ValidationType
         {
-            MobileNumber,
+            PhoneNumber,
             BankAccountNumber
         }
-        //in case we have multiple types of property validations
         private readonly ValidationType _validationType;
+
+        #region Constants
+        const string PHONENUMBER_ERRORMESSAGE = "Please Enter a Valid Phone Number";
+        const string BANKACCOUNTNUMBER_ERRORMESSAGE = "Please Enter a Valid Phone Number";
+
+        const string BANKACCOUNTNUMBER_PATTERN = @"^\d{6,20}$";
+        #endregion
 
         public CustomizedValidationAttribute(ValidationType validationType)
         {
@@ -29,8 +35,8 @@ namespace Common.Attributes
             string errorMessage = "";
             switch (_validationType)
             {
-                case ValidationType.MobileNumber:
-                    errorMessage = "Please Enter a Valid Phone Number";
+                case ValidationType.PhoneNumber:
+                    errorMessage = PHONENUMBER_ERRORMESSAGE;
                     PhoneNumberUtil phoneUtil = PhoneNumberUtil.GetInstance();
                     try
                     {
@@ -43,8 +49,8 @@ namespace Common.Attributes
                         return new ValidationResult(errorMessage);
                     }
                 case ValidationType.BankAccountNumber:
-                    pattern = @"^\d{6,20}$";
-                    errorMessage = "Please Enter a Valid Bank Account Number";
+                    pattern = BANKACCOUNTNUMBER_PATTERN;
+                    errorMessage = BANKACCOUNTNUMBER_ERRORMESSAGE;
                     break;
                 default:
                     throw new InvalidOperationException("Invalid validation type.");

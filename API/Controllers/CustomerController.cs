@@ -39,9 +39,7 @@ namespace API.Controllers
         {
             var result = await _mediator.Send(new GetCustomerByIdQuery { Id = id });
             if (result is null)
-            {
                 return NotFound();
-            }
             return Ok(result);
         }
 
@@ -50,9 +48,7 @@ namespace API.Controllers
         {
             var result = await _mediator.Send(new GetAllCustomersQuery { });
             if (result is null)
-            {
                 return NotFound("None Found!");
-            }
             return Ok(result);
         }
 
@@ -61,9 +57,7 @@ namespace API.Controllers
         {
             var result = await _mediator.Send(new DeleteCustomerCommand { Id = id });
             if (!result.Item1)
-            {
                 return NotFound(result.Item2);
-            }
             return Ok(result.Item2);
         }
     }

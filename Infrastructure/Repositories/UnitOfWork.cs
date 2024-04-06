@@ -1,6 +1,6 @@
 ﻿using Core.Interfaces;
 
-namespace Infrastructure
+namespace Infrastructure.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {

@@ -1,6 +1,6 @@
 ﻿using PhoneNumbers;
 
-namespace Common
+namespace Common.Helpers
 {
     public static class PhoneNumberHelper
     {

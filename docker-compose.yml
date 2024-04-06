@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  sql-server:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sql-server
+    user: root
+    environment:
+      SA_PASSWORD: "Sql@dmin404"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1436:1433"
+    networks:
+      - app-network
+  api:
+    build:
+      context: .
+      dockerfile: API/Dockerfile
+    container_name: api
+    ports:
+      - "5000:80" 
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings_DefaultConnection: "Server=sql-server;Database=Mc2.CrudTest;User Id=sa;Password=Sql@dmin404;TrustServerCertificate=true;"
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge

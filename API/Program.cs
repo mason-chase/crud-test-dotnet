@@ -5,11 +5,11 @@ using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings_DefaultConnection");
 // Add services to the container.
 builder.Services.AddDbContext<CustomerDbContext>(options =>
         options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
-        .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+        .UseSqlServer(connectionString ?? builder.Configuration.GetConnectionString("DefaultConnection"))
     );
 ApplicationLogic.RegisterApplicationServices(builder.Services);
 builder.Services.AddTransient<ICustomerRepository, CustomerRepository>();

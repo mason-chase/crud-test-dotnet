@@ -9,6 +9,7 @@ namespace Common.Attributes
         public enum ValidationType
         {
             MobileNumber,
+            BankAccountNumber
         }
         //in case we have multiple types of property validations
         private readonly ValidationType _validationType;
@@ -24,19 +25,36 @@ namespace Common.Attributes
             {
                 return ValidationResult.Success;
             }
-            var errorMessage = "Please Enter a Valid Phone Number";
-            PhoneNumberUtil phoneUtil = PhoneNumberUtil.GetInstance();
-            try
+            string pattern = "";
+            string errorMessage = "";
+            switch (_validationType)
             {
-                PhoneNumber number = phoneUtil.Parse(value.ToString(), null);
-                var isValid = phoneUtil.IsValidNumber(number);
-                return isValid ? ValidationResult.Success : new ValidationResult(errorMessage);
+                case ValidationType.MobileNumber:
+                    errorMessage = "Please Enter a Valid Phone Number";
+                    PhoneNumberUtil phoneUtil = PhoneNumberUtil.GetInstance();
+                    try
+                    {
+                        PhoneNumber number = phoneUtil.Parse(value.ToString(), null);
+                        var isValid = phoneUtil.IsValidNumber(number);
+                        return isValid ? ValidationResult.Success : new ValidationResult(errorMessage);
+                    }
+                    catch (NumberParseException)
+                    {
+                        return new ValidationResult(errorMessage);
+                    }
+                case ValidationType.BankAccountNumber:
+                    pattern = @"((\\d{4})-){3}\\d{4}";
+                    errorMessage = "Please Enter a Valid Bank Account Number";
+                    break;
+                default:
+                    throw new InvalidOperationException("Invalid validation type.");
             }
-            catch (NumberParseException)
+            if (!string.IsNullOrEmpty(pattern) && !System.Text.RegularExpressions.Regex.IsMatch(value.ToString(), pattern))
             {
                 return new ValidationResult(errorMessage);
             }
 
+            return ValidationResult.Success;
         }
     }
 }

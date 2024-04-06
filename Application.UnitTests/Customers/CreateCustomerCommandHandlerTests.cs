@@ -6,7 +6,7 @@ using Moq;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 
-namespace Application.UnitTests
+namespace Application.UnitTests.Customers
 {
     public class CreateCustomerCommandHandlerTests
     {

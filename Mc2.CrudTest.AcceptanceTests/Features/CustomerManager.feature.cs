@@ -26,7 +26,7 @@ namespace Mc2.CrudTest.AcceptanceTests.Features
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-        private string[] _featureTags = ((string[])(null));
+        private static string[] featureTags = ((string[])(null));
         
 #line 1 "CustomerManager.feature"
 #line hidden
@@ -36,7 +36,7 @@ namespace Mc2.CrudTest.AcceptanceTests.Features
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Customer Manager", "As a an operator I wish to be able to Create, Update, Delete customers and list a" +
-                    "ll customers", ProgrammingLanguage.CSharp, ((string[])(null)));
+                    "ll customers", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -48,53 +48,45 @@ namespace Mc2.CrudTest.AcceptanceTests.Features
         }
         
         [NUnit.Framework.SetUpAttribute()]
-        public virtual void TestInitialize()
+        public void TestInitialize()
         {
         }
         
         [NUnit.Framework.TearDownAttribute()]
-        public virtual void TestTearDown()
+        public void TestTearDown()
         {
             testRunner.OnScenarioEnd();
         }
         
-        public virtual void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
+        public void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
             testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<NUnit.Framework.TestContext>(NUnit.Framework.TestContext.CurrentContext);
         }
         
-        public virtual void ScenarioStart()
+        public void ScenarioStart()
         {
             testRunner.OnScenarioStart();
         }
         
-        public virtual void ScenarioCleanup()
+        public void ScenarioCleanup()
         {
             testRunner.CollectScenarioErrors();
         }
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Create a new customer with valid data")]
-        public virtual void CreateANewCustomerWithValidData()
+        [NUnit.Framework.CategoryAttribute("create")]
+        public void CreateANewCustomerWithValidData()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "create"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a new customer with valid data", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a new customer with valid data", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
             {
                 testRunner.SkipScenario();
             }
@@ -109,19 +101,16 @@ this.ScenarioInitialize(scenarioInfo);
                             "Email",
                             "BankAccountNumber"});
                 table1.AddRow(new string[] {
-                            "John",
+                            "Jack",
                             "Doe",
-                            "1985-10-15",
-                            "+1234567890",
+                            "1985-10-15T18:30:00.000Z",
+                            "+1 (650) 253-0000",
                             "john.doe@example.com",
-                            "1234567890123456"});
+                            "100200300400"});
 #line 6
- testRunner.Given("the following customer details", ((string)(null)), table1, "Given ");
+ testRunner.When("I create customers with the following details", ((string)(null)), table1, "When ");
 #line hidden
 #line 9
- testRunner.When("I send a request to create a new customer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 10
  testRunner.Then("the customer should be created successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -129,26 +118,18 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Create a new customer with invalid data")]
-        public virtual void CreateANewCustomerWithInvalidData()
+        [NUnit.Framework.DescriptionAttribute("Create a new customer with duplicate Email")]
+        [NUnit.Framework.CategoryAttribute("create")]
+        public void CreateANewCustomerWithDuplicateEmail()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "create"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a new customer with invalid data", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 12
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a new customer with duplicate Email", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 11
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
             {
                 testRunner.SkipScenario();
             }
@@ -163,20 +144,14 @@ this.ScenarioInitialize(scenarioInfo);
                             "Email",
                             "BankAccountNumber"});
                 table2.AddRow(new string[] {
-                            "John",
+                            "Jeoffrey",
                             "Doe",
-                            "1985-10-15",
-                            "invalid_number",
-                            "john.doe@example.com",
-                            "1234567890123456"});
-#line 13
- testRunner.Given("the following customer details", ((string)(null)), table2, "Given ");
-#line hidden
-#line 16
- testRunner.When("I send a request to create a new customer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 17
- testRunner.Then("the request should fail with a validation error for PhoneNumber", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+                            "1985-10-15T18:30:00.000Z",
+                            "+1 (650) 253-0000",
+                            "Jeoffrey.doe@example.com",
+                            "100200300400"});
+#line 12
+ testRunner.When("I create customers with the following details", ((string)(null)), table2, "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                             "FirstName",
@@ -186,21 +161,41 @@ this.ScenarioInitialize(scenarioInfo);
                             "Email",
                             "BankAccountNumber"});
                 table3.AddRow(new string[] {
-                            "John",
+                            "Jon",
                             "Doe",
-                            "1985-10-15",
-                            "+1234567890",
-                            "invalid_email@example.com",
-                            "1234567890123456"});
-#line 19
- testRunner.Given("the following customer details", ((string)(null)), table3, "Given ");
+                            "1985-10-15T18:30:00.000Z",
+                            "+1 (650) 253-0000",
+                            "Jeoffrey.doe@example.com",
+                            "100200300400"});
+#line 15
+ testRunner.When("I create customers with the following details with duplicate email", ((string)(null)), table3, "When ");
 #line hidden
-#line 22
- testRunner.When("I send a request to create a new customer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 18
+ testRunner.Then("the second request with duplicate Email should fail with a validation error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 23
- testRunner.Then("the request should fail with a validation error for Email", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Create a new customer with duplicate details")]
+        [NUnit.Framework.CategoryAttribute("create")]
+        public void CreateANewCustomerWithDuplicateDetails()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "create"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a new customer with duplicate details", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 20
+this.ScenarioInitialize(scenarioInfo);
 #line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
                 TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                             "FirstName",
                             "LastName",
@@ -209,19 +204,116 @@ this.ScenarioInitialize(scenarioInfo);
                             "Email",
                             "BankAccountNumber"});
                 table4.AddRow(new string[] {
-                            "John",
+                            "Jesus",
+                            "Doe",
+                            "1985-10-15T18:30:00.000Z",
+                            "+1 (650) 253-0000",
+                            "Jesus.doe@example.com",
+                            "100200300400"});
+#line 21
+ testRunner.When("I create customers with the following details", ((string)(null)), table4, "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                            "FirstName",
+                            "LastName",
+                            "DateOfBirth",
+                            "PhoneNumber",
+                            "Email",
+                            "BankAccountNumber"});
+                table5.AddRow(new string[] {
+                            "Jesus",
+                            "Doe",
+                            "1985-10-15T18:30:00.000Z",
+                            "+1 (650) 253-0000",
+                            "different@example.com",
+                            "100200300400"});
+#line 24
+ testRunner.When("I create customers with the following details with duplicate detail", ((string)(null)), table5, "When ");
+#line hidden
+#line 27
+ testRunner.Then("the second request with duplicate detail should fail with a validation error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Create a new customer with invalid data")]
+        [NUnit.Framework.CategoryAttribute("create")]
+        public void CreateANewCustomerWithInvalidData()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "create"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a new customer with invalid data", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 29
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                            "FirstName",
+                            "LastName",
+                            "DateOfBirth",
+                            "PhoneNumber",
+                            "Email",
+                            "BankAccountNumber"});
+                table6.AddRow(new string[] {
+                            "Joe",
+                            "Doe",
+                            "1985-10-15",
+                            "invalid_number",
+                            "john.doe1@example.com",
+                            "100200300400"});
+#line 30
+ testRunner.When("I send a request with invalid PhoneNumber to create a new customer", ((string)(null)), table6, "When ");
+#line hidden
+#line 33
+ testRunner.Then("the request should fail with a validation error for PhoneNumber", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                            "FirstName",
+                            "LastName",
+                            "DateOfBirth",
+                            "PhoneNumber",
+                            "Email",
+                            "BankAccountNumber"});
+                table7.AddRow(new string[] {
+                            "Jake",
                             "Doe",
                             "1985-10-15",
                             "+1234567890",
-                            "john.doe@example.com",
+                            "invalid_email@example.com",
+                            "100200300400"});
+#line 35
+ testRunner.When("I send a request with invalid Email to create a new customer", ((string)(null)), table7, "When ");
+#line hidden
+#line 38
+ testRunner.Then("the request should fail with a validation error for Email", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                            "FirstName",
+                            "LastName",
+                            "DateOfBirth",
+                            "PhoneNumber",
+                            "Email",
+                            "BankAccountNumber"});
+                table8.AddRow(new string[] {
+                            "Jin",
+                            "Doe",
+                            "1985-10-15",
+                            "+1234567890",
+                            "john.doe2@example.com",
                             "invalid_number"});
-#line 25
- testRunner.Given("the following customer details", ((string)(null)), table4, "Given ");
+#line 40
+ testRunner.When("I send a request with invalid BankAccountNumber to create a new customer", ((string)(null)), table8, "When ");
 #line hidden
-#line 28
- testRunner.When("I send a request to create a new customer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 29
+#line 43
  testRunner.Then("the request should fail with a validation error for BankAccountNumber", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -230,152 +322,24 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Update an existing customer with valid data")]
-        public virtual void UpdateAnExistingCustomerWithValidData()
+        [NUnit.Framework.CategoryAttribute("update")]
+        public void UpdateAnExistingCustomerWithValidData()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "update"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update an existing customer with valid data", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 31
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Id",
-                            "FirstName",
-                            "LastName",
-                            "DateOfBirth",
-                            "PhoneNumber",
-                            "Email",
-                            "BankAccountNumber"});
-                table5.AddRow(new string[] {
-                            "1",
-                            "John",
-                            "Doe",
-                            "1985-10-15",
-                            "+1234567890",
-                            "john.doe@example.com",
-                            "1234567890123456"});
-#line 32
- testRunner.Given("there is an existing customer with the following details", ((string)(null)), table5, "Given ");
-#line hidden
-                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Id",
-                            "FirstName",
-                            "LastName",
-                            "DateOfBirth",
-                            "PhoneNumber",
-                            "Email",
-                            "BankAccountNumber"});
-                table6.AddRow(new string[] {
-                            "1",
-                            "Jane",
-                            "Doe",
-                            "1985-10-15",
-                            "+1234567890",
-                            "jane.doe@example.com",
-                            "1234567890123456"});
-#line 35
- testRunner.And("the following updated customer details", ((string)(null)), table6, "And ");
-#line hidden
-#line 38
- testRunner.When("I send a request to update the customer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 39
- testRunner.Then("the customer should be updated successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Update an existing customer with invalid data")]
-        public virtual void UpdateAnExistingCustomerWithInvalidData()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update an existing customer with invalid data", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 41
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Id",
-                            "FirstName",
-                            "LastName",
-                            "DateOfBirth",
-                            "PhoneNumber",
-                            "Email",
-                            "BankAccountNumber"});
-                table7.AddRow(new string[] {
-                            "1",
-                            "John",
-                            "Doe",
-                            "1985-10-15",
-                            "+1234567890",
-                            "john.doe@example.com",
-                            "1234567890123456"});
-#line 42
- testRunner.Given("there is an existing customer with the following details", ((string)(null)), table7, "Given ");
-#line hidden
-                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Id",
-                            "FirstName",
-                            "LastName",
-                            "DateOfBirth",
-                            "PhoneNumber",
-                            "Email",
-                            "BankAccountNumber"});
-                table8.AddRow(new string[] {
-                            "1",
-                            "John",
-                            "Doe",
-                            "1985-10-15",
-                            "invalid_number",
-                            "john.doe@example.com",
-                            "1234567890123456"});
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update an existing customer with valid data", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 45
- testRunner.And("the following updated customer details", ((string)(null)), table8, "And ");
+this.ScenarioInitialize(scenarioInfo);
 #line hidden
-#line 48
- testRunner.When("I send a request to update the customer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 49
- testRunner.Then("the request should fail with a validation error for PhoneNumber", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
                 TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Id",
                             "FirstName",
                             "LastName",
                             "DateOfBirth",
@@ -383,14 +347,13 @@ this.ScenarioInitialize(scenarioInfo);
                             "Email",
                             "BankAccountNumber"});
                 table9.AddRow(new string[] {
-                            "1",
-                            "John",
+                            "Jerard",
                             "Doe",
                             "1985-10-15",
-                            "+1234567890",
-                            "john.doe@example.com",
-                            "1234567890123456"});
-#line 51
+                            "+1 (650) 253-0000",
+                            "john.doe3@example.com",
+                            "100200300400"});
+#line 46
  testRunner.Given("there is an existing customer with the following details", ((string)(null)), table9, "Given ");
 #line hidden
                 TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
@@ -403,23 +366,42 @@ this.ScenarioInitialize(scenarioInfo);
                             "BankAccountNumber"});
                 table10.AddRow(new string[] {
                             "1",
-                            "John",
+                            "Janet",
                             "Doe",
                             "1985-10-15",
-                            "+1234567890",
-                            "invalid_email@example.com",
-                            "1234567890123456"});
+                            "+1 (650) 253-0000",
+                            "janet.doe@example.com",
+                            "100200300400"});
+#line 49
+ testRunner.When("I send a request to update the customer with following detail", ((string)(null)), table10, "When ");
+#line hidden
+#line 52
+ testRunner.Then("the customer should be updated successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Update an existing customer with invalid data")]
+        [NUnit.Framework.CategoryAttribute("update")]
+        public void UpdateAnExistingCustomerWithInvalidData()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "update"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update an existing customer with invalid data", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 54
- testRunner.And("the following updated customer details", ((string)(null)), table10, "And ");
+this.ScenarioInitialize(scenarioInfo);
 #line hidden
-#line 57
- testRunner.When("I send a request to update the customer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 58
- testRunner.Then("the request should fail with a validation error for Email", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
                 TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Id",
                             "FirstName",
                             "LastName",
                             "DateOfBirth",
@@ -427,14 +409,13 @@ this.ScenarioInitialize(scenarioInfo);
                             "Email",
                             "BankAccountNumber"});
                 table11.AddRow(new string[] {
-                            "1",
-                            "John",
+                            "Joey",
                             "Doe",
                             "1985-10-15",
-                            "+1234567890",
-                            "john.doe@example.com",
-                            "invalid_number"});
-#line 60
+                            "+1 (650) 253-0000",
+                            "john.doe4@example.com",
+                            "100200300400"});
+#line 55
  testRunner.Given("there is an existing customer with the following details", ((string)(null)), table11, "Given ");
 #line hidden
                 TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
@@ -447,52 +428,19 @@ this.ScenarioInitialize(scenarioInfo);
                             "BankAccountNumber"});
                 table12.AddRow(new string[] {
                             "1",
-                            "John",
+                            "Jane",
                             "Doe",
                             "1985-10-15",
-                            "+1234567890",
-                            "john.doe@example.com",
-                            "invalid_number"});
-#line 63
- testRunner.And("the following updated customer details", ((string)(null)), table12, "And ");
+                            "invalid_number",
+                            "john.doe4@example.com",
+                            "100200300400"});
+#line 58
+ testRunner.When("I send a request to update the customer with invalid PhoneNumber with the followi" +
+                        "ng details", ((string)(null)), table12, "When ");
 #line hidden
-#line 66
- testRunner.When("I send a request to update the customer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 61
+ testRunner.Then("the request should fail with a validation error for PhoneNumber", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 67
- testRunner.Then("the request should fail with a validation error for BankAccountNumber", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Get an existing customer by ID")]
-        public virtual void GetAnExistingCustomerByID()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get an existing customer by ID", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 69
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
                 TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "FirstName",
@@ -503,92 +451,19 @@ this.ScenarioInitialize(scenarioInfo);
                             "BankAccountNumber"});
                 table13.AddRow(new string[] {
                             "1",
-                            "John",
+                            "Jane",
                             "Doe",
                             "1985-10-15",
-                            "+1234567890",
-                            "john.doe@example.com",
-                            "1234567890123456"});
-#line 70
- testRunner.Given("there is an existing customer with the following details", ((string)(null)), table13, "Given ");
+                            "+1 (650) 253-0000",
+                            "invalid_email",
+                            "100200300400"});
+#line 63
+ testRunner.When("I send a request to update the customer with invalid Email with the following det" +
+                        "ails", ((string)(null)), table13, "When ");
 #line hidden
-#line 73
- testRunner.When("I send a request to get the customer by ID", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 66
+ testRunner.Then("the request should fail with a validation error for Email", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 74
- testRunner.Then("the customer details should be returned successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Get all customers")]
-        public virtual void GetAllCustomers()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get all customers", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 76
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 77
- testRunner.Given("there are existing customers in the database", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 78
- testRunner.When("I send a request to get all customers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 79
- testRunner.Then("the list of customers should be returned successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Delete an existing customer by ID")]
-        public virtual void DeleteAnExistingCustomerByID()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete an existing customer by ID", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 81
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
                 TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "FirstName",
@@ -599,19 +474,155 @@ this.ScenarioInitialize(scenarioInfo);
                             "BankAccountNumber"});
                 table14.AddRow(new string[] {
                             "1",
+                            "Jane",
+                            "Doe",
+                            "1985-10-15",
+                            "+1 (650) 253-0000",
+                            "john.doe5@example.com",
+                            "invalid_number"});
+#line 68
+ testRunner.When("I send a request to update the customer with invalid BankAccountNumber with the f" +
+                        "ollowing details", ((string)(null)), table14, "When ");
+#line hidden
+#line 71
+ testRunner.Then("the request should fail with a validation error for BankAccountNumber", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Get an existing customer by ID")]
+        [NUnit.Framework.CategoryAttribute("read")]
+        public void GetAnExistingCustomerByID()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "read"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get an existing customer by ID", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 73
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+                TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+                            "FirstName",
+                            "LastName",
+                            "DateOfBirth",
+                            "PhoneNumber",
+                            "Email",
+                            "BankAccountNumber"});
+                table15.AddRow(new string[] {
+                            "Johnathan",
+                            "Doe",
+                            "1985-10-15",
+                            "+1 (650) 253-0000",
+                            "john.doe6@example.com",
+                            "100200300400"});
+#line 74
+ testRunner.Given("there is an existing customer with the following details", ((string)(null)), table15, "Given ");
+#line hidden
+#line 77
+ testRunner.When("I send a request to get the customer by ID", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 78
+ testRunner.Then("the customer details should be returned successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Get all customers")]
+        [NUnit.Framework.CategoryAttribute("read")]
+        public void GetAllCustomers()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "read"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get all customers", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 80
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+                TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
+                            "FirstName",
+                            "LastName",
+                            "DateOfBirth",
+                            "PhoneNumber",
+                            "Email",
+                            "BankAccountNumber"});
+                table16.AddRow(new string[] {
                             "John",
                             "Doe",
                             "1985-10-15",
-                            "+1234567890",
-                            "john.doe@example.com",
-                            "1234567890123456"});
-#line 82
- testRunner.Given("there is an existing customer with the following details", ((string)(null)), table14, "Given ");
+                            "+1 (650) 253-0000",
+                            "john.doe7@example.com",
+                            "100200300400"});
+#line 81
+ testRunner.Given("there is an existing customer with the following details", ((string)(null)), table16, "Given ");
+#line hidden
+#line 84
+ testRunner.When("I send a request to get all customers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 85
+ testRunner.Then("the list of customers should be returned successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Delete an existing customer by ID")]
+        [NUnit.Framework.CategoryAttribute("delete")]
+        public void DeleteAnExistingCustomerByID()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "delete"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete an existing customer by ID", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 87
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+                TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
+                            "FirstName",
+                            "LastName",
+                            "DateOfBirth",
+                            "PhoneNumber",
+                            "Email",
+                            "BankAccountNumber"});
+                table17.AddRow(new string[] {
+                            "Jackey",
+                            "Doe",
+                            "1985-10-15",
+                            "+1 (650) 253-0000",
+                            "john.doe8@example.com",
+                            "100200300400"});
+#line 88
+ testRunner.Given("there is an existing customer with the following details", ((string)(null)), table17, "Given ");
+#line hidden
+#line 91
  testRunner.When("I send a request to delete the customer by ID", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 86
+#line 92
  testRunner.Then("the customer should be deleted successfully", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

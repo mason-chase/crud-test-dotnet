@@ -33,7 +33,7 @@ namespace Application.UnitTests.Customers
                 DateOfBirth = DateTime.Now,
                 PhoneNumber = "+1 (650) 253-0000",
                 Email = "john.doe@example.com",
-                BankAccountNumber = "1234567890123456"
+                BankAccountNumber = "100200300400"
             };
             var context = new ValidationContext(command);
             var results = new List<ValidationResult>();

@@ -43,7 +43,7 @@ namespace Common.Attributes
                         return new ValidationResult(errorMessage);
                     }
                 case ValidationType.BankAccountNumber:
-                    pattern = @"((\\d{4})-){3}\\d{4}";
+                    pattern = @"^\d{6,20}$";
                     errorMessage = "Please Enter a Valid Bank Account Number";
                     break;
                 default:

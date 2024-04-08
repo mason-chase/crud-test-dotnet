@@ -20,4 +20,8 @@
     <Folder Include="Contexts\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\Application\Application\Application.csproj" />
+  </ItemGroup>
+
 </Project>

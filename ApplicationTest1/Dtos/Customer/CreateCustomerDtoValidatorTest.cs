@@ -5,6 +5,7 @@ using Infrastructure.Persistence.Interceptors;
 using Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework.Internal;
+using PhoneNumbers;
 
 namespace ApplicationTest.Dtos.Customer;
 
@@ -390,4 +391,44 @@ public class CreateCustomerDtoValidatorTest
 
     }
     #endregion
+
+    #region ValidatePhoneNumber
+    [Test]
+    [TestCase(ExpectedResult = true)]
+    public async Task<bool> CheckPhoneNumber_IsValid_ReturnTrue()
+    {
+        //Arrange
+        ulong phoneNumber = +989121234567;
+        var Customer_One = new CreateCustomerDto("Saeedeh", "Saneei", DateTime.Now.Date.AddYears(-35), phoneNumber, "s.sa@yahoo.com", "123456789");
+        var validator = new CreateCustomerDtoValidator(customerRepository);
+
+        //Act
+        var validationResult = await validator.ValidateAsync(Customer_One);
+
+        //Assert
+        return validationResult.IsValid;
+
+    }
+
+    [Test]
+    [TestCase(ExpectedResult = false)]
+    public async Task<bool> CheckPhoneNumber_IsNotValid_ReturnFalse()
+    {
+        //Arrange
+        ulong phoneNumber = +982188776655;
+        var Customer_One = new CreateCustomerDto("Saeedeh", "Saneei", DateTime.Now.Date.AddYears(-35), phoneNumber, "s.sa@yahoo.com", "123456789");
+        var validator = new CreateCustomerDtoValidator(customerRepository);
+
+        //Act
+        var validationResult = await validator.ValidateAsync(Customer_One);
+
+        //Assert
+        return validationResult.IsValid;
+
+
+
+    }
+
+    #endregion
+
 }

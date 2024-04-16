@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
@@ -11,12 +11,23 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="DotNetty.Common" Version="0.7.5" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+        <PackageReference Include="ServiceStack.Text" Version="8.1.2" />
+        <PackageReference Include="SolidToken.SpecFlow.DependencyInjection" Version="3.9.3" />
         <PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.9.57" />
         <PackageReference Include="SpecFlow.NUnit" Version="3.9.22" />
         <PackageReference Include="nunit" Version="3.13.2" />
         <PackageReference Include="NUnit3TestAdapter" Version="4.1.0" />
         <PackageReference Include="FluentAssertions" Version="6.2.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+
+	</ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Mc2.CrudTest.Presentation.Application\Mc2.CrudTest.Presentation.Application.csproj" />
+      <ProjectReference Include="..\Mc2.CrudTest.Presentation.Contracts\Mc2.CrudTest.Presentation.Contracts.csproj" />
+      <ProjectReference Include="..\Mc2.CrudTest.Presentation.EntityFrameworkCore\Mc2.CrudTest.Presentation.EntityFrameworkCore.csproj" />
     </ItemGroup>
 
 </Project>

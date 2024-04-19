@@ -1,0 +1,330 @@
+{
+  "swagger": "2.0",
+  "x-stoplight": {
+    "id": "56bce1e3clqs4"
+  },
+  "info": {
+    "title": "crud-test-OpenAPI",
+    "version": "1.0"
+  },
+  "host": "localhost:8080",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/customers": {
+      "parameters": [],
+      "get": {
+        "summary": "Get User Info by User ID",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "User Found",
+            "schema": {
+              "type": "array",
+              "x-examples": {
+                "Example 1": [
+                  {
+                    "id": 1,
+                    "firstname": "mehdi",
+                    "lastname": "kordilo",
+                    "dateOfBirth": "1990-08-24T14:15:22",
+                    "phoneNumber": "09355329942",
+                    "email": "mehdi.kordilo@gmail.com",
+                    "bankAccountNumber": "123456789"
+                  },
+                  {
+                    "id": 7,
+                    "firstname": "string",
+                    "lastname": "string",
+                    "dateOfBirth": "2019-08-24T14:15:22",
+                    "phoneNumber": "string",
+                    "email": "string",
+                    "bankAccountNumber": "string"
+                  }
+                ]
+              },
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "firstname": {
+                    "type": "string"
+                  },
+                  "lastname": {
+                    "type": "string"
+                  },
+                  "dateOfBirth": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "phoneNumber": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "bankAccountNumber": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "examples": {
+              "0": [
+                {
+                  "id": 1,
+                  "firstname": "mehdi",
+                  "lastname": "kordilo",
+                  "dateOfBirth": "1990-08-24T14:15:22",
+                  "phoneNumber": "09355329942",
+                  "email": "mehdi.kordilo@gmail.com",
+                  "bankAccountNumber": "123456789"
+                },
+                {
+                  "id": 7,
+                  "firstname": "string",
+                  "lastname": "string",
+                  "dateOfBirth": "2019-08-24T14:15:22",
+                  "phoneNumber": "string",
+                  "email": "string",
+                  "bankAccountNumber": "string"
+                }
+              ]
+            }
+          },
+          "404": {
+            "description": "User Not Found",
+            "schema": {
+              "type": "null"
+            },
+            "examples": {}
+          }
+        },
+        "operationId": "get-users-userId",
+        "description": "Retrieve the information of the user with the matching user ID."
+      },
+      "post": {
+        "summary": "",
+        "operationId": "postcustomers",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Firstname": {
+                  "type": "string"
+                },
+                "Lastname": {
+                  "type": "string"
+                },
+                "DateOfBirth": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "PhoneNumber": {
+                  "type": "string"
+                },
+                "Email": {
+                  "type": "string"
+                },
+                "BankAccountNumber": {
+                  "type": "string"
+                }
+              }
+            },
+            "x-examples": {
+              "0": {
+                "Firstname": "mehdi",
+                "Lastname": "kordilo",
+                "DateOfBirth": "1990-08-24T14:15:22Z",
+                "PhoneNumber": "09355329942",
+                "Email": "mehdi.kordilo@gmail.com",
+                "BankAccountNumber": "123456789"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/customers/{customer_id}": {
+      "get": {
+        "summary": "",
+        "operationId": "get-user",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": [
+              {
+                "id": 1,
+                "firstname": "mehdi",
+                "lastname": "kordilo",
+                "dateOfBirth": "1990-08-24T14:15:22",
+                "phoneNumber": "09355329942",
+                "email": "mehdi.kordilo@gmail.com",
+                "bankAccountNumber": "123456789"
+              }
+            ],
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "Example 1": {
+                  "id": 1,
+                  "firstname": "mehdi",
+                  "lastname": "kordilo",
+                  "dateOfBirth": "1990-08-24T14:15:22",
+                  "phoneNumber": "09355329942",
+                  "email": "mehdi.kordilo@gmail.com",
+                  "bankAccountNumber": "123456789"
+                }
+              },
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "firstname": {
+                  "type": "string"
+                },
+                "lastname": {
+                  "type": "string"
+                },
+                "dateOfBirth": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "phoneNumber": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "bankAccountNumber": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "",
+        "operationId": "put-user",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "examples": [],
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "Example 1": {
+                  "Id": 5,
+                  "Firstname": "mehdi",
+                  "Lastname": "kordilo",
+                  "DateOfBirth": "1990-08-24T14:15:22Z",
+                  "PhoneNumber": "09355329942",
+                  "Email": "mehdi.kordilo@gmail.com",
+                  "BankAccountNumber": "123456789"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "Example 1": {
+                  "Id": 1,
+                  "Firstname": "mehdi",
+                  "Lastname": "kordilo",
+                  "DateOfBirth": "1990-08-24T14:15:22Z",
+                  "PhoneNumber": "09355329942",
+                  "Email": "mehdi.kordilo@gmail.com",
+                  "BankAccountNumber": "123456789"
+                }
+              },
+              "properties": {
+                "Id": {
+                  "type": "integer"
+                },
+                "Firstname": {
+                  "type": "string"
+                },
+                "Lastname": {
+                  "type": "string"
+                },
+                "DateOfBirth": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "PhoneNumber": {
+                  "type": "string"
+                },
+                "Email": {
+                  "type": "string"
+                },
+                "BankAccountNumber": {
+                  "type": "string"
+                }
+              }
+            },
+            "x-examples": {
+              "0": {
+                "Id": 0,
+                "Firstname": "string",
+                "Lastname": "string",
+                "DateOfBirth": "2019-08-24T14:15:22Z",
+                "PhoneNumber": "string",
+                "Email": "string",
+                "BankAccountNumber": "string"
+              }
+            }
+          }
+        ]
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-user",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "name": "customer_id",
+          "in": "path",
+          "required": true
+        }
+      ]
+    }
+  },
+  "definitions": {}
+}

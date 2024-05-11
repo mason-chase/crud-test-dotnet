@@ -1,6 +1,6 @@
 namespace Mc2.CrudTest.Presentation.Shared.Events;
 
-public class CustomerCreatedEvent
+public class CustomerCreatedEvent: EventBase
 {
     public CustomerCreatedEvent(Guid id, string firstName, string lastName, string phoneNumber, string email, string bankAccount)
     {
@@ -20,3 +20,4 @@ public class CustomerCreatedEvent
 
     
 }
+

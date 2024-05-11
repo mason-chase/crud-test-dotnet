@@ -1,6 +1,6 @@
 namespace Mc2.CrudTest.Presentation.Shared.Events;
 
-public class CustomerUpdatedEvent
+public class CustomerUpdatedEvent: EventBase
 {
     public Guid PersonId { get; }
     public string FirstName { get; }

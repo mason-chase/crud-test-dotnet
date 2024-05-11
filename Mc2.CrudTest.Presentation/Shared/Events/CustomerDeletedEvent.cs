@@ -1,6 +1,6 @@
 namespace Mc2.CrudTest.Presentation.Shared.Events;
 
-public class CustomerDeletedEvent
+public class CustomerDeletedEvent: EventBase
 {
     public Guid CustomerId { get; }
 

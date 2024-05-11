@@ -10,6 +10,7 @@ public class Customer {
     public DateOfBirth DateOfBirth { get; private set; }
     public PhoneNumber PhoneNumber { get; private set; }
     public Email Email { get; private set; }
+    public bool IsDeleted { get; }
 
     // Constructor for rehydration
     public Customer(Guid id, string firstName, string lastName, string phoneNumber, string email, string bankAccount)
@@ -20,9 +21,15 @@ public class Customer {
         PhoneNumber = new PhoneNumber(phoneNumber) ?? throw new ArgumentNullException(nameof(phoneNumber));
         Email = new Email(email) ?? throw new ArgumentNullException(nameof(email));
         BankAccount = new BankAccount(bankAccount) ?? throw new ArgumentException(bankAccount);
+        IsDeleted = false;
     }
 
- 
+    public Customer()
+    {
+        
+    }
+
+
     public static Customer Create(Guid id, string firstName, string lastName, string phoneNumber, string email, string bankAccount)
     {
         var customer = new Customer(id, firstName, lastName, phoneNumber, email, bankAccount);
@@ -64,9 +71,25 @@ public class Customer {
 
     protected void Apply(CustomerDeletedEvent @event)
     {
-        Id = @event.CustomerId;
+        Id = @event.AggregateId;
     }
-
+    
+    
+    // Method to apply events generically
+    public void Apply(object @event)
+    {
+        ((dynamic)this).Apply((dynamic)@event);
+    }
    
+    
+    public Customer Rehydrate(IEnumerable<EventBase> events)
+    {
+        var customer = new Customer();
+        foreach (var @event in events)
+        {
+            customer.Apply(@event);
+        }
+        return customer;
+    }
 }
 }

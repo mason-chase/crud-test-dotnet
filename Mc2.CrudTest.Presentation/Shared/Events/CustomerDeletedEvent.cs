@@ -2,11 +2,11 @@ namespace Mc2.CrudTest.Presentation.Shared.Events;
 
 public class CustomerDeletedEvent: EventBase
 {
-    public Guid CustomerId { get; }
+    public Guid AggregateId { get; }
 
-    public CustomerDeletedEvent(Guid customerId)
+    public CustomerDeletedEvent(Guid aggregateId)
     {
-        CustomerId = customerId;
+        AggregateId = aggregateId;
     }
     
 }

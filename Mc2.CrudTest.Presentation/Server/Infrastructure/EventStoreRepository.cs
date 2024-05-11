@@ -1,9 +1,10 @@
 using Mc2.CrudTest.Presentation.Shared.Events;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 namespace Mc2.CrudTest.Presentation.Infrastructure;
 
-public class EventStoreRepository
+public class EventStoreRepository: IEventRepository
 {
     private readonly ApplicationDbContext _context;
 
@@ -12,29 +13,12 @@ public class EventStoreRepository
         _context = context;
     }
 
-    public async Task SaveEventAsync<T>(T @event) where T : EventBase
+    public async Task SaveEventAsync(EventBase @event) 
     {
-        var eventData = new EventData
-        {
-            EventId = Guid.NewGuid(),
-            AggregateId = @event.AggregateId,
-            AggregateType = typeof(T).Name,
-            EventType = @event.GetType().Name,
-            Data = JsonConvert.SerializeObject(@event),
-            CreatedAt = DateTime.UtcNow
-        };
-
-        _context.Events.Add(eventData);
+        _context.Events.Add(@event);
         await _context.SaveChangesAsync();
     }
 }
 
-public class EventData
-{
-    public Guid EventId { get; set; }
-    public object AggregateId { get; set; }
-    public string AggregateType { get; set; }
-    public string EventType { get; set; }
-    public object Data { get; set; }
-    public DateTime CreatedAt { get; set; }
-}
+
+

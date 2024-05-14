@@ -1,4 +1,7 @@
+using System.Configuration;
+using Mc2.CrudTest.Presentation.Infrastructure;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mc2.CrudTest.Presentation
 {
@@ -12,7 +15,10 @@ namespace Mc2.CrudTest.Presentation
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
-
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseNpgsql(builder.Configuration["ConnectionStrings:EventStoreConnection"]));
+            
+            
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

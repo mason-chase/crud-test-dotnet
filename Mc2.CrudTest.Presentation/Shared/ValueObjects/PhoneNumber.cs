@@ -14,6 +14,8 @@ namespace Mc2.CrudTest.Presentation.Shared.ValueObjects
 
         private bool IsValidNumber(string value)
         {
+            
+            // using google's libPhoneNumber package for validating phone numbers
             var phoneNumberUtil = PhoneNumbers.PhoneNumberUtil.GetInstance();
             try
             {

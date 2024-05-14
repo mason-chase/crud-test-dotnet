@@ -24,16 +24,27 @@ public class Customer {
         IsDeleted = false;
     }
 
+    
+    public Customer(string firstName, string lastName, string phoneNumber, string email, string bankAccount)
+    {
+        FirstName = new Name(firstName) ?? throw new ArgumentNullException(nameof(firstName));
+        LastName = new Name(lastName) ?? throw new ArgumentNullException(nameof(lastName));
+        PhoneNumber = new PhoneNumber(phoneNumber) ?? throw new ArgumentNullException(nameof(phoneNumber));
+        Email = new Email(email) ?? throw new ArgumentNullException(nameof(email));
+        BankAccount = new BankAccount(bankAccount) ?? throw new ArgumentException(bankAccount);
+        IsDeleted = false;
+    }
+
     public Customer()
     {
         
     }
 
 
-    public static Customer Create(Guid id, string firstName, string lastName, string phoneNumber, string email, string bankAccount)
+    public static Customer Create(string firstName, string lastName, string phoneNumber, string email, string bankAccount)
     {
-        var customer = new Customer(id, firstName, lastName, phoneNumber, email, bankAccount);
-        customer.Apply(new CustomerCreatedEvent(id, firstName, lastName,phoneNumber, email, bankAccount));
+        var customer = new Customer(firstName:firstName, lastName: lastName, phoneNumber:phoneNumber, email, bankAccount);
+        customer.Apply(new CustomerCreatedEvent(customer.Id, firstName, lastName,phoneNumber, email, bankAccount));
         return customer;
     }
 
@@ -66,7 +77,8 @@ public class Customer {
         Email = new Email(@event.Email);
         PhoneNumber = new PhoneNumber(@event.PhoneNumber);
         BankAccount = new BankAccount(@event.BankAccount);
-       
+        Id = @event.CustomerId;
+
     }
 
     protected void Apply(CustomerDeletedEvent @event)

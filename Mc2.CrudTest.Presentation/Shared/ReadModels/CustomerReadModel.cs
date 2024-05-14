@@ -1,6 +1,8 @@
+using Mc2.CrudTest.Presentation.Shared.Events;
+
 namespace Mc2.CrudTest.Presentation.Shared.ReadModels;
 
-public class CustomerReadModel
+public class CustomerReadModel:EventBase
 {
    
     public string FirstName { get; set; }

@@ -6,7 +6,7 @@ namespace Mc2.CrudTest.Presentation.Infrastructure;
 // creating another Dbcontext for reading in CQRS
 public class ReadModelDbContext : DbContext
 {
-    public DbSet<CustomerReadModel> PersonEvents { get; set; }
+    public DbSet<CustomerReadModel> CustomerEvents { get; set; }
 
     public ReadModelDbContext(DbContextOptions<ReadModelDbContext> options)
         : base(options)

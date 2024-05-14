@@ -1,0 +1,61 @@
+<!-- CustomerList.razor -->
+@using Mc2.CrudTest.Presentation.Shared.Entities
+@inject HttpClient Http
+@page "/customers"
+
+<h3>Customer List</h3>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Date Of Birth</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var customer in Customers)
+    {
+        <tr>
+            <td>@customer.Id</td>
+            <td>@customer.FirstName</td>
+            <td>@customer.LastName</td>
+            <td>@customer.Email</td>
+            <td>@customer.PhoneNumber</td>
+            <td>@customer.DateOfBirth</td>
+            
+            <td>
+                <button class="btn btn-link" @onclick="() => EditCustomer(customer)">
+                    <i class="bi bi-pencil"></i> Edit
+                </button>
+                <button class="btn btn-link text-danger" @onclick="() => DeleteCustomer(customer)">
+                    <i class="bi bi-trash"></i> Delete
+                </button>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@code {
+    private List<Customer>? Customers { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Customers =  await Http.GetFromJsonAsync<List<Customer>>("Customer/GetCustomers");
+    }
+
+    private async Task EditCustomer(Customer customer)
+    {
+         await Http.PutAsJsonAsync("Customer/UpdateCustomer", customer);
+    }
+
+    private async Task DeleteCustomer(Customer customer)
+    {
+        await Http.DeleteAsync(new Uri($"Customer/UpdateCustomer/{customer.Id}"));
+    }
+}

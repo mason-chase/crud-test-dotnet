@@ -1,0 +1,6 @@
+@Hamideh.Crud.Test.Apis_HostAddress = http://localhost:5215
+
+GET {{Hamideh.Crud.Test.Apis_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

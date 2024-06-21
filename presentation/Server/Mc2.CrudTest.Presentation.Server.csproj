@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="MediatR" Version="12.3.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.2"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.20">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\modules\Customers\Mc2.CrudTest.Modules.Customers.Application\Mc2.CrudTest.Modules.Customers.Application.csproj"/>
+        <ProjectReference Include="..\..\modules\Customers\Mc2.CrudTest.Modules.Customers.Infrastructure\Mc2.CrudTest.Modules.Customers.Infrastructure.csproj"/>
+        <ProjectReference Include="..\..\shared\Mc2.CrudTest.Shared.BuildingBlocks\Mc2.CrudTest.Shared.BuildingBlocks.csproj"/>
+        <ProjectReference Include="..\Client\Mc2.CrudTest.Presentation.Client.csproj"/>
+        <ProjectReference Include="..\Shared\Mc2.CrudTest.Presentation.Shared.csproj"/>
+    </ItemGroup>
+
+</Project>

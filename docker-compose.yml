@@ -1,0 +1,11 @@
+﻿services:
+  mssql:
+    container_name: crud-mssql
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: no
+    environment:
+      MSSQL_AGENT_ENABLED: "true"
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: oyOp9ZTxaFJhlbcTbt
+    ports:
+      - "1434:1433"

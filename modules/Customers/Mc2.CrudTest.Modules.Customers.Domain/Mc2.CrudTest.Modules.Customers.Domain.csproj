@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="libphonenumber-csharp" Version="8.13.39"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\shared\Mc2.CrudTest.Shared.BuildingBlocks\Mc2.CrudTest.Shared.BuildingBlocks.csproj"/>
+    </ItemGroup>
+
+</Project>

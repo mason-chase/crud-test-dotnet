@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\shared\Mc2.CrudTest.Shared.DataStore\Mc2.CrudTest.Shared.DataStore.csproj"/>
+        <ProjectReference Include="..\Mc2.CrudTest.Modules.Customers.Domain\Mc2.CrudTest.Modules.Customers.Domain.csproj"/>
+    </ItemGroup>
+
+</Project>
